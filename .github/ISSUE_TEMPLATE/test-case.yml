@@ -1,0 +1,113 @@
+name: Test Case
+description: A manual test case derived from a user story's acceptance criteria
+title: "[TEST CASE] TC_XXX_000 - "
+labels: ["test-case", "test-manual"]
+body:
+  - type: input
+    id: test_id
+    attributes:
+      label: Test Case ID
+      description: Unique identifier, TC_<AREA>_<NNN> (e.g., TC_SEARCH_001)
+      placeholder: TC_SEARCH_001
+    validations:
+      required: true
+
+  - type: input
+    id: source_ticket
+    attributes:
+      label: Source ticket
+      description: The user story this case verifies, and which of its acceptance criteria it covers. Also add this issue as a sub-issue of that story.
+      placeholder: "#1 — acceptance criteria 2, 3"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: test_type
+    attributes:
+      label: Test Type
+      description: Smoke cases get the @smoke tag once automated.
+      options:
+        - Smoke
+        - Functional
+        - Integration
+        - Performance
+        - Accessibility
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - Critical
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: environments
+    attributes:
+      label: Test Environments
+      options:
+        - label: Staging
+        - label: Production
+        - label: Local Development
+
+  - type: checkboxes
+    id: browsers
+    attributes:
+      label: Browser Coverage
+      options:
+        - label: Chromium
+        - label: Firefox
+        - label: WebKit
+        - label: Mobile Chrome
+        - label: Mobile Safari
+
+  - type: textarea
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      description: Conditions that must be met before executing this test
+      placeholder: "- Signed in as a test user\n- Starting from an empty state"
+
+  - type: textarea
+    id: test_steps
+    attributes:
+      label: Test Steps
+      description: Detailed steps to execute the test
+      placeholder: "1. Open the staging site\n2. Navigate to the page under test\n3. Perform the action"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_results
+    attributes:
+      label: Expected Results
+      description: What should happen, numbered to match the steps
+      placeholder: "3. The expected result for step 3"
+    validations:
+      required: true
+
+  - type: input
+    id: automation_status
+    attributes:
+      label: Automation Status
+      description: Manual, Needs Automation, or Automated in Playwright
+      placeholder: "Manual"
+
+  - type: input
+    id: automation_file
+    attributes:
+      label: Automation File Path
+      description: Spec file and test name, once automated
+      placeholder: "tests/download_search_tests.spec.js › TC_SEARCH_001"
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Notes
+      description: Any additional information about this test case

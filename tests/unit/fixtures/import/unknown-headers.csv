@@ -1,0 +1,3 @@
+Case Ref,Title,Steps,Expected,Owner,Team
+UH-1,Verify widget renders,Open the widget page,Widget is visible,jdoe,Platform
+UH-2,Verify widget resizes,Drag the widget corner,Widget resizes smoothly,jdoe,Platform

@@ -1,0 +1,360 @@
+name: QA Test Suite
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  push:
+    branches: [ main, develop ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Test environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+      test_suite:
+        description: 'Test suite to run'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - smoke
+          - regression
+          - all
+
+env:
+  TEST_ENV: ${{ github.event.inputs.environment || 'staging' }}
+
+jobs:
+  smoke-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    name: Smoke Tests (Quick Validation)
+    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.test_suite == 'smoke' || github.event.inputs.test_suite == 'all')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      # A failing test fails its job, so a real failure shows as a red check.
+      # The steps after this one still run (if: always()) and collect the
+      # results for the dashboard.
+      - name: Run Smoke Tests
+        run: npx playwright test tests/smoke_tests.spec.js --project=staging
+
+      - name: Organize results for dashboard
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p artifacts/smoke-test-results
+          echo "Checking for test-results.json..."
+          if [ -f "test-results.json" ]; then
+            echo "✓ Found test-results.json, copying to smoke-results.json"
+            cp test-results.json artifacts/smoke-test-results/smoke-results.json
+          else
+            echo "✗ test-results.json not found"
+            ls -la
+          fi
+          if [ -d "playwright-report" ]; then
+            echo "✓ Copying playwright-report"
+            cp -r playwright-report artifacts/smoke-test-results/
+          fi
+          if [ -d "test-results" ]; then
+            echo "✓ Copying test-results directory"
+            cp -r test-results artifacts/smoke-test-results/
+          fi
+
+      - name: Upload Smoke Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-test-results
+          path: artifacts/smoke-test-results/
+          retention-days: 30
+          if-no-files-found: warn
+
+  error-handling-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    name: Error Handling Tests
+    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'all')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Error Handling Tests
+        # FORCE JSON OUTPUT
+        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test tests/error_handling_tests.spec.js --project=staging --reporter=json
+
+      - name: Organize results for dashboard
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p artifacts/error-handling-test-results
+          if [ -f "test-results.json" ]; then
+            cp test-results.json artifacts/error-handling-test-results/error-handling-results.json
+          else
+            echo "No test-results.json found!"
+          fi
+          if [ -d "playwright-report" ]; then
+            cp -r playwright-report artifacts/error-handling-test-results/
+          fi
+          if [ -d "test-results" ]; then
+            cp -r test-results artifacts/error-handling-test-results/
+          fi
+
+      - name: Upload Error Handling Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: error-handling-test-results
+          path: artifacts/error-handling-test-results/
+          retention-days: 30
+          if-no-files-found: warn
+
+  download-search-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    name: Download & Search Tests
+    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'all')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Download & Search Tests
+        # FORCE JSON OUTPUT
+        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test tests/download_search_tests.spec.js --project=staging --reporter=json
+
+      - name: Organize results for dashboard
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p artifacts/download-search-test-results
+          if [ -f "test-results.json" ]; then
+            cp test-results.json artifacts/download-search-test-results/download-search-results.json
+          else
+            echo "No test-results.json found!"
+          fi
+          if [ -d "playwright-report" ]; then
+            cp -r playwright-report artifacts/download-search-test-results/
+          fi
+          if [ -d "test-results" ]; then
+            cp -r test-results artifacts/download-search-test-results/
+          fi
+
+      - name: Upload Download & Search Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: download-search-test-results
+          path: artifacts/download-search-test-results/
+          retention-days: 30
+          if-no-files-found: warn
+
+  documentation-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    name: Documentation Tests
+    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'all')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Documentation Tests
+        # FORCE JSON OUTPUT
+        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test tests/documentation_tests.spec.js --project=staging --reporter=json
+
+      - name: Organize results for dashboard
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p artifacts/documentation-test-results
+          if [ -f "test-results.json" ]; then
+            cp test-results.json artifacts/documentation-test-results/documentation-results.json
+          else
+            echo "No test-results.json found!"
+          fi
+          if [ -d "playwright-report" ]; then
+            cp -r playwright-report artifacts/documentation-test-results/
+          fi
+          if [ -d "test-results" ]; then
+            cp -r test-results artifacts/documentation-test-results/
+          fi
+
+      - name: Upload Documentation Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation-test-results
+          path: artifacts/documentation-test-results/
+          retention-days: 30
+          if-no-files-found: warn
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    name: Unit Tests
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Unit Tests
+        run: npm run test:unit
+
+  template-check:
+    runs-on: ubuntu-latest
+    name: Template Structural Check
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Template Structural Check
+        run: npm run test:template-check
+
+      - name: Check coverage map is current
+        run: |
+          npm run coverage
+          if ! git diff --exit-code -- docs/coverage-map.md; then
+            echo "::error::docs/coverage-map.md is out of date. Run 'npm run coverage' and commit the result."
+            exit 1
+          fi
+
+  update-dashboard:
+    runs-on: ubuntu-latest
+    needs: [smoke-tests, error-handling-tests, download-search-tests, documentation-tests]
+    if: always() && github.event_name == 'workflow_dispatch'
+    name: Update QA Dashboard
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./artifacts
+        continue-on-error: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: List downloaded artifacts for debugging
+        run: |
+          echo "=== Artifacts structure ==="
+          ls -R ./artifacts 2>/dev/null || echo "No artifacts directory found"
+          echo ""
+          echo "=== Checking for specific result files ==="
+          [ -f "./artifacts/smoke-test-results/smoke-results.json" ] && echo "✓ Found smoke-results.json" || echo "✗ Missing smoke-results.json"
+          [ -f "./artifacts/error-handling-test-results/error-handling-results.json" ] && echo "✓ Found error-handling-results.json" || echo "✗ Missing error-handling-results.json"
+          [ -f "./artifacts/download-search-test-results/download-search-results.json" ] && echo "✓ Found download-search-results.json" || echo "✗ Missing download-search-results.json"
+          [ -f "./artifacts/documentation-test-results/documentation-results.json" ] && echo "✓ Found documentation-results.json" || echo "✗ Missing documentation-results.json"
+
+      - name: Generate Dashboard
+        run: |
+          node dashboards/scripts/generate-dashboard.js
+        env:
+          TEST_ENV: ${{ env.TEST_ENV }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_REF: ${{ github.ref }}
+
+      - name: Commit Dashboard Updates
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add dashboards/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "📊 Update QA Dashboard - Run #${{ github.run_number }} [${{ github.ref_name }}]"
+          # Another run (or a merge) may have pushed since checkout. Commit
+          # first, then replay this commit on the latest branch; on a conflict
+          # in the generated dashboard files, this run's output wins (-X theirs
+          # during a rebase means the commit being replayed).
+          for attempt in 1 2 3; do
+            git pull --rebase -X theirs origin ${{ github.ref_name }} && git push && exit 0
+            echo "Push attempt $attempt failed; retrying"
+            sleep $((attempt * 5))
+          done
+          echo "::error::Could not push the dashboard update after 3 attempts"
+          exit 1

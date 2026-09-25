@@ -1,0 +1,103 @@
+name: Merge Develop to Master
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_merge:
+        description: 'Type "MERGE" to confirm you want to merge develop into master'
+        required: true
+        type: string
+
+jobs:
+  merge-develop-to-master:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Confirm merge action
+      run: |
+        echo "🚀 Starting merge of develop into master"
+        echo "This action will rebase develop onto master"
+        echo "Repository: ${{ github.repository }}"
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        # Fetch full history for all branches
+        fetch-depth: 0
+        # Use a token with write permissions
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Configure Git
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Validate branches exist
+      run: |
+        echo "Checking if develop branch exists..."
+        git ls-remote --heads origin develop || {
+          echo "❌ Develop branch does not exist"
+          exit 1
+        }
+        
+        echo "Checking if master branch exists..."
+        git ls-remote --heads origin master || {
+          echo "❌ Master branch does not exist"
+          exit 1
+        }
+        
+        echo "✅ Both develop and master branches exist"
+
+    - name: Checkout master branch
+      run: |
+        git checkout master
+        git pull origin master
+        echo "✅ Master branch is up to date"
+
+    - name: Rebase and merge develop
+      run: |
+        echo "Fetching latest develop branch..."
+        git fetch origin develop
+        
+        echo "Rebasing develop onto master..."
+        git rebase origin/develop
+        
+        echo "✅ Develop has been rebased onto master"
+
+    - name: Push changes to master
+      run: |
+        echo "Pushing rebased changes to master..."
+        git push origin master
+        echo "✅ Master branch updated successfully"
+
+    - name: Create summary
+      run: |
+        echo "## 🎉 Develop Merged to Master!" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Repository:** \`${{ github.repository }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "**Action:** Develop rebased and merged into master" >> $GITHUB_STEP_SUMMARY
+        echo "**Strategy:** Rebase and merge (linear history)" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "The develop branch has been successfully rebased onto master! 🚀" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Result:** Master now contains all commits from develop in a clean, linear history." >> $GITHUB_STEP_SUMMARY
+
+  # Notification job
+  notify:
+    runs-on: ubuntu-latest
+    needs: merge-develop-to-master
+    if: always()
+    steps:
+    - name: Notify on success
+      if: needs.merge-develop-to-master.result == 'success'
+      run: |
+        echo "✅ Successfully merged develop into master!"
+        echo "All commits from develop are now in master with a clean, linear history."
+
+    - name: Notify on failure
+      if: needs.merge-develop-to-master.result == 'failure'
+      run: |
+        echo "❌ Failed to merge develop into master!"
+        echo "This likely means there are conflicts that need manual resolution."
+        echo "Please resolve conflicts manually and try again."
+        exit 1

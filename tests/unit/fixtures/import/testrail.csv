@@ -1,0 +1,9 @@
+ID,Title,Preconditions,Steps,Expected Result,Priority,Section
+C1,Login with valid credentials,,Open the login page,Login page is displayed,Medium,Authentication
+,,,Enter a valid username and password,Fields accept the input,,
+,,,Click Log In,User lands on the dashboard,,
+C2,Reset password with an expired link,User has requested a password reset and the link has expired,Open the expired reset link,An error message explains the link has expired,High,Authentication
+C3,Update profile email address,,Open Account Settings,Account Settings page is displayed,Low,Profile
+,,,Enter a new email address,,,
+,,,,,,
+,,,,Confirmation email is sent to the new address,,

@@ -1,0 +1,91 @@
+(node:21644) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/.claude/skills/import-test-cases/import.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Format: proposed
+Case count: 3
+Column map:
+{
+  "client_id": "Test Case ID",
+  "title": "Test Case Name",
+  "objective": "Test Objective",
+  "preconditions": null,
+  "steps": "Test Steps",
+  "expected": "Expected Result",
+  "section": null,
+  "priority": null,
+  "notes": "Notes/Comments"
+}
+Unmapped headers: Pass/Fail
+First 3 cases:
+[
+  {
+    "client_id": "TC_BST_001",
+    "title": "Homepage search returns results",
+    "objective": "Verify the homepage search returns relevant results.",
+    "preconditions": null,
+    "steps": [
+      "Open the homepage.",
+      "Enter \"laptop\" in the search box.",
+      "Press Enter."
+    ],
+    "expected": [
+      "Search results page lists laptops."
+    ],
+    "section": null,
+    "priority": null,
+    "notes": "High-priority entry point.",
+    "source_row": 2
+  },
+  {
+    "client_id": "TC_BST_002",
+    "title": "Add to cart from search results",
+    "objective": "Verify a product can be added to cart from search results.",
+    "preconditions": null,
+    "steps": [
+      "Search for a product.",
+      "Click Add to Cart on a result."
+    ],
+    "expected": [
+      "Item appears in the cart icon count."
+    ],
+    "section": null,
+    "priority": null,
+    "notes": "Medium-priority.",
+    "source_row": 3
+  },
+  {
+    "client_id": "TC_BST_003",
+    "title": "Cart quantity update",
+    "objective": "Verify cart quantity updates recalculate the subtotal.",
+    "preconditions": null,
+    "steps": [
+      "Open the cart.",
+      "Increase quantity of an item.",
+      "Observe subtotal."
+    ],
+    "expected": [
+      "Subtotal updates to reflect the new quantity."
+    ],
+    "section": null,
+    "priority": null,
+    "notes": null,
+    "source_row": 4
+  }
+]
+column-map.json:
+{
+  "format": "proposed",
+  "column_map": {
+    "client_id": "Test Case ID",
+    "title": "Test Case Name",
+    "objective": "Test Objective",
+    "preconditions": null,
+    "steps": "Test Steps",
+    "expected": "Expected Result",
+    "section": null,
+    "priority": null,
+    "notes": "Notes/Comments"
+  },
+  "confirmed_at": "2026-09-25T17:51:35.895Z"
+}

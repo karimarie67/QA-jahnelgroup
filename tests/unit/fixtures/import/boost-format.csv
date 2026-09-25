@@ -1,0 +1,9 @@
+Test Case ID,Test Case Name,Test Objective,Test Steps,Expected Result,Pass/Fail,Notes/Comments,,,,,
+TC_BST_001,Homepage search returns results,Verify the homepage search returns relevant results.,"1. Open the homepage.
+2. Enter ""laptop"" in the search box.
+3. Press Enter.",Search results page lists laptops.,,High-priority entry point.,,,,,
+TC_BST_002,Add to cart from search results,Verify a product can be added to cart from search results.,"1. Search for a product.
+2. Click Add to Cart on a result.",Item appears in the cart icon count.,,Medium-priority.,,,,,
+TC_BST_003,Cart quantity update,Verify cart quantity updates recalculate the subtotal.,"1. Open the cart.
+2. Increase quantity of an item.
+3. Observe subtotal.",Subtotal updates to reflect the new quantity.,,,,,,,

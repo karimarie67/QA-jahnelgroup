@@ -1,0 +1,9 @@
+Key,Name,Precondition,Objective,Step,Expected Result,Priority,Folder
+PROJ-T10,Search returns matching products,,Verify the search bar returns relevant results,Open the search bar,Search bar is focused,Medium,Search
+,,,,Type a known product name,Suggestions list appears,,
+,,,,Press Enter,Matching products are listed,,
+PROJ-T11,Checkout blocked without shipping address,Cart contains at least one item and no shipping address is saved,Verify checkout cannot proceed without a shipping address,Proceed to checkout,An error prompts for a shipping address,High,Checkout
+PROJ-T12,Update quantity in cart,,Verify cart totals recalculate,Open the cart page,Cart page lists items,Low,Cart
+,,,,Increase quantity of an item,,,
+
+,,,,,Cart subtotal updates,,

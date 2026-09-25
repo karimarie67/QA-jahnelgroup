@@ -1,0 +1,9 @@
+Test Case Id,Name,Description,Precondition,Module,Priority,Step Description,Expected Result
+TC-501,Add item to cart,Verify an item can be added to the cart from the product page,,Cart,Medium,Open a product page,Product details are displayed
+,,,,,,Click Add to Cart,Item is added to the cart
+,,,,,,Open the cart page,The added item is listed with quantity 1
+TC-502,Apply an expired coupon code,Verify an expired coupon is rejected,Cart contains items and an expired coupon code is available,Checkout,High,Enter the expired coupon code and apply it,An error states the coupon has expired
+TC-503,Remove item from cart,Verify an item can be removed from the cart,,Cart,Low,Open the cart page,Cart page lists items
+,,,,,,Click Remove on an item,
+
+,,,,,,,Item no longer appears in the cart

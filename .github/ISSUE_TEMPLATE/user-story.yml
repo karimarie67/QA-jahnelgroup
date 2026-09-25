@@ -1,0 +1,51 @@
+name: User Story
+description: A behavior to test, with numbered acceptance criteria that test cases trace to
+title: "[STORY] "
+labels: ["user-story"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Each acceptance criterion gets at least one **Test Case** issue, created from the Test Case form and added as a sub-issue of this story. Number the criteria so test cases can say which ones they cover.
+
+  - type: textarea
+    id: story
+    attributes:
+      label: User story
+      description: Who wants what, and why.
+      placeholder: "As a **returning customer**, I want **to reorder a past purchase**, so that **I don't have to find each item again**."
+    validations:
+      required: true
+
+  - type: input
+    id: site
+    attributes:
+      label: Site under test
+      description: The environment URL these criteria are checked against.
+      placeholder: "https://staging.example.com"
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance criteria
+      description: Numbered, observable, and specific. Quote exact messages and values where they matter.
+      placeholder: |
+        1. From Order history, **Reorder** adds every item from that order to the cart.
+        2. An item that is no longer sold is skipped, and the page says `Some items are no longer available`.
+        3. The cart badge shows the number of items added.
+    validations:
+      required: true
+
+  - type: textarea
+    id: test_data
+    attributes:
+      label: Test data
+      description: Accounts, records, and values the criteria assume. Name where a credential lives (a CI secret), never the value itself.
+      placeholder: "- A test account with at least one past order\n- Credential: CI secret `TEST_USER_PASSWORD`"
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of scope
+      description: What this story deliberately doesn't cover, so nobody writes test cases for it.
+      placeholder: "Payment, and orders older than 12 months."

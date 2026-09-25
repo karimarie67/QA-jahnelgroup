@@ -1,0 +1,59 @@
+Test Case ID,Test Case Name,Test Objective,Test Steps,Expected Result,Pass/Fail,Notes/Comments,,,,,,,,,,,,,,,,,,,
+TC_FUNC_001,Homepage Load and Elements,Verify that the homepage loads correctly and displays all key elements.,"1. Open Chrome. 
+2. Navigate to https://www.boost.org. 
+3. Observe load time and content. 
+4. Check for logo, navigation bar, main content (e.g., welcome message), call-to-action buttons (e.g., ""Get Started""), and footer. 
+5. Click a call-to-action button.","Homepage loads within 2 seconds, displays logo, navigation bar, main content, buttons, and footer without errors. Call-to-action redirects to the correct page (e.g., Libraries).",,High-priority: entry point for users. Test on multiple browsers.,,,,,,,,,,,,,,,,,,,
+TC_FUNC_002,External Link Functionality,Ensure external links on the homepage are valid and open correctly.,"1. Access homepage. 
+2. Identify external links (e.g., to GitHub, boost.org). 
+3. Click each link. 
+4. Verify the target page loads.","Links open in new tabs, target pages load without errors (e.g., GitHub loads https://github.com/boostorg).",,Medium-priority: supports user trust. Test all footer/external links.,,,,,,,,,,,,,,,,,,,
+TC_FUNC_003,Navigation Menu Functionality,Validate that all navigation menu links redirect correctly.,"1. Access https://www.boost.org. 
+2. Locate navigation menu. 
+3. Click each item (e.g., Libraries, Documentation, Downloads, Community, News). 
+4. Verify URL and content of each page. 
+5. Test dropdowns (if present) by hovering and clicking sub-items.","Menu links redirect to correct pages (e.g., Libraries shows library list). Dropdowns function correctly. No 404 errors.",,High-priority: critical for site navigation. Test on desktop and mobile for responsiveness.,,,,,,,,,,,,,,,,,,,
+TC_FUNC_004,Mobile Navigation Menu,Ensure navigation is usable on mobile devices.,"1. Open https://www.boost.org/ on a mobile device (e.g., iPhone 12). 
+2. Tap the hamburger menu.
+3. Tap each menu item. 
+4. Verify page loads and menu collapses after selection.","Hamburger menu opens/closes smoothly, links redirect correctly, and menu collapses after selection.",,High-priority: mobile usability is critical. Test on iOS and Android.,,,,,,,,,,,,,,,,,,,
+TC_FUNC_005,Library Listing Display,Verify that the Libraries page lists all Boost libraries.,"1. Navigate to Libraries page. 
+2. Check for a list of libraries (e.g., Boost.Asio, Boost.Beast). 
+3. Verify pagination or ""Load More"" (if present). 
+4. Click a library name.","Page loads within 2 seconds, displays a complete list of libraries. Pagination/""Load More"" works. Clicking a library redirects to its documentation.",,High-priority: core feature for developers. Compare with boost.org library list.,,,,,,,,,,,,,,,,,,,
+TC_FUNC_006,Library Documentation Content,Ensure library documentation is complete and functional.,"1. Navigate to a library’s documentation (e.g., Boost.Beast). 
+2. Verify sections: overview, API reference, examples. 
+3. Click a code example’s ""Copy"" button (if present). 
+4. Follow an internal link (e.g., to related library). 
+5. Compare content with boost.org.","Documentation loads within 2 seconds, includes all sections, code is copyable, internal links work, and content matches boost.org.",,High-priority: critical for developer use. Test examples like the chat server.,,,,,,,,,,,,,,,,,,,
+TC_FUNC_007,Documentation Edge Cases,Test documentation behavior with invalid or missing content.,"1. Navigate to a non-existent library page (e.g., https://www.boost.org/libs/nonexistent). 
+2. Access a library with known issues (if any, based on GitHub). 
+3. Check for broken internal links.",A 404 page displays for non-existent pages. Known issues are resolved or documented. Broken links are absent or redirect gracefully.,,Medium-priority: ensures robustness. Check GitHub issues for problematic libraries.,,,,,,,,,,,,,,,,,,,
+TC_FUNC_008,Search with Valid Queries,Verify that search returns accurate results for valid inputs.,"1. Locate search bar. 
+2. Enter queries: ""Boost.Beast"", ""WebSocket"", ""C++20"". 
+3. Press Enter or click search icon. 
+4. Check result relevance and load time. 
+5. Click top result.","Results load within 3 seconds, are relevant (e.g., Boost.Beast links to its documentation), and top result redirects correctly.",,High-priority: critical for finding content. Test multiple query types.,,,,,,,,,,,,,,,,,,,
+TC_FUNC_009,Search Edge Cases,Test search with invalid or unusual inputs.,"1. Access search bar. 
+2. Test inputs: 
+a) Empty query
+b) Special characters (e.g., ""@#$%"")
+c) Long query (100+ characters
+d) Non-existent term (e.g., ""xyz_library"")
+3. Submit each query.","a) Empty query prompts ""Please enter a term"". b) Special characters return safe results or error. c) Long query processes without crashing. d) Non-existent term shows ""No results"".",,High-priority: ensures robustness and security. Creative test to prevent crashes.,,,,,,,,,,,,,,,,,,,
+TC_FUNC_010,Search Performance Under Load,Verify search performance under high-latency conditions.,"1. Use a network throttling tool (e.g., Chrome DevTools) to simulate 3G connection. 
+2. Enter a query (e.g., ""Boost.Asio""). 
+3. Measure result load time. 
+4. Check usability of results.","Results load within 5 seconds on 3G, remain relevant, and are navigable.",,Medium-priority: ensures usability in poor network conditions.,,,,,,,,,,,,,,,,,,,
+TC_FUNC_011,Download Latest Boost Release,Ensure users can download the latest Boost release.,"1. Navigate to Downloads page. 
+2. Locate latest release link. 
+3. Click download link. 
+4. Verify file downloads. 
+5. Check for instructions (e.g., OpenSSL for Boost.Beast).","Download starts immediately, file matches expected size/format (e.g., .zip). Instructions are clear and include prerequisites.",,High-priority: core feature for library access. Verify file integrity.,,,,,,,,,,,,,,,,,,,
+TC_FUNC_012,Download Previous Releases,Verify access to previous Boost releases.,"1. Navigate to Downloads page. 
+2. Locate a previous release (e.g., Boost 1.85.0). 
+3. Click download link. 
+4. Verify file downloads.","Download starts, file matches expected size/format.",,Medium-priority: supports legacy users. Test at least two older releases.,,,,,,,,,,,,,,,,,,,
+TC_FUNC_013,Download Link Error Handling,Test behavior for broken or unavailable download links.,1. Navigate to Downloads page. 2. Click a known broken link (if identified via GitHub) or simulate a server error. 3. Observe response.,"A user-friendly error message displays (e.g., ""File unavailable""). No site crash occurs.",,Medium-priority: ensures graceful error handling. Check GitHub for reported issues.,,,,,,,,,,,,,,,,,,,
+TC_FUNC_014,Community Page Links,Validate that community links are functional.,"1. Navigate to Community page. 
+2. Click links to GitHub issues",,,,,,,,,,,,,,,,,,,,,,

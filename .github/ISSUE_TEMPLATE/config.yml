@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Team Discussion
+    url: https://example.com/TODO-replace-with-your-teams-chat
+    about: "TODO: replace with your Engagement's chat/discussion channel"
+  - name: Documentation
+    url: https://example.com/TODO-replace-with-your-docs
+    about: "TODO: replace with a link to your project's documentation"
+  - name: Team Mailing List / Discussions
+    url: https://example.com/TODO-replace-with-your-mailing-list
+    about: "TODO: replace with your team's mailing list or discussion forum"

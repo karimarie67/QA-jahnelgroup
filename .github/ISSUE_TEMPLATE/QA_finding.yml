@@ -1,0 +1,198 @@
+name: QA Finding
+description: Report a finding from QA testing
+title: "[QA]: "
+labels: ["qa", "needs-triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        QA Finding Report - Please provide detailed information about your testing results.
+  
+  - type: dropdown
+    id: finding-type
+    attributes:
+      label: Finding Type
+      description: What type of issue is this?
+      options:
+        - Bug/Defect
+        - UI/UX Issue
+        - Performance Issue
+        - Accessibility Issue
+        - Documentation Issue
+        - Security Concern
+        - Improvement Suggestion
+    validations:
+      required: true
+  
+  - type: input
+    id: test-case
+    attributes:
+      label: Test Case ID
+      description: Reference to the test case being executed (if applicable)
+      placeholder: e.g., TC-001, QA-Homepage-001
+    validations:
+      required: false
+  
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Brief summary of the finding
+      placeholder: Describe the issue in one or two sentences...
+    validations:
+      required: true
+  
+  - type: textarea
+    id: preconditions
+    attributes:
+      label: Preconditions
+      description: What needs to be set up before testing?
+      placeholder: |
+        - User must be logged in
+        - Test data must be present
+        - Specific feature flags enabled
+    validations:
+      required: false
+  
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Detailed steps to reproduce the finding
+      placeholder: |
+        1. Navigate to...
+        2. Enter data...
+        3. Click...
+        4. Observe...
+    validations:
+      required: true
+  
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Result
+      description: What should happen according to requirements/specifications?
+      placeholder: The expected behavior is...
+    validations:
+      required: true
+  
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Result
+      description: What actually happened during testing?
+      placeholder: The actual behavior observed is...
+    validations:
+      required: true
+  
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this finding?
+      options:
+        - Critical - System/feature completely broken
+        - High - Major functionality affected
+        - Medium - Moderate impact on functionality
+        - Low - Minor issue, workaround available
+    validations:
+      required: true
+  
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: Recommended priority for fixing
+      options:
+        - P0 - Must fix immediately
+        - P1 - Fix before release
+        - P2 - Fix in next sprint
+        - P3 - Fix when possible
+    validations:
+      required: true
+  
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: Frequency
+      description: How often does this occur?
+      options:
+        - Always - 100% reproducible
+        - Often - Reproducible > 50% of the time
+        - Sometimes - Reproducible < 50% of the time
+        - Rare - Difficult to reproduce
+    validations:
+      required: true
+  
+  - type: input
+    id: build
+    attributes:
+      label: Build/Version
+      description: What build or version were you testing?
+      placeholder: e.g., v2.1.0, build #123, commit abc123
+    validations:
+      required: false
+  
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser(s) Affected
+      description: Which browsers does this affect?
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - All browsers
+        - Other
+      multiple: true
+    validations:
+      required: false
+  
+  - type: input
+    id: os
+    attributes:
+      label: Operating System
+      description: What OS are you testing on?
+      placeholder: e.g., Windows 11, macOS 14.1, Ubuntu 22.04
+    validations:
+      required: false
+  
+  - type: textarea
+    id: test-data
+    attributes:
+      label: Test Data Used
+      description: What test data was used (sanitize sensitive info)?
+      placeholder: |
+        - Username: testuser@example.com
+        - Input values: ...
+    validations:
+      required: false
+  
+  - type: textarea
+    id: attachments
+    attributes:
+      label: Screenshots/Videos/Logs
+      description: Attach any supporting evidence
+      placeholder: Drag and drop files or paste URLs...
+    validations:
+      required: false
+  
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround
+      description: Is there a workaround available?
+      placeholder: Users can work around this by...
+    validations:
+      required: false
+  
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Notes
+      description: Any other relevant information
+      placeholder: Additional context, related issues, etc...
+    validations:
+      required: false

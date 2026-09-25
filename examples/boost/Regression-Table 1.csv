@@ -1,0 +1,44 @@
+Test Case ID,Test Case Name,Test Objective,Test Steps,Expected Result,Pass/Fail,Notes/Comments,,,,,,,,,,,,,,,,,,,
+TC_REG_001,Navigation Menu Stability,Verify that the navigation menu remains functional after updates.,"1. Access https://www.boost.org. 
+2. Click each navigation menu item (e.g., Libraries, Documentation, Downloads, Community). 
+3. If dropdowns exist, hover and click sub-items. 
+4. Check URLs and page content.","All menu items redirect to the correct pages with no 404 errors. Dropdowns function as before, and content matches expectations (e.g., Libraries shows a list).",,High-priority due to navigation being critical. Compare with pre-update behavior.,,,,,,,,,,,,,,,,,,,
+TC_REG_002,Library Documentation Consistency,Ensure library documentation is unchanged after content migration.,"1. Navigate to the Libraries page. 
+2. Select two libraries (e.g., Boost.Asio, Boost.Beast). 
+3. Verify documentation sections (overview, examples, API reference). 
+4. Compare content with boost.org for equivalence. 
+5. Test a code example’s copy functionality.","Documentation matches boost.org content, includes all sections, and code examples are copyable. No content is missing or altered unexpectedly.",,"High-priority due to documentation’s importance. Manually verify examples (e.g., HTTP SSL client).",,,,,,,,,,,,,,,,,,,
+TC_REG_003,Search Functionality Stability,Confirm that search performance and accuracy are unaffected by updates.,"1. Access the search bar. 
+2. Enter previously tested queries (e.g., “Boost.Asio”, “WebSocket”). 
+3. Submit and observe results. 
+4. Measure load time. 
+5. Click a result to verify redirection.","Results are consistent with prior tests, load within 3 seconds, and are relevant. Clicking a result redirects to the correct page.",,High-priority for developer usability. Test multiple queries to ensure no degradation.,,,,,,,,,,,,,,,,,,,
+TC_REG_004,Download Functionality Integrity,Verify that download links and instructions remain functional post-update.,"1. Navigate to the Downloads page. 
+2. Click the link for the latest Boost release. 
+3. Verify the download starts. 
+4. Check for instructions (e.g., OpenSSL prerequisites). 
+5. Test a previous release link.","Downloads start immediately, files match expected size/format, and instructions are unchanged. Previous release links work as before.",,High-priority for user access. Verify file integrity for both releases.,,,,,,,,,,,,,,,,,,,
+TC_REG_005,Community Links Stability,Ensure community links and features are unaffected by updates.,"1. Navigate to the Community page. 
+2. Click links to GitHub issues and mailing lists. 
+3. If a form (e.g., newsletter signup) exists, submit a valid email. 
+4. Test with an invalid email.","Links open in new tabs and are valid (e.g., https://github.com/boostorg/website-v2/issues). Form submissions show expected success/error messages, consistent with prior behavior.",,Medium priority but important for engagement. Re-test all external links.,,,,,,,,,,,,,,,,,,,
+TC_REG_006,Logo Display Post-Update,Confirm that the logo displays correctly after redesign or optimization.,"1. Access the homepage. 
+2. Inspect the logo image. 
+3. Verify file size (< 500 KB) and dimensions.
+4. Check for visual clarity (no pixelation). 
+5. Compare with community feedback (e.g., no “SS” or “Gatorade” resemblance).","Logo loads correctly, is optimized, and appears clear. It matches the approved design and avoids community-reported issues.",,Medium priority but critical due to community feedback. Test on high-resolution displays.,,,,,,,,,,,,,,,,,,,
+TC_REG_007,Cross-Browser Rendering,Ensure no new rendering issues across browsers post-update.,"1. Open https://www.boost.org on Chrome, Firefox, Edge, and Safari. 
+2. Navigate to homepage, Libraries, and Downloads. 
+3. Check layout, text, and button alignment. 
+4. Test search and navigation.","The website renders consistently across browsers, with no new misalignments or broken elements. Functionality matches prior tests.",,High-priority for user access. Use BrowserStack to compare with pre-update screenshots.,,,,,,,,,,,,,,,,,,,
+TC_REG_008,Mobile Responsiveness Stability,Verify that mobile usability is unchanged after updates.,"1. Open https://www.boost.org on a mobile device (e.g., iPhone 12, Samsung Galaxy S21). 
+2. Check homepage layout and navigation (e.g., hamburger menu). 
+3. Access a documentation page. 
+4. Perform a search.","Layout adjusts correctly, navigation is accessible, documentation is readable, and search works as before. No new usability issues.",,High-priority due to mobile usage. Test on both iOS and Android.,,,,,,,,,,,,,,,,,,,
+TC_REG_009,Performance Stability,Confirm that page load times are unaffected by updates.,"1. Measure load times for homepage, Libraries, and Downloads pages using a tool (e.g., Chrome DevTools). 
+2. Compare with pre-update benchmarks. 
+3. Test under low-bandwidth conditions.",Load times remain within 2 seconds for normal conditions and are comparable to pre-update performance. Site is usable under low bandwidth.,,Medium priority but critical for user experience. Log any degradation for optimization.,,,,,,,,,,,,,,,,,,,
+TC_REG_010,Error Handling Consistency,"Ensure error handling (e.g., 404 pages) remains functional.","1. Navigate to an invalid URL (e.g., https://www.boost.org/nonexistent). 
+2. Observe the response. 
+3. If forms exist, submit invalid data (e.g., incorrect email). 
+4. Check error messages.","A user-friendly 404 page is displayed for invalid URLs. Forms show appropriate error messages for invalid inputs, consistent with prior behavior.",,Medium priority but important for UX. Test multiple invalid URLs and form inputs.,,,,,,,,,,,,,,,,,,,

@@ -1,0 +1,10 @@
+TCID,Test Summary,Test Priority,Component,Action,Data,Result
+WEB-101,Login with valid credentials,Medium,Authentication,Go to login page,,
+WEB-101,,,,Enter username,peter,
+WEB-101,,,,Enter password,secret123,
+WEB-101,,,,Click login,,User is redirected to the dashboard
+WEB-102,Logout clears session,High,Authentication,Click logout,,User is returned to the login page and back button does not restore session
+WEB-103,Filter products by category,Low,Catalog,Open the catalog page,,Catalog page lists all products
+WEB-103,,,,Select the Electronics category filter,,
+,,,,,,
+WEB-103,,,,,,Only Electronics products are listed

@@ -1,0 +1,378 @@
+
+> qa-documentation@1.0.0 test:unit
+> node --test tests/unit/*.test.js
+
+(node:21503) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/config-helper.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ getBaseURL
+  ✔ returns testInfo.project.use.baseURL when set (0.544292ms)
+  ✔ falls back to placeholder default when baseURL is undefined (0.08275ms)
+  ✔ falls back to placeholder default when baseURL is falsy (empty string) (0.0615ms)
+✔ getBaseURL (1.513875ms)
+▶ buildURL
+  ✔ constructs a basic URL by joining baseURL and path (0.10225ms)
+  ✔ defaults path to "/" when omitted (0.141375ms)
+  ✔ cachebust option adds a cachebust query param (0.478584ms)
+  ✔ params option adds custom query parameters (0.114625ms)
+  ✔ cachebust and params can be combined (0.138042ms)
+✔ buildURL (1.374875ms)
+▶ urlPatterns
+  ✔ is an object with exactly the expected keys (0.788916ms)
+  ✔ docLibsVersion is a function returning a string containing the version arg (0.054958ms)
+  ✔ releaseNotes is a function returning a string containing the version arg (0.052167ms)
+✔ urlPatterns (1.05325ms)
+▶ expectedUrlPatterns
+  ✔ is an object with exactly the expected keys (0.05375ms)
+  ✔ every value is a RegExp (0.056667ms)
+  ✔ afterCTAClick matches a post-CTA-click URL and rejects an unrelated one (0.125167ms)
+  ✔ afterSearch matches a search results URL and rejects an unrelated one (0.080292ms)
+  ✔ afterLogoClick matches the homepage root (0.040458ms)
+  ✔ githubBoost matches the placeholder github org pattern and rejects an unrelated URL (0.036792ms)
+  ✔ downloadSite matches a download URL and rejects an unrelated one (0.098833ms)
+  ✔ communityLinks matches a github issues URL and rejects an unrelated one (0.098292ms)
+✔ expectedUrlPatterns (0.859458ms)
+▶ testData
+  ✔ searchTerms.working and .alternative are non-empty strings (0.037084ms)
+  ✔ downloadFiles.tarGz/.zip/.supported are RegExps (0.03275ms)
+  ✔ timeouts.short/medium/long/download are numbers (0.030167ms)
+  ✔ viewport.desktop/.mobile are {width, height} objects (0.037375ms)
+✔ testData (0.257167ms)
+(node:21504) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/coverage-map.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ collectTests
+  ✔ returns one entry per test, merging projects (1.277958ms)
+  ✔ reads test_case, issue, tags, and the describe path (0.543917ms)
+  ✔ leaves testCase null when the annotation is missing (0.105834ms)
+  ✔ collects clientCases from all client_case annotations (0.073375ms)
+  ✔ returns empty array for clientCases when no client_case annotation (0.074625ms)
+✔ collectTests (3.600916ms)
+▶ renderMarkdown
+  ✔ sorts rows by test case ID (0.176333ms)
+  ✔ links issues by number and shows tags, with client cases (0.133208ms)
+  ✔ lists tests without an ID separately and escapes pipes (0.087542ms)
+  ✔ summarizes the counts (1.846042ms)
+✔ renderMarkdown (13.935167ms)
+(node:21505) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/generate-dashboard.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ testStatus
+  ✔ maps Playwright verdicts (0.615875ms)
+  ✔ without a verdict, uses the last attempt (0.081959ms)
+✔ testStatus (2.139375ms)
+▶ parsePlaywrightJson and calculateMetrics
+  ✔ reads every test, including nested suites (0.875583ms)
+  ✔ duration covers every attempt, and the error comes from a failed one (0.079458ms)
+  ✔ skipped tests are left out of the pass rate; flaky counts as a pass (1.346708ms)
+✔ parsePlaywrightJson and calculateMetrics (3.310583ms)
+(node:21506) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/import-cli.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ normalise --preview writes nothing (358.645916ms)
+✔ normalise --write without --map exits 2 and creates nothing (177.643ms)
+✔ normalise --write with a confirmed map creates cases.json, reuses it unchanged, and refuses a changed source (800.493292ms)
+✔ normalise --preview detects a built-in format (198.180541ms)
+✔ normalise --preview on an .xlsx fixture gives the same case count as the equivalent .csv (405.395583ms)
+✔ normalise rejects an unsupported file format (187.361125ms)
+✔ validate, report, and assign-ids wire through to the lib functions (961.322625ms)
+✔ reconcile exits 0 for a consistent set and 1 for a duplicate test case issue title (371.389ms)
+(node:21507) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/import-csv.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ parseCsv
+  ✔ parses a simple unquoted row (1.379041ms)
+  ✔ strips a leading UTF-8 BOM (0.091417ms)
+  ✔ handles CRLF line endings (0.086125ms)
+  ✔ handles a quoted field containing a comma (0.077584ms)
+  ✔ unescapes a doubled quote inside a quoted field (0.067625ms)
+  ✔ preserves an embedded newline inside a quoted field, spanning physical lines (0.079666ms)
+  ✔ a record spans several physical lines when quoted (0.058875ms)
+  ✔ keeps trailing empty columns as empty strings (0.058958ms)
+  ✔ represents a genuinely blank physical line as an empty record (0.081167ms)
+  ✔ a row of only commas is not collapsed to an empty record (0.087334ms)
+  ✔ handles a file with no trailing newline (0.063292ms)
+  ✔ returns an empty array for an empty string (0.054334ms)
+  ✔ a quote inside an unquoted field, after other characters, is literal text (0.0485ms)
+  ✔ a quote still open at end of input throws, naming the line it started on (8.049792ms)
+✔ parseCsv (15.018125ms)
+(node:21508) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/import-ids.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ TC_ID
+  ✔ matches a well-formed ID (0.644125ms)
+  ✔ rejects malformed IDs (0.081041ms)
+✔ TC_ID (1.503667ms)
+▶ areaFromSection
+  ✔ uppercases the first word and strips non-alphanumerics (0.176084ms)
+  ✔ truncates to 8 characters (0.056833ms)
+  ✔ falls back to GEN when there is no usable word (0.05525ms)
+✔ areaFromSection (0.564916ms)
+▶ collectUsedIds
+  ✔ finds every test case ID across the given texts (0.918792ms)
+  ✔ ignores null/empty texts and ID-shaped substrings that are too short (0.128334ms)
+✔ collectUsedIds (1.254ms)
+▶ nextId
+  ✔ is one past the highest used number in that area (0.144041ms)
+  ✔ starts at 001 when the area is unused (1.104875ms)
+✔ nextId (1.43075ms)
+▶ assignIds
+  ✔ assigns the next free ID across coverage map, cases.json, and issue titles, never reusing one (0.332792ms)
+  ✔ uses a TC_ id client_id unchanged (0.069584ms)
+  ✔ leaves a covered case pointed at its covered_by ID (0.06375ms)
+  ✔ leaves a stale case without an ID (0.065167ms)
+  ✔ is idempotent: running twice yields the same result (0.096208ms)
+  ✔ does not mutate its inputs (0.065542ms)
+✔ assignIds (1.013625ms)
+(node:21509) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/import-propose-map.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ proposeMap
+  ✔ maps every Boost header (1.443542ms)
+  ✔ ignores trailing empty header columns (0.12175ms)
+  ✔ maps the Boost fixture headers read straight off the CSV file (0.339459ms)
+  ✔ partly maps unknown headers, listing the rest as unmapped (0.48875ms)
+  ✔ a header matching an already-filled field is left unmapped rather than overwriting it (0.369666ms)
+✔ proposeMap (5.241375ms)
+▶ detectFormat returns null for formats with no built-in map
+  ✔ the Boost format (0.180792ms)
+  ✔ unknown headers (0.206542ms)
+✔ detectFormat returns null for formats with no built-in map (0.688625ms)
+(node:21510) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/import-readers.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ testrail.csv normalises to the full expected shape for every case (2.746167ms)
+✔ zephyr-scale.csv normalises to the full expected shape for every case (1.639583ms)
+✔ xray.csv normalises to the full expected shape for every case (0.734584ms)
+✔ qtest.csv normalises to the full expected shape for every case (1.026458ms)
+▶ splitNumbered edge cases used by the row rules
+  ✔ a cell with no numbering is a single item (0.09825ms)
+  ✔ numbered lines split into one item per number, prefix removed and trimmed (0.088ms)
+  ✔ accepts a ")" number style too (0.071792ms)
+  ✔ null and empty input return an empty array (0.092625ms)
+✔ splitNumbered edge cases used by the row rules (1.033417ms)
+✔ normalise: a row that repeats the current case's client_id with an empty title continues that case (0.135708ms)
+✔ normalise: headers are matched case-insensitively (0.090166ms)
+(node:21511) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/import-reconcile.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ reconcile: rule 1 - no duplicate TEST CASE or STORY issue titles
+  ✔ passes with distinct titles (0.845458ms)
+  ✔ fails when two issues share a [TEST CASE] <id> - prefix (0.137625ms)
+  ✔ fails when two issues share an identical [STORY] title (0.09425ms)
+✔ reconcile: rule 1 - no duplicate TEST CASE or STORY issue titles (1.8805ms)
+▶ reconcile: rule 2 - non-stale, non-covered cases need a matching issue
+  ✔ passes when the issue exists with the expected title (0.15ms)
+  ✔ fails when import.issue is missing (0.096ms)
+  ✔ fails when the issue's title does not match the test case ID (0.092333ms)
+✔ reconcile: rule 2 - non-stale, non-covered cases need a matching issue (1.568291ms)
+▶ reconcile: rule 3 - label matches bucket
+  ✔ passes when a manual case has the test-manual label (2.085083ms)
+  ✔ fails when a manual case is labelled test-automated instead of test-manual (0.17325ms)
+  ✔ fails when an automatable case has neither test-automated nor test-needs-automation (0.099042ms)
+✔ reconcile: rule 3 - label matches bucket (2.681083ms)
+▶ reconcile: rule 4 - test-automated and covered cases need a matching coverage test
+  ✔ passes when a test-automated case has a matching coverage test (0.130167ms)
+  ✔ fails when a test-automated case has no coverage test (0.084083ms)
+  ✔ fails when the client_id differs from the test_case_id and the coverage test is missing that client_case (0.078541ms)
+  ✔ passes for a covered case with a matching coverage test, and needs no issue (0.112334ms)
+✔ reconcile: rule 4 - test-automated and covered cases need a matching coverage test (0.754333ms)
+▶ reconcile: rule 5 - no coverage test may reference a stale case
+  ✔ passes when no coverage test references a stale client_id (0.087292ms)
+  ✔ fails when a coverage test lists a stale case in clientCases (0.084708ms)
+✔ reconcile: rule 5 - no coverage test may reference a stale case (0.755542ms)
+▶ reconcile: counts
+  ✔ reports bucket counts plus issues_by_label restricted to the cases referenced issues (1.031709ms)
+✔ reconcile: counts (1.13275ms)
+(node:21513) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/import-report.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ countBuckets
+  ✔ tallies each bucket plus a total (1.350625ms)
+  ✔ returns zero counts for an empty case list (0.077625ms)
+✔ countBuckets (2.192875ms)
+▶ renderReport
+  ✔ has the heading and summary line (0.217709ms)
+  ✔ has a counts table (0.071417ms)
+  ✔ has a reasons table for manual and partly-automatable cases (0.062541ms)
+  ✔ has a stale table (0.065083ms)
+  ✔ has a traceability table for every non-stale case, and omits stale cases (0.093292ms)
+✔ renderReport (1.182375ms)
+(node:21514) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/import-validate.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ validate: rule 1 - bucket must be one of the four values
+  ✔ passes when bucket is a valid value (1.983333ms)
+  ✔ fails when bucket is null or unrecognised (0.244083ms)
+✔ validate: rule 1 - bucket must be one of the four values (3.163875ms)
+▶ validate: rule 2 - client_id unique and non-null
+  ✔ passes with unique, non-null client_ids (0.121584ms)
+  ✔ fails on a duplicate or null client_id (0.184792ms)
+✔ validate: rule 2 - client_id unique and non-null (0.61375ms)
+▶ validate: rule 3 - manual and partly-automatable require a reason
+  ✔ passes when a reason is given (0.105ms)
+  ✔ fails when the reason is missing (0.1165ms)
+✔ validate: rule 3 - manual and partly-automatable require a reason (1.20175ms)
+▶ validate: rule 4 - stale requires missing and forbids a test
+  ✔ passes when stale.missing is set and test/covered_by/test_case_id are null (0.125709ms)
+  ✔ fails when stale.missing is absent (0.078334ms)
+  ✔ fails when a stale case still carries a test, covered_by, or test_case_id (0.074166ms)
+✔ validate: rule 4 - stale requires missing and forbids a test (0.559833ms)
+▶ validate: rule 5 - test_case_id shape and client_id agreement
+  ✔ passes when a TC_ client_id matches its own test_case_id (0.240791ms)
+  ✔ fails on a malformed test_case_id (0.130666ms)
+  ✔ fails when a TC_ client_id disagrees with its own (non-covered) test_case_id (0.092666ms)
+  ✔ skips the client_id agreement check for a stale case (its test_case_id must be null) (0.06025ms)
+✔ validate: rule 5 - test_case_id shape and client_id agreement (0.911917ms)
+▶ validate: rule 6 - covered_by agreement and bucket restriction
+  ✔ passes when test_case_id equals covered_by on an automatable case (0.080708ms)
+  ✔ fails when test_case_id disagrees with covered_by (0.076667ms)
+  ✔ fails when covered_by is set on a manual case (0.05575ms)
+✔ validate: rule 6 - covered_by agreement and bucket restriction (0.38125ms)
+▶ validate: rule 7 - non-covered test_case_id values are unique
+  ✔ passes with distinct, non-covered test_case_ids (0.049042ms)
+  ✔ fails when two non-covered cases share a test_case_id (0.056417ms)
+  ✔ allows two covered cases to legitimately share the covered test_case_id (0.053458ms)
+✔ validate: rule 7 - non-covered test_case_id values are unique (0.269416ms)
+(node:21515) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/import-xlsx.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ readXlsx + normalise matches parseCsv + normalise for the Boost fixture (25.787625ms)
+✔ readXlsx accepts a Buffer as well as a file path (4.809458ms)
+▶ readXlsx cell text conversion
+  ✔ joins rich text runs into plain text (16.304583ms)
+  ✔ uses a formula cell's computed result, not the formula text (6.2265ms)
+  ✔ cellToText treats a sharedFormula cell like a formula cell (0.093708ms)
+  ✔ uses a hyperlink cell's display text (6.502833ms)
+  ✔ renders a midnight Date as a plain YYYY-MM-DD string (6.031541ms)
+  ✔ renders a non-midnight Date as a full ISO string (5.887041ms)
+  ✔ renders a number as its plain string form (4.881958ms)
+  ✔ trims trailing empty cells from a row (4.854417ms)
+✔ readXlsx cell text conversion (51.691583ms)
+✔ readXlsx honours the sheet option to select a non-first worksheet (7.653667ms)
+(node:21516) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/selectors.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ every *Fallbacks array export
+  ✔ mobileToggleFallbacks is a non-empty array (0.525375ms)
+  ✔ mobileToggleFallbacks contains no "boost" references (0.199416ms)
+  ✔ mobileMenuFallbacks is a non-empty array (0.060291ms)
+  ✔ mobileMenuFallbacks contains no "boost" references (0.050167ms)
+  ✔ searchInputFallbacks is a non-empty array (0.049833ms)
+  ✔ searchInputFallbacks contains no "boost" references (0.08225ms)
+  ✔ searchTriggerFallbacks is a non-empty array (0.038666ms)
+  ✔ searchTriggerFallbacks contains no "boost" references (0.060583ms)
+  ✔ logoFallbacks is a non-empty array (0.061ms)
+  ✔ logoFallbacks contains no "boost" references (0.0905ms)
+  ✔ navFallbacks is a non-empty array (0.097875ms)
+  ✔ navFallbacks contains no "boost" references (0.046541ms)
+  ✔ navLinksFallbacks is a non-empty array (0.028959ms)
+  ✔ navLinksFallbacks contains no "boost" references (0.028708ms)
+  ✔ contentFallbacks is a non-empty array (0.036708ms)
+  ✔ contentFallbacks contains no "boost" references (0.046125ms)
+  ✔ ctaFallbacks is a non-empty array (0.03075ms)
+  ✔ ctaFallbacks contains no "boost" references (0.044375ms)
+  ✔ externalLinksFallbacks is a non-empty array (0.04375ms)
+  ✔ externalLinksFallbacks contains no "boost" references (0.040709ms)
+  ✔ footerFallbacks is a non-empty array (0.035708ms)
+  ✔ footerFallbacks contains no "boost" references (0.031375ms)
+  ✔ searchResultsFallbacks is a non-empty array (0.0245ms)
+  ✔ searchResultsFallbacks contains no "boost" references (0.025084ms)
+  ✔ downloadLinksFallbacks is a non-empty array (0.033542ms)
+  ✔ downloadLinksFallbacks contains no "boost" references (0.033416ms)
+  ✔ formsInputFallbacks is a non-empty array (0.024583ms)
+  ✔ formsInputFallbacks contains no "boost" references (0.025458ms)
+  ✔ formsButtonFallbacks is a non-empty array (0.019125ms)
+  ✔ formsButtonFallbacks contains no "boost" references (0.02075ms)
+  ✔ formsSelectFallbacks is a non-empty array (0.02075ms)
+  ✔ formsSelectFallbacks contains no "boost" references (0.021792ms)
+  ✔ formsTextareaFallbacks is a non-empty array (0.020875ms)
+  ✔ formsTextareaFallbacks contains no "boost" references (0.018958ms)
+  ✔ modalsFallbacks is a non-empty array (0.020917ms)
+  ✔ modalsFallbacks contains no "boost" references (0.025417ms)
+  ✔ alertsFallbacks is a non-empty array (0.030834ms)
+  ✔ alertsFallbacks contains no "boost" references (0.028667ms)
+  ✔ loadingFallbacks is a non-empty array (0.022041ms)
+  ✔ loadingFallbacks contains no "boost" references (0.02125ms)
+✔ every *Fallbacks array export (4.428917ms)
+▶ logoFallbacks
+  ✔ contains exactly the expected generic fallback chain, in order (0.791125ms)
+✔ logoFallbacks (0.859959ms)
+▶ downloadLinksFallbacks
+  ✔ contains exactly the expected generic fallback chain, in order (0.048916ms)
+✔ downloadLinksFallbacks (0.108916ms)
+▶ selectors function API
+  ✔ selectors.mobileToggle is a function (0.056625ms)
+  ✔ selectors.mobileMenu is a function (0.027625ms)
+  ✔ selectors.searchInput is a function (0.02125ms)
+  ✔ selectors.searchTrigger is a function (0.021791ms)
+  ✔ selectors.logo is a function (0.023417ms)
+  ✔ selectors.nav is a function (0.02025ms)
+  ✔ selectors.navLinks is a function (0.020334ms)
+  ✔ selectors.content is a function (0.035541ms)
+  ✔ selectors.cta is a function (0.023125ms)
+  ✔ selectors.externalLinks is a function (0.022458ms)
+  ✔ selectors.footer is a function (0.0485ms)
+  ✔ selectors.searchResults is a function (0.027042ms)
+  ✔ selectors.downloadLinks is a function (0.022125ms)
+  ✔ selectors.modals is a function (0.020166ms)
+  ✔ selectors.alerts is a function (0.034583ms)
+  ✔ selectors.loading is a function (0.020417ms)
+  ✔ selectors.forms is an object (0.037375ms)
+  ✔ selectors.forms.input is a function (0.048458ms)
+  ✔ selectors.forms.button is a function (0.017875ms)
+  ✔ selectors.forms.select is a function (0.027292ms)
+  ✔ selectors.forms.textarea is a function (0.017208ms)
+✔ selectors function API (1.60675ms)
+(node:21517) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/setup-labels.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ parseTriageLabels
+  ✔ reads the tracker label and meaning from each row (1.401792ms)
+  ✔ throws when there are no rows (0.427625ms)
+  ✔ parses this repo's triage-labels.md (0.528708ms)
+✔ parseTriageLabels (3.489083ms)
+▶ parseFormLabels
+  ✔ reads quoted and unquoted labels (0.283541ms)
+  ✔ returns [] for a form without labels (0.168875ms)
+✔ parseFormLabels (0.941958ms)
+▶ plannedLabels
+  ✔ lists each label once, test-management labels first (0.140291ms)
+  ✔ records every reason a label is needed (0.097709ms)
+  ✔ uses known colors and falls back to a neutral one (0.757542ms)
+  ✔ covers every label this repo's issue forms apply (2.41825ms)
+✔ plannedLabels (3.99925ms)
+(node:21518) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file://~/QA-framework-template/tests/unit/setup-project-board.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to ~/QA-framework-template/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ parseStates
+  ✔ reads the table rows in order and the human-only line (1.689167ms)
+  ✔ throws when the section or its rows are missing (0.253667ms)
+  ✔ parses this repo's issue-tracker.md (0.748625ms)
+✔ parseStates (3.649042ms)
+▶ statusOptions
+  ✔ keeps order, uses the meaning as description, and assigns a color (0.182292ms)
+✔ statusOptions (0.398583ms)
+ℹ tests 263
+ℹ suites 0
+ℹ pass 263
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3669.204167
