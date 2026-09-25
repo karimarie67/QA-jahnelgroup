@@ -261,3 +261,51 @@ Stacked on step 3 (#4).
 **Next**
 
 - Step 5: create the project board.
+
+## Step 5 — Create the project board (2026-09-25)
+
+Stacked on step 4 (#6).
+
+**What we did**
+
+- Ran `npm run board:setup -- karimarie67/QA-jahnelgroup`. It created project
+  [#8 "QA-jahnelgroup"](https://github.com/users/karimarie67/projects/8), set
+  its Status options to the lifecycle in `docs/agents/issue-tracker.md`
+  (Backlog → To Do → In Progress → In QA → Done), and linked it to the repo.
+- The human added the Board view, "JG BOARD", with columns by Status. They
+  also renamed the table view "JG".
+- Ticked the brief's "Project board created" kickoff item.
+
+**Decisions**
+
+- **Auto-delete merged branches.** The human turned this on for the repo
+  (`gh repo edit --delete-branch-on-merge`), after two stacked PRs landed on
+  their parent's branch rather than `main`: #2 (step 2, re-landed by #3) and
+  #5 (step 4, re-landed by #6). With the parent's branch deleted on merge,
+  GitHub moves a stacked PR to `main` by itself.
+- **Human-only state IDs not recorded yet.** Adding them to
+  `.atlas/manifest.json` `human_only_state_ids` is optional, because the
+  manifest already names the states (`In QA`, `Done`), and it's a guardrail
+  edit. The IDs are below, for when it's wanted.
+
+**Result**
+
+| Check | Outcome |
+|---|---|
+| `npm run board:setup -- karimarie67/QA-jahnelgroup` | Created project #8, set 5 Status options, linked to the repo |
+| The repo's linked projects (GraphQL `repository.projectsV2`) | Project #8 "QA-jahnelgroup" |
+| The project's views (GraphQL `projectV2.views`) | "JG" (table), and "JG BOARD" (board, columns by Status) |
+
+Status option IDs:
+
+| Status | Option ID |
+|---|---|
+| Backlog | `500ffda0` |
+| To Do | `744d5384` |
+| In Progress | `0bca9950` |
+| In QA | `21d172b9` (human-only) |
+| Done | `1dcc3c62` (human-only) |
+
+**Next**
+
+- Step 6: point the issue forms' contact links.
