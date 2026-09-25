@@ -139,7 +139,7 @@ this product, to agree with the client contact:
 ## Kickoff checklist
 
 - [ ] Brief filled in and agreed with the client contact
-- [ ] Site config replaced (`playwright.config.js`, `config-helper.js`, `selectors.js`; search for `TODO(Engagement)`)
+- [x] Site config replaced (`playwright.config.js`, `config-helper.js`, `selectors.js`; search for `TODO(Engagement)`)
 - [x] Labels created: `npm run labels:setup -- karimarie67/QA-jahnelgroup`. It creates the test-management labels (see [`docs/github_test_management.md`](./github_test_management.md)), the triage labels in [`docs/agents/triage-labels.md`](./agents/triage-labels.md), and every label an issue form applies, such as `qa` and `needs-triage`. GitHub quietly drops a form's label when the repo doesn't have it.
 - [x] Project board created: `npm run board:setup -- karimarie67/QA-jahnelgroup`, then add a Board view grouped by Status in the web UI
 - [x] `.github/ISSUE_TEMPLATE/config.yml` links point at the Engagement's channels
