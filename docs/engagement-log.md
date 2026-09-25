@@ -230,3 +230,34 @@ removed specs. Step 7 removes them, when it turns on the browser jobs.
 - Human: approve this PR's `CLAUDE.md` edit by merging it, then run the
   `setup-atlas` **verify** step.
 - Step 4: create the labels.
+
+## Step 4 — Create the labels (2026-09-25)
+
+Stacked on step 3 (#4).
+
+**What we did**
+
+- Ran `npm run labels:setup` against `karimarie67/QA-jahnelgroup`, after a dry
+  run. It created the test-management labels (`user-story`, `test-case`,
+  `test-manual`, `test-needs-automation`, `test-automated`), the triage labels
+  (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`), and
+  `qa`, which the QA finding form applies. `wontfix`, `bug`, and
+  `enhancement` were already there, as GitHub defaults.
+- Ticked the brief's "Labels created" kickoff item.
+
+**Decisions**
+
+- **Dry run first.** It showed exactly the 10 labels to add and nothing to
+  change, so the real run went ahead as-is.
+
+**Result**
+
+| Command | Outcome |
+|---|---|
+| `npm run labels:setup -- karimarie67/QA-jahnelgroup --dry-run` | 10 to create, 3 already there |
+| `npm run labels:setup -- karimarie67/QA-jahnelgroup` | 10 created, 3 already there |
+| The dry run again | 0 to create, 13 already there |
+
+**Next**
+
+- Step 5: create the project board.
