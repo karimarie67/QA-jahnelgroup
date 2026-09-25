@@ -69,9 +69,6 @@ export const searchInputFallbacks = [
 ];
 
 export const searchTriggerFallbacks = [
-  // TODO(Engagement): '#gecko-search-button' is a site-specific element ID -
-  // replace with your site's actual search-trigger ID/selector.
-  '#gecko-search-button',
   'button[aria-label*="search" i], button[title*="search" i]',
   '.search-trigger, #search-trigger, [class*="search-btn"]',
   'button:has-text("Search"), [type="submit"][value*="search" i]',
@@ -227,4 +224,37 @@ export const selectors = {
 
   // Loading indicators
   loading: page => buildChain(page, loadingFallbacks),
+
+  // Jahnel Group website elements, by role and accessible name. The site has
+  // no <header> or <main> element, so these hang off the navigation and
+  // contentinfo landmarks, and the page's headings.
+  jg: {
+    nav: page => page.getByRole('navigation'),
+    logo: page => page.getByRole('navigation').getByRole('link', { name: 'Jahnel Group — Home' }),
+    // Phones get this button; it slides the header menu in from the right.
+    menuButton: page => page.getByRole('button', { name: 'Toggle menu' }),
+    navLink: (page, name) => page.getByRole('navigation').getByRole('link', { name, exact: true }),
+    servicesButton: page => page.getByRole('navigation').getByRole('button', { name: 'Services' }),
+    servicesMenu: page => page.getByRole('navigation').getByRole('menu'),
+    // Each Services link's name is the service plus a one-line summary.
+    serviceLink: (page, name) => page.getByRole('navigation').getByRole('menu').getByRole('link', { name: new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`) }),
+    mainHeading: page => page.getByRole('heading', { level: 1 }),
+    footer: page => page.getByRole('contentinfo'),
+    footerLink: (page, name) => page.getByRole('contentinfo').getByRole('link', { name, exact: true }),
+    copyright: page => page.getByRole('contentinfo').getByText(/Copyright ©/),
+    contactForm: page => page.locator('#conForm'),
+    contactField: (page, label) => page.locator('#conForm').getByLabel(label, { exact: true }),
+    recaptcha: page => page.locator('#conForm iframe[src*="recaptcha"]'),
+    // Located only to check it's there. Never click it: that sends a real message.
+    contactSubmit: page => page.getByRole('button', { name: 'Send Message' }),
+    roleFilters: page => page.getByRole('group', { name: 'Filter roles by team' }),
+    roleFilter: (page, name) => page.getByRole('group', { name: 'Filter roles by team' }).getByRole('button', { name: new RegExp(`^${name}\\b`) }),
+    // One About and one Apply button per role. Apply only opens the modal;
+    // the tests never go on to the application form.
+    roleAboutButtons: page => page.getByRole('button', { name: 'About', exact: true }).filter({ visible: true }),
+    roleApplyButtons: page => page.getByRole('button', { name: 'Apply', exact: true }).filter({ visible: true }),
+    roleDialog: page => page.getByRole('dialog').filter({ visible: true }),
+    roleDialogClose: page => page.getByRole('dialog').filter({ visible: true }).getByRole('button', { name: 'Close application' }),
+    notFoundHeading: page => page.getByRole('heading', { level: 1, name: /didn.t ship/i }),
+  },
 };

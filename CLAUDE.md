@@ -32,8 +32,9 @@ repository keeps its own base SHA, branch, verification result, and pull request
 
 ### Structure
 
-- `tests/` — Playwright spec files (smoke, regression, error handling, documentation, download/search, link-checker tests) plus `tests/unit/` unit tests
-- `docs/` — Atlas agent docs and remaining process documentation
+- `tests/` — Playwright spec files for the site (`smoke_tests.spec.js`, `error_handling_tests.spec.js`, and the on-demand `check-links.spec.js` link checker) plus `tests/unit/` unit tests
+- `config-helper.js`, `selectors.js` (`selectors.jg.*`), `playwright.config.js` — the Site config for https://www.jahnelgroup.com
+- `docs/` — Atlas agent docs, the Engagement brief (`engagement-brief.md`) and log (`engagement-log.md`), and remaining process documentation
 - `dashboards/` — QA metrics dashboard generator and published dashboard, auto-committed by CI after each run
 - `scripts/` — Support scripts, including the `template-check` structural smoke check
 - `test-results/` — Evidence root: Playwright HTML/JSON reports and captured output
@@ -43,6 +44,7 @@ repository keeps its own base SHA, branch, verification result, and pull request
 
 - dashboards/ is auto-committed directly to main by the qa-test.yml CI workflow (github-actions[bot]) after every test run. Expect frequent upstream commits touching only that path; rebase/pull before pushing.
 - staging and production are Playwright project names (deploy targets in playwright.config.js), not git branches. Do not treat them as protected branches.
+- The site has no staging copy: `staging`, `production`, and their `-mobile` (Pixel 5) projects all point at the live site, https://www.jahnelgroup.com. Every test is read-only there: load pages and look, and open and close menus, filters, and dialogs. Never type into or submit a form (the contact form sends real mail, and Apply sends a real application to Greenhouse), and run one worker at a time.
 
 ## Atlas repository workflow
 

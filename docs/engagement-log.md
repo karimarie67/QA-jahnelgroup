@@ -121,3 +121,112 @@ Stacked on step 1 (#1).
 - Human: agree the brief and its `TBD`s with the client contact (tracked to
   step 10).
 - Step 3: replace the Site config.
+
+## Step 3 — Replace the Site config (2026-09-25)
+
+Stacked on step 2 (#3).
+
+**What we did**
+
+- Probed the pages again, read-only, for the hooks the tests need: the
+  header's and footer's accessible names, the Services menu, the contact
+  form's labels and `required` attributes, the Open Positions filters and role
+  details, the 404 page, and the phone menu on an emulated Pixel 5. Each
+  candidate defect was re-checked with a screenshot.
+- **`playwright.config.js`:** every project points at
+  `https://www.jahnelgroup.com`. The two `*-mobile` projects emulate a Pixel 5,
+  and a run uses one worker.
+- **`config-helper.js`:** rewritten for the site. It holds the 27 page paths
+  and their titles, the header, Services, footer, and social links, the
+  footer's contact details, the six contact form fields (two required), and
+  the four role filters.
+- **`selectors.js`:** added a `selectors.jg` block, hooked by role and
+  accessible name, and dropped the template's leftover `#gecko-search-button`.
+- **Specs:**
+  - `smoke_tests.spec.js` is rewritten as 8 smoke tests: the home page, the
+    header menu, the Services menu, every page's title and main heading, the
+    footer, the contact form (looked at, never sent), Open Positions (filters,
+    and a role's details), and the phone layout and menu.
+  - `error_handling_tests.spec.js` keeps 3 tests: the 404 page, malformed
+    addresses, and outbound links (the footer's social links and the trust
+    pages' vendor links). It drops the documentation-link and search tests,
+    which don't apply, and `TC_ERROR_006`, which clicks submit on the first
+    form it finds.
+  - `check-links.spec.js` crawls the site from `/`, and now fails on a broken
+    link (see Decisions).
+  - `documentation_tests.spec.js` and `download_search_tests.spec.js` are
+    removed: the site has no documentation, downloads, or search.
+- Updated the unit tests, `template-check`'s spec list,
+  `npm run test:regression`, the test-case issue form's example, and the
+  operators guide's regression row to match, and regenerated
+  [`docs/coverage-map.md`](./coverage-map.md).
+- Updated `CLAUDE.md`'s structure and rules: the specs, the Site config, and
+  the read-only rule for every project.
+
+**Decisions**
+
+- **Staging points at the live site.** This corrects step 2, which recorded
+  the `staging` projects as unused. Manual CI runs default to `staging`, so
+  pointing it at the live site gives those runs a real target, and the tests
+  are read-only either way. The brief's Environments table now says so.
+- **Phone emulation, not an 800x600 window.** On a phone, the header menu is
+  behind a `Toggle menu` button that slides it in from the right.
+- **"Menu open" means the link is on screen.** The closed phone menu sits
+  off-screen, where Playwright still counts its links as visible. So the
+  tests check `toBeInViewport`, and tap the button until the first link is on
+  screen.
+- **Role details, not role counts.** The role buttons are named About (step 2
+  called them Overview; the brief is corrected). The Open Positions test
+  checks that each filter shows as many roles as its label says, and that
+  About opens a role's details and closes them. It never presses Apply.
+- **One worker.** The brief asks for a gentle request rate on the live site.
+- **The link checker can fail now.** The template's version always passed:
+  it read `response?.status` without calling it, and `status` is a method,
+  so no response ever counted as broken. It also filed pages that failed to
+  load under their error message rather than as `site`. Both are fixed, and a
+  broken site link now fails `TC_LINKS_001`. The template and QA-kcs have the
+  same bug.
+- **No full-page screenshot of a very tall page.** On the phone, `/photos` is
+  163,129 px tall. The load helper's full-page screenshot outlasts its 3 s
+  timeout and leaves the browser busy, and the next page (`/videos`) then
+  timed out loading in 3 of 7 phone passes. Loaded on their own, both pages
+  take under 250 ms. `utils.js` now takes a screen-sized screenshot of any
+  page over 20,000 px. The template has the same helper.
+- **A link that doesn't answer gets a second try.** One run's request to
+  `support.google.com` stalled for 15 s, though it answers in under a second.
+  One stalled request isn't a broken link, but a 404 or 410 is.
+- **Soft checks per page.** In `TC_SMOKE_004` a failed page load is soft too,
+  so one page can't stop the rest being checked.
+
+**Result**
+
+| Check | Result |
+|---|---|
+| `npm run test:unit` | 285 passed, 0 failed |
+| `npm run test:template-check` | PASS (3 specs discovered) |
+| Smoke and error handling, desktop and phone (`production`, `production-mobile`), `--retries=0`, run twice | 19 passed, 1 skipped (phone-only test on desktop), **2 failed**, the same both runs |
+| `npm run test:links` | 36 URLs checked, 0 broken |
+| Each test made to fail once (an expected value broken, then restored) | All 11 passing tests failed on the assertion under test; `TC_SMOKE_004` already fails on the defect below |
+| `TODO(Engagement)` markers left in code | 0 |
+
+**The 2 failures are one defect, caught on desktop and phone:** `/contact` has
+no `<h1>`. `TC_SMOKE_004` expects one on every page, and the Contact page's
+top heading is the `<h2>` "Send us a message." Every other page has one.
+
+**Candidate findings** (carried to step 8 with step 2's)
+
+| Finding | Where | Brief severity |
+|---|---|---|
+| No `<h1>` (confirmed; caught by `TC_SMOKE_004`) | `/contact` | Medium |
+| No `<main>` or `<header>` element, so screen readers can't jump to the content | Every page | To triage |
+| The phone menu button has no `aria-expanded`, so a screen reader can't tell whether the menu is open | Every page, phone | To triage |
+| The JG Atlas title uses "·" where every other title uses "—" | `/jg-atlas` | Low |
+
+**Carried forward:** `qa-test.yml` still has manual-dispatch jobs for the two
+removed specs. Step 7 removes them, when it turns on the browser jobs.
+
+**Next**
+
+- Human: approve this PR's `CLAUDE.md` edit by merging it, then run the
+  `setup-atlas` **verify** step.
+- Step 4: create the labels.
