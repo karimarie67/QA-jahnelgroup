@@ -45,5 +45,19 @@
       "TC_SMOKE_004 Every page loads with its own title and a main heading"
     ],
     "runNumber": "14"
+  },
+  {
+    "date": "2026-09-25",
+    "time": "2026-09-25T19:57:23.302Z",
+    "total": 22,
+    "passed": 19,
+    "failed": 2,
+    "passRate": 90.47619047619048,
+    "duration": 290.546,
+    "failedTestNames": [
+      "TC_SMOKE_004 Every page loads with its own title and a main heading",
+      "TC_SMOKE_004 Every page loads with its own title and a main heading"
+    ],
+    "runNumber": "16"
   }
 ]

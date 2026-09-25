@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-25T19:49:37.199Z",
+  "timestamp": "2026-09-25T19:57:23.316Z",
   "metrics": {
     "totalTests": 22,
     "passed": 19,
@@ -11,56 +11,56 @@
       "TC_SMOKE_004 Every page loads with its own title and a main heading"
     ],
     "passRate": 90.47619047619048,
-    "totalDuration": 345.297,
+    "totalDuration": 290.546,
     "smokeCount": 16,
     "functionalCount": 6,
     "allTestObjects": [
       {
         "name": "TC_SMOKE_001 Home page loads with its title, logo, header menu, and main heading",
         "status": "passed",
-        "durationSec": 2.541,
+        "durationSec": 2.03,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_SMOKE_002 Header menu reaches Case Studies, Team, Culture, Careers, and Contact",
         "status": "passed",
-        "durationSec": 10.346,
+        "durationSec": 6.472,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_SMOKE_003 Services menu opens and reaches each service page",
         "status": "passed",
-        "durationSec": 12.825,
+        "durationSec": 10.237,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_SMOKE_004 Every page loads with its own title and a main heading",
         "status": "failed",
-        "durationSec": 87.819,
+        "durationSec": 66.211,
         "projectName": "staging",
-        "error": "Error: contact has one <h1>\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading', { level: 1 })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - contact has one <h1> with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { level: 1 })\u001b[22m\n\u001b[2m    9 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n\n  108 |         if (loadError) return;\n  109 |         await expect.soft(page, `${key} title`).toHaveTitle(testData.pageTitles[key]);\n> 110 |         await expect.soft(jg.mainHeading(page), `${key} has one <h1>`).toHaveCount(1);\n      |                                                                        ^\n  111 |       });\n  112 |     }\n  113 |   });\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:110:72\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:104:7"
+        "error": "Error: contact has one <h1>\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading', { level: 1 })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - contact has one <h1> with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { level: 1 })\u001b[22m\n\u001b[2m    9 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n\n  109 |         await expect.soft(page, `${key} title`).toHaveTitle(testData.pageTitles[key]);\n  110 |         // Fails on the live site today: known defect #10 (/contact has no <h1>).\n> 111 |         await expect.soft(jg.mainHeading(page), `${key} has one <h1>`).toHaveCount(1);\n      |                                                                        ^\n  112 |       });\n  113 |     }\n  114 |   });\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:111:72\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:104:7"
       },
       {
         "name": "TC_SMOKE_005 Footer shows the contact details and links to the site's pages and social profiles",
         "status": "passed",
-        "durationSec": 3.133,
+        "durationSec": 2.359,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_SMOKE_006 Contact form shows its fields, marks Email and the project required, and loads reCAPTCHA",
         "status": "passed",
-        "durationSec": 2.047,
+        "durationSec": 1.55,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_SMOKE_007 Open Positions lists roles, its filters narrow the list, and a role's details open and close",
         "status": "passed",
-        "durationSec": 1.786,
+        "durationSec": 2.081,
         "projectName": "staging",
         "error": null
       },
@@ -74,106 +74,106 @@
       {
         "name": "TC_SMOKE_001 Home page loads with its title, logo, header menu, and main heading",
         "status": "passed",
-        "durationSec": 2.681,
+        "durationSec": 2.385,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_SMOKE_002 Header menu reaches Case Studies, Team, Culture, Careers, and Contact",
         "status": "passed",
-        "durationSec": 12.727,
+        "durationSec": 10.435,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_SMOKE_003 Services menu opens and reaches each service page",
         "status": "passed",
-        "durationSec": 15.365,
+        "durationSec": 12.777,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_SMOKE_004 Every page loads with its own title and a main heading",
         "status": "failed",
-        "durationSec": 134.538,
+        "durationSec": 113.675,
         "projectName": "staging-mobile",
-        "error": "Error: contact has one <h1>\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading', { level: 1 })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - contact has one <h1> with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { level: 1 })\u001b[22m\n\u001b[2m    9 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n\n  108 |         if (loadError) return;\n  109 |         await expect.soft(page, `${key} title`).toHaveTitle(testData.pageTitles[key]);\n> 110 |         await expect.soft(jg.mainHeading(page), `${key} has one <h1>`).toHaveCount(1);\n      |                                                                        ^\n  111 |       });\n  112 |     }\n  113 |   });\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:110:72\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:104:7"
+        "error": "Error: contact has one <h1>\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading', { level: 1 })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - contact has one <h1> with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { level: 1 })\u001b[22m\n\u001b[2m    9 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n\n  109 |         await expect.soft(page, `${key} title`).toHaveTitle(testData.pageTitles[key]);\n  110 |         // Fails on the live site today: known defect #10 (/contact has no <h1>).\n> 111 |         await expect.soft(jg.mainHeading(page), `${key} has one <h1>`).toHaveCount(1);\n      |                                                                        ^\n  112 |       });\n  113 |     }\n  114 |   });\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:111:72\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:104:7"
       },
       {
         "name": "TC_SMOKE_005 Footer shows the contact details and links to the site's pages and social profiles",
         "status": "passed",
-        "durationSec": 3.101,
+        "durationSec": 2.381,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_SMOKE_006 Contact form shows its fields, marks Email and the project required, and loads reCAPTCHA",
         "status": "passed",
-        "durationSec": 3.059,
+        "durationSec": 2.566,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_SMOKE_007 Open Positions lists roles, its filters narrow the list, and a role's details open and close",
         "status": "passed",
-        "durationSec": 2.46,
+        "durationSec": 2.486,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_SMOKE_008 Phone layout fits the screen and its menu opens and closes",
         "status": "passed",
-        "durationSec": 13.468,
+        "durationSec": 10.599,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_ERROR_001 Unknown page shows the 404 page",
         "status": "passed",
-        "durationSec": 1.091,
+        "durationSec": 1.465,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_ERROR_004 Malformed addresses never cause a server error",
         "status": "passed",
-        "durationSec": 2.671,
+        "durationSec": 2.819,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_ERROR_005 Outbound links lead somewhere",
         "status": "passed",
-        "durationSec": 13.402,
+        "durationSec": 14.265,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_ERROR_001 Unknown page shows the 404 page",
         "status": "passed",
-        "durationSec": 1.073,
+        "durationSec": 1.345,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_ERROR_004 Malformed addresses never cause a server error",
         "status": "passed",
-        "durationSec": 2.543,
+        "durationSec": 3,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_ERROR_005 Outbound links lead somewhere",
         "status": "passed",
-        "durationSec": 16.535,
+        "durationSec": 19.322,
         "projectName": "staging-mobile",
         "error": null
       }
     ],
-    "timestamp": "2026-09-25T19:49:37.184Z",
+    "timestamp": "2026-09-25T19:57:23.301Z",
     "environment": "staging",
-    "runId": "36181406831",
-    "runNumber": "14",
+    "runId": "36182224472",
+    "runNumber": "16",
     "branch": "main"
   },
   "testResults": {
@@ -181,49 +181,49 @@
       {
         "name": "TC_SMOKE_001 Home page loads with its title, logo, header menu, and main heading",
         "status": "passed",
-        "durationSec": 2.541,
+        "durationSec": 2.03,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_SMOKE_002 Header menu reaches Case Studies, Team, Culture, Careers, and Contact",
         "status": "passed",
-        "durationSec": 10.346,
+        "durationSec": 6.472,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_SMOKE_003 Services menu opens and reaches each service page",
         "status": "passed",
-        "durationSec": 12.825,
+        "durationSec": 10.237,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_SMOKE_004 Every page loads with its own title and a main heading",
         "status": "failed",
-        "durationSec": 87.819,
+        "durationSec": 66.211,
         "projectName": "staging",
-        "error": "Error: contact has one <h1>\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading', { level: 1 })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - contact has one <h1> with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { level: 1 })\u001b[22m\n\u001b[2m    9 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n\n  108 |         if (loadError) return;\n  109 |         await expect.soft(page, `${key} title`).toHaveTitle(testData.pageTitles[key]);\n> 110 |         await expect.soft(jg.mainHeading(page), `${key} has one <h1>`).toHaveCount(1);\n      |                                                                        ^\n  111 |       });\n  112 |     }\n  113 |   });\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:110:72\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:104:7"
+        "error": "Error: contact has one <h1>\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading', { level: 1 })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - contact has one <h1> with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { level: 1 })\u001b[22m\n\u001b[2m    9 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n\n  109 |         await expect.soft(page, `${key} title`).toHaveTitle(testData.pageTitles[key]);\n  110 |         // Fails on the live site today: known defect #10 (/contact has no <h1>).\n> 111 |         await expect.soft(jg.mainHeading(page), `${key} has one <h1>`).toHaveCount(1);\n      |                                                                        ^\n  112 |       });\n  113 |     }\n  114 |   });\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:111:72\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:104:7"
       },
       {
         "name": "TC_SMOKE_005 Footer shows the contact details and links to the site's pages and social profiles",
         "status": "passed",
-        "durationSec": 3.133,
+        "durationSec": 2.359,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_SMOKE_006 Contact form shows its fields, marks Email and the project required, and loads reCAPTCHA",
         "status": "passed",
-        "durationSec": 2.047,
+        "durationSec": 1.55,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_SMOKE_007 Open Positions lists roles, its filters narrow the list, and a role's details open and close",
         "status": "passed",
-        "durationSec": 1.786,
+        "durationSec": 2.081,
         "projectName": "staging",
         "error": null
       },
@@ -237,56 +237,56 @@
       {
         "name": "TC_SMOKE_001 Home page loads with its title, logo, header menu, and main heading",
         "status": "passed",
-        "durationSec": 2.681,
+        "durationSec": 2.385,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_SMOKE_002 Header menu reaches Case Studies, Team, Culture, Careers, and Contact",
         "status": "passed",
-        "durationSec": 12.727,
+        "durationSec": 10.435,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_SMOKE_003 Services menu opens and reaches each service page",
         "status": "passed",
-        "durationSec": 15.365,
+        "durationSec": 12.777,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_SMOKE_004 Every page loads with its own title and a main heading",
         "status": "failed",
-        "durationSec": 134.538,
+        "durationSec": 113.675,
         "projectName": "staging-mobile",
-        "error": "Error: contact has one <h1>\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading', { level: 1 })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - contact has one <h1> with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { level: 1 })\u001b[22m\n\u001b[2m    9 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n\n  108 |         if (loadError) return;\n  109 |         await expect.soft(page, `${key} title`).toHaveTitle(testData.pageTitles[key]);\n> 110 |         await expect.soft(jg.mainHeading(page), `${key} has one <h1>`).toHaveCount(1);\n      |                                                                        ^\n  111 |       });\n  112 |     }\n  113 |   });\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:110:72\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:104:7"
+        "error": "Error: contact has one <h1>\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading', { level: 1 })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - contact has one <h1> with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { level: 1 })\u001b[22m\n\u001b[2m    9 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n\n  109 |         await expect.soft(page, `${key} title`).toHaveTitle(testData.pageTitles[key]);\n  110 |         // Fails on the live site today: known defect #10 (/contact has no <h1>).\n> 111 |         await expect.soft(jg.mainHeading(page), `${key} has one <h1>`).toHaveCount(1);\n      |                                                                        ^\n  112 |       });\n  113 |     }\n  114 |   });\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:111:72\n    at /home/runner/work/QA-jahnelgroup/QA-jahnelgroup/tests/smoke_tests.spec.js:104:7"
       },
       {
         "name": "TC_SMOKE_005 Footer shows the contact details and links to the site's pages and social profiles",
         "status": "passed",
-        "durationSec": 3.101,
+        "durationSec": 2.381,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_SMOKE_006 Contact form shows its fields, marks Email and the project required, and loads reCAPTCHA",
         "status": "passed",
-        "durationSec": 3.059,
+        "durationSec": 2.566,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_SMOKE_007 Open Positions lists roles, its filters narrow the list, and a role's details open and close",
         "status": "passed",
-        "durationSec": 2.46,
+        "durationSec": 2.486,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_SMOKE_008 Phone layout fits the screen and its menu opens and closes",
         "status": "passed",
-        "durationSec": 13.468,
+        "durationSec": 10.599,
         "projectName": "staging-mobile",
         "error": null
       }
@@ -295,42 +295,42 @@
       {
         "name": "TC_ERROR_001 Unknown page shows the 404 page",
         "status": "passed",
-        "durationSec": 1.091,
+        "durationSec": 1.465,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_ERROR_004 Malformed addresses never cause a server error",
         "status": "passed",
-        "durationSec": 2.671,
+        "durationSec": 2.819,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_ERROR_005 Outbound links lead somewhere",
         "status": "passed",
-        "durationSec": 13.402,
+        "durationSec": 14.265,
         "projectName": "staging",
         "error": null
       },
       {
         "name": "TC_ERROR_001 Unknown page shows the 404 page",
         "status": "passed",
-        "durationSec": 1.073,
+        "durationSec": 1.345,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_ERROR_004 Malformed addresses never cause a server error",
         "status": "passed",
-        "durationSec": 2.543,
+        "durationSec": 3,
         "projectName": "staging-mobile",
         "error": null
       },
       {
         "name": "TC_ERROR_005 Outbound links lead somewhere",
         "status": "passed",
-        "durationSec": 16.535,
+        "durationSec": 19.322,
         "projectName": "staging-mobile",
         "error": null
       }
