@@ -107,6 +107,7 @@ test.describe('Smoke Tests', () => {
         expect.soft(loadError, `${key} loads`).toBeNull();
         if (loadError) return;
         await expect.soft(page, `${key} title`).toHaveTitle(testData.pageTitles[key]);
+        // Fails on the live site today: known defect #10 (/contact has no <h1>).
         await expect.soft(jg.mainHeading(page), `${key} has one <h1>`).toHaveCount(1);
       });
     }
