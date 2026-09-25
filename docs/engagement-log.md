@@ -392,3 +392,68 @@ agreement (step 10).
 **Next**
 
 - Step 8: file the findings.
+
+## Step 8 — File the findings (2026-09-25)
+
+**What we did**
+
+- Re-checked, on desktop and phone (Pixel 5), every candidate finding logged
+  in steps 2 and 3, read-only. The re-check loaded all 27 pages and counted
+  their headings and landmarks. It captured the console, looked at the Vimeo
+  embed and asked Vimeo about the video, and inspected the phone menu button
+  before and after a tap.
+- Filed four findings with the QA Finding form's sections, labelled `qa` and
+  `needs-triage`, plus `accessibility` or `bug`, and added each to the board
+  in Backlog:
+
+| Issue | Finding | Labels | Proposed severity | Caught by |
+|---|---|---|---|---|
+| #10 | `/contact` has no `<h1>` | accessibility | Medium | `TC_SMOKE_004` |
+| #11 | The OpenAI ads pixel runs with `debug:true` on the live site, writing about 190 `[oaiq]` debug lines to the console over a crawl | bug | Low | — |
+| #12 | 22 of 27 pages have no `<main>`, 20 have no `<header>`, and there's no skip link | accessibility | Low | — |
+| #13 | The phone menu button has no `aria-expanded` (or `aria-controls`), open or closed | accessibility | Low | — |
+
+- Added a comment at `TC_SMOKE_004`'s failing assertion naming #10.
+
+**Decisions**
+
+- **Dropped: the Vimeo 401 on `/videos`.** The video is public: Vimeo's
+  oEmbed API returns it (200). It plays in the phone run. The desktop run's
+  401 came with Vimeo's page "We couldn't verify the security of your
+  connection", which is its bot check reacting to the automated browser. It
+  isn't a site defect.
+- **Dropped: no `robots.txt` or `sitemap.xml`.** Both still return 404. But
+  search-engine setup isn't in the brief's scope, and nothing a visitor does
+  is affected. Worth mentioning to the client contact as a suggestion.
+- **Dropped: the JG Atlas title's "·".** "JG Atlas — Idea to Deployed
+  Software · Jahnel Group" uses the dot to separate a subtitle that already
+  has a dash. That reads as deliberate, not a slip.
+- **Sharpened: landmarks.** Step 3 logged "no `<main>` or `<header>` on every
+  page". The re-check found 5 pages with both (`/ai-assisted-onboarding`,
+  `/ai-assisted-quality-documentation`, `/agentic-sdlc`, `/team`,
+  `/jg-atlas`), and 2 more with a `<header>` only. #12 lists them.
+- **Observed facts only, with anything inferred marked.** #11 doesn't claim
+  debug mode changes what the pixel sends; only its console output was seen.
+  #13 doesn't claim what a particular screen reader says; no screen reader was
+  run.
+- **Severities are proposals.** #10 and #11 follow the brief's examples
+  ("a page is missing its main heading" is Medium, "a console error with no
+  visible effect" is Low). The brief has no accessibility example, so #12 and
+  #13 propose Low. Triage confirms each, and removes `needs-triage`.
+
+**Result**
+
+| Check | Outcome |
+|---|---|
+| Heading and landmark counts, all 27 pages, desktop and phone | `/contact`: 0 `<h1>`; every other page 1. Landmarks as in #12, the same on both |
+| `oaiq("init", …)` in the home page source | `{pixelId:"3FyEBkYTNGNoXGi7dLwKVv",debug:true}` |
+| `[oaiq]` console lines over the re-check crawl | 192 on desktop, 188 on phone |
+| `curl https://vimeo.com/api/oembed.json?url=https://vimeo.com/746945239` | 200 (public video) |
+| Phone menu button, before and after a tap | `<button class="nav-toggle" aria-label="Toggle menu">` both times |
+| `gh project item-list 8` | #10–#13, all in Backlog |
+| `npm run test:template-check` | PASS; `docs/coverage-map.md` unchanged |
+
+**Next**
+
+- Human: triage #10–#13 (confirm the severities, and remove `needs-triage`).
+- Step 9: write the stories and test cases.
