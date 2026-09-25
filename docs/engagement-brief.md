@@ -77,10 +77,18 @@ tests create no data, so there's nothing to clean up.
 
 ## When the tests run
 
-TBD. Set in step 7 to match
-[`.github/workflows/qa-test.yml`](../.github/workflows/qa-test.yml). The plan
-is for the browser tests to run on every push and PR, on desktop and phone,
-and for the link checker to run on demand.
+Set in [`.github/workflows/qa-test.yml`](../.github/workflows/qa-test.yml):
+
+- **Every push and PR to `main`:** the smoke and error-handling suites, on
+  desktop and phone, against the live site. A failing test turns its check
+  red, including a failure on a known site defect.
+- **On demand:** the link checker, from a manual run of the workflow
+  (`links` or `all`). It isn't run automatically, to keep traffic to the live
+  site low.
+- **The dashboard** updates after each push to `main` and each manual run,
+  not after a PR.
+- **Before and after a release:** TBD with the client contact (see Release
+  gates).
 
 ## Release gates
 
@@ -131,11 +139,11 @@ this product, to agree with the client contact:
 ## Kickoff checklist
 
 - [ ] Brief filled in and agreed with the client contact
-- [ ] Site config replaced (`playwright.config.js`, `config-helper.js`, `selectors.js`; search for `TODO(Engagement)`)
+- [x] Site config replaced (`playwright.config.js`, `config-helper.js`, `selectors.js`; search for `TODO(Engagement)`)
 - [x] Labels created: `npm run labels:setup -- karimarie67/QA-jahnelgroup`. It creates the test-management labels (see [`docs/github_test_management.md`](./github_test_management.md)), the triage labels in [`docs/agents/triage-labels.md`](./agents/triage-labels.md), and every label an issue form applies, such as `qa` and `needs-triage`. GitHub quietly drops a form's label when the repo doesn't have it.
 - [x] Project board created: `npm run board:setup -- karimarie67/QA-jahnelgroup`, then add a Board view grouped by Status in the web UI
 - [x] `.github/ISSUE_TEMPLATE/config.yml` links point at the Engagement's channels
-- [ ] Browser e2e jobs in `qa-test.yml` enabled on push and PR once the Site config is real
+- [x] Browser e2e jobs in `qa-test.yml` enabled on push and PR once the Site config is real
 - [ ] `npm run coverage` run and `docs/coverage-map.md` committed
 - [ ] `README.md` rewritten for the Engagement: where things stand, where things are, how to run it, and what to do going forward
 - [x] Git hooks activated (`git config core.hooksPath .githooks`)

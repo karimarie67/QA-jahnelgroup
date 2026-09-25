@@ -339,3 +339,56 @@ Status option IDs:
 **Next**
 
 - Step 7: run the browser tests in CI.
+
+## Step 7 — Run the browser tests in CI (2026-09-25)
+
+**What we did**
+
+- In [`qa-test.yml`](../.github/workflows/qa-test.yml), the Smoke and Error
+  Handling jobs now run on every push and PR, not only by hand, on desktop and
+  phone (`staging` and `staging-mobile`, both pointed at the live site). They
+  install only Chromium.
+- Removed the jobs for the documentation and download/search specs dropped in
+  step 3, and removed their files from the dashboard generator
+  (`dashboards/scripts/generate-dashboard.js`).
+- Gave the link checker a job of its own, on demand only: a manual run with
+  `links` or `all`.
+- The dashboard now updates from pushes to `main` and from manual runs, not
+  from PRs.
+- Updated the brief's "When the tests run" and the operators guide's check
+  table to match, and ticked the brief's CI kickoff item.
+
+**Decisions**
+
+- **A test that fails on a known site defect stays red.** The human chose
+  this. The alternative was to mark the test as a known failure linked to its
+  bug, so the check stays green while the defect is open. A red check is the
+  honest result.
+- **Link checker on demand only.** It loads every page, so running it on
+  every push would put more traffic on the live site than the brief allows.
+- **No dashboard update from a PR.** The dashboard reflects `main`; a PR's
+  results are on the PR.
+
+**Result** (PR #9's CI run
+[36180615228](https://github.com/karimarie67/QA-jahnelgroup/actions/runs/36180615228))
+
+| Job | Result |
+|---|---|
+| Smoke Tests | **Failed**: 13 passed, 1 skipped (phone-only test on desktop), 2 failed |
+| Error Handling Tests | Passed: 6 of 6 (3 tests, desktop and phone) |
+| Unit Tests | Passed |
+| Template Structural Check | Passed |
+| Link Check, Update QA Dashboard | Skipped (not run on PRs) |
+
+Both Smoke failures are `TC_SMOKE_004` on desktop and phone: `/contact` has no
+`<h1>`. They failed again on the retry. That's the known defect from step 3,
+and the only red check.
+
+**Kickoff checklist: 6 of 9.** This entry also ticks the Site config item,
+done in step 3 but never ticked. The three left are the coverage map with
+story and issue links (step 9), the README (step 10), and the client
+agreement (step 10).
+
+**Next**
+
+- Step 8: file the findings.
