@@ -1,379 +1,223 @@
 import { test, expect } from '@playwright/test';
 import fs from 'fs';
 import { selectors } from '../selectors.js';
-import { logAndScreenshot, safeGoto } from '../utils.js';
 import { buildURL, testData, urlPatterns, expectedUrlPatterns } from '../config-helper.js';
-import { 
-  findVisibleElement, 
-  testElementVisibility, 
-  handleMobileMenu, 
-  performSearch, 
-  findSearchResults, 
-  validateElementDetails,
-  testPatterns 
-} from '../test-helpers.js';
+import { testPatterns } from '../test-helpers.js';
 
 fs.mkdirSync('test-results', { recursive: true });
 
-test.describe('Smoke Tests', () => {
-  
-  // TC_SMOKE_001: Homepage Accessibility
-  test('Homepage loads with key elements', { annotation: { type: 'test_case', description: 'TC_SMOKE_001' } }, async ({ page }, testInfo) => {
-    const testId = 'TC_SMOKE_001';
-    testInfo.setTimeout(30000);
+// Read-only: these tests load pages and look, and open and close menus,
+// filters, and dialogs. They never type into or send a form, because
+// jahnelgroup.com is the live site.
+const { jg } = selectors;
 
-    // Load homepage using configuration
-    const homepageUrl = buildURL(testInfo, urlPatterns.homepage, { cachebust: true });
-    const { loadTime } = await testPatterns.loadAndValidatePage(page, testInfo, homepageUrl, testId);
+// The *-mobile projects emulate a phone, where the header menu is behind a
+// menu button.
+const onPhone = testInfo => Boolean(testInfo.project.use.isMobile);
+
+async function open(page, testInfo, key, testId) {
+  const result = await testPatterns.loadAndValidatePage(page, testInfo, buildURL(testInfo, urlPatterns[key], { cachebust: true }), testId);
+  // The header menu is drawn by the site's script once the page has loaded.
+  await expect(jg.nav(page)).toBeAttached();
+  return result;
+}
+
+// The phone menu slides in from off-screen, where its links still count as
+// visible, so "open" means its first link is on screen. A tap before the
+// site's script has wired the button up does nothing, so tap until it opens.
+async function openPhoneMenu(page) {
+  const firstLink = jg.navLink(page, testData.navLinks[0][0]);
+  await expect(async () => {
+    await jg.menuButton(page).tap();
+    await expect(firstLink).toBeInViewport({ timeout: 2000 });
+  }).toPass({ timeout: testData.timeouts.medium });
+}
+
+async function openMenuOnPhone(page, testInfo) {
+  if (onPhone(testInfo)) {
+    await openPhoneMenu(page);
+  }
+}
+
+test.describe('Smoke Tests', () => {
+
+  test('TC_SMOKE_001 Home page loads with its title, logo, header menu, and main heading', {
+    tag: '@smoke',
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_001' }],
+  }, async ({ page }, testInfo) => {
+    const testId = 'TC_SMOKE_001';
+
+    const { loadTime } = await open(page, testInfo, 'homepage', testId);
     expect(loadTime / 1000).toBeLessThanOrEqual(15);
 
-    // Test logo visibility with comprehensive fallbacks
-    const logoLocator = selectors.logo(page);
-    const logoFallbacks = [
-      // TODO(Engagement): replace with a role/name matcher for your actual site name,
-      // e.g. page.getByRole('img', { name: /YourSiteName/i })
-      page.locator('img[alt*="logo" i]'),
-      page.locator('.logo img, #logo img'),
-      page.locator('header img').first()
-    ];
-    await testElementVisibility(page, testInfo, logoLocator, logoFallbacks, 'Logo', testId);
-
-    // Test navigation visibility
-    const navLocator = selectors.nav(page);
-    const navFallbacks = [
-      page.locator('nav, [role="navigation"]'),
-      page.locator('div[class*="nav"]'),
-      page.locator('.navbar, .navigation')
-    ];
-    await testElementVisibility(page, testInfo, navLocator, navFallbacks, 'Navigation', testId);
-
-    // Test main content visibility
-    const contentLocator = selectors.content(page);
-    const contentFallbacks = [
-      page.locator('h1, h2, p').first(),
-      page.locator('main, .main'),
-      page.locator('.content, #content')
-    ];
-    await testElementVisibility(page, testInfo, contentLocator, contentFallbacks, 'Main content', testId);
-
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Homepage smoke test completed successfully\n`);
+    await expect(page).toHaveTitle(testData.pageTitles.homepage);
+    await expect(jg.logo(page)).toBeVisible();
+    await expect(onPhone(testInfo) ? jg.menuButton(page) : jg.servicesButton(page)).toBeVisible();
+    await expect(jg.mainHeading(page)).toHaveText(/Where AI becomes reality/i);
   });
 
-  // TC_SMOKE_002: Navigation Menu
-  test('Navigation menu links work correctly', { annotation: { type: 'test_case', description: 'TC_SMOKE_002' } }, async ({ page }, testInfo) => {
+  test('TC_SMOKE_002 Header menu reaches Case Studies, Team, Culture, Careers, and Contact', {
+    tag: '@smoke',
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_002' }],
+  }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_002';
-    testInfo.setTimeout(60000);
 
-    const homepageUrl = buildURL(testInfo, urlPatterns.homepage, { cachebust: true });
-    await testPatterns.loadAndValidatePage(page, testInfo, homepageUrl, testId);
-
-    // Get all navigation links with improved selectors
-    const navLinks = await selectors.navLinks(page).all();
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Found ${navLinks.length} navigation links\n`);
-
-    // Log all nav links for debugging
-    for (let i = 0; i < navLinks.length; i++) {
-      const details = await validateElementDetails(navLinks[i], `Nav link ${i}`, testId);
-    }
-
-    // First, let's debug what links we actually have
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Debugging all ${navLinks.length} navigation links:\n`);
-    for (let i = 0; i < Math.min(navLinks.length, 10); i++) {
-      const link = navLinks[i];
-      const text = await link.textContent().catch(() => '');
-      const href = await link.getAttribute('href').catch(() => '');
-      const isVisible = await link.isVisible().catch(() => false);
-      fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Link ${i}: text="${text.trim()}", href="${href}", visible=${isVisible}\n`);
-    }
-
-    // Filter to only test visible, internal navigation links
-    const visibleNavLinks = [];
-    for (let i = 0; i < navLinks.length; i++) {
-      const link = navLinks[i];
-      const href = await link.getAttribute('href').catch(() => '');
-      const isVisible = await link.isVisible().catch(() => false);
-      
-      // Only include visible links that are internal navigation
-      if (isVisible && href && !href.includes('mailto:') && !href.includes('tel:') && 
-          !href.startsWith('http') && href !== '/' && href !== '#') {
-        visibleNavLinks.push({ link, href, index: i });
-      }
-    }
-
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Found ${visibleNavLinks.length} visible internal navigation links\n`);
-
-    // Test visible navigation links
-    let testedLinks = 0;
-    const maxLinksToTest = Math.min(3, visibleNavLinks.length);
-
-    for (let i = 0; i < maxLinksToTest; i++) {
-      const { link, href, index } = visibleNavLinks[i];
-      const text = await link.textContent().catch(() => '');
-
-      try {
-        // Record starting URL
-        const startUrl = page.url();
-        fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Testing visible link ${index}: "${text.trim()}" -> "${href}"\n`);
-
-        // Click the link
-        await link.click();
-        
-        // Wait for navigation
-        await page.waitForLoadState('domcontentloaded', { timeout: 8000 });
-        const currentUrl = page.url();
-        
-        // Check if URL changed appropriately
-        if (currentUrl !== startUrl && currentUrl.includes(href.replace('/', ''))) {
-          fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ✓ Navigation successful: ${startUrl} -> ${currentUrl}\n`);
-          testedLinks++;
-          
-          // Verify some content loaded
-          try {
-            await expect(page.locator('h1, h2, main, .content, body')).toBeVisible({ timeout: 3000 });
-            fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ✓ Page content loaded\n`);
-          } catch (e) {
-            fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ⚠ Navigation worked but content check failed\n`);
-          }
-          
-        } else {
-          fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ⚠ Unexpected navigation: ${startUrl} -> ${currentUrl}\n`);
-          // Still count as working if URL changed
-          if (currentUrl !== startUrl) {
-            testedLinks += 0.5;
-          }
-        }
-        
-        // Return to homepage for next test
-        await safeGoto(page, testInfo, homepageUrl, { waitUntil: 'domcontentloaded' });
-        
-      } catch (error) {
-        fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ✗ Link test failed: ${error.message}\n`);
-      }
-    }
-
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Navigation test summary: ${testedLinks} successful navigations out of ${visibleNavLinks.length} visible links\n`);
-
-    // For smoke test, require at least one working navigation link
-    if (testedLinks > 0) {
-      expect(testedLinks).toBeGreaterThan(0);
-      fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ✓ Navigation smoke test PASSED - ${testedLinks} links work\n`);
-    } else if (visibleNavLinks.length > 0) {
-      fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ⚠ Visible navigation links found but none functional\n`);
-      // For smoke test, having visible nav structure might be sufficient
-    } else {
-      fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ✗ No functional navigation links found\n`);
-      throw new Error('No functional navigation links found');
+    for (const [name, key] of testData.navLinks) {
+      await test.step(name, async () => {
+        await open(page, testInfo, 'homepage', testId);
+        await openMenuOnPhone(page, testInfo);
+        await jg.navLink(page, name).click();
+        await expect(page).toHaveURL(expectedUrlPatterns.page(urlPatterns[key]));
+        await expect(page).toHaveTitle(testData.pageTitles[key]);
+        fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ${name} -> ${page.url()}\n`);
+      });
     }
   });
 
-  // TC_SMOKE_003: Content Listings
-  test('a listing page displays expected items and links to detail pages', { annotation: { type: 'test_case', description: 'TC_SMOKE_003' } }, async ({ page }, testInfo) => {
+  test('TC_SMOKE_003 Services menu opens and reaches each service page', {
+    tag: '@smoke',
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_003' }],
+  }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_003';
-    testInfo.setTimeout(45000);
 
-    // TODO(Engagement): urlPatterns.libraries points at '/libraries/' as a generic placeholder
-    // path; adjust it in config-helper.js if your listing page lives elsewhere.
-    const librariesUrl = buildURL(testInfo, urlPatterns.libraries, { cachebust: true });
-    await testPatterns.loadAndValidatePage(page, testInfo, librariesUrl, testId);
-
-    // TODO(Engagement): replace with real content identifiers from your site
-    // (e.g. product names, category names)
-    const libraryNames = ['Item One', 'Item Two', 'Item Three'];
-    const foundLibraries = [];
-
-    for (const libName of libraryNames) {
-      const librarySelectors = [
-        page.getByRole('heading', { name: new RegExp(libName, 'i') }),
-        page.locator(`h1, h2, h3, h4, h5, h6`).filter({ hasText: new RegExp(libName, 'i') }),
-        page.locator(`a`).filter({ hasText: new RegExp(libName, 'i') }),
-        page.locator(`*:has-text("${libName}")`)
-      ];
-
-      for (const selector of librarySelectors) {
-        const count = await selector.count();
-        if (count > 0) {
-          const visibleElement = await findVisibleElement(selector, `${libName} library`, testId);
-          if (visibleElement) {
-            foundLibraries.push(libName);
-            fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Found ${libName} library on page\n`);
-            break;
-          }
-        }
-      }
-    }
-
-    expect(foundLibraries.length).toBeGreaterThan(0); // Ensure at least one library found
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Found libraries: ${foundLibraries.join(', ')}\n`);
-
-    // Test library link navigation for first found library
-    if (foundLibraries.length > 0) {
-      const firstLib = foundLibraries[0];
-      const libraryLink = page.locator('a').filter({ hasText: new RegExp(firstLib, 'i') }).first();
-      
-      try {
-        await libraryLink.click();
-        await page.waitForTimeout(3000);
-        const currentUrl = page.url();
-        
-        if (currentUrl.includes(firstLib.toLowerCase()) || 
-            currentUrl.includes('doc') || 
-            currentUrl.includes('lib')) {
-          fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Successfully navigated to ${firstLib} documentation: ${currentUrl}\n`);
-        }
-      } catch (error) {
-        fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Library link navigation failed: ${error.message}\n`);
-      }
+    for (const [name, key] of testData.serviceLinks) {
+      await test.step(name, async () => {
+        await open(page, testInfo, 'homepage', testId);
+        await openMenuOnPhone(page, testInfo);
+        await jg.servicesButton(page).click();
+        await expect(jg.servicesButton(page)).toHaveAttribute('aria-expanded', 'true');
+        await jg.serviceLink(page, name).click();
+        await expect(page).toHaveURL(expectedUrlPatterns.page(urlPatterns[key]));
+        await expect(page).toHaveTitle(testData.pageTitles[key]);
+      });
     }
   });
 
-  // TC_SMOKE_004: Download Functionality
-  test('Download section works correctly', { annotation: { type: 'test_case', description: 'TC_SMOKE_004' } }, async ({ page }, testInfo) => {
+  test('TC_SMOKE_004 Every page loads with its own title and a main heading', {
+    tag: '@smoke',
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_004' }],
+  }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_004';
-    testInfo.setTimeout(45000);
+    testInfo.setTimeout(5 * 60 * 1000);
 
-    const releasesUrl = buildURL(testInfo, urlPatterns.releases, { cachebust: true });
-    await testPatterns.loadAndValidatePage(page, testInfo, releasesUrl, testId);
-
-    // Look for download links using comprehensive selectors
-    const downloadSelectors = [
-      'a[href*=".tar.gz"]',
-      'a[href*=".zip"]',
-      'a[href*="download"]',
-      '*:has-text("Download")',
-      '[class*="download"]'
-    ];
-
-    let downloadLink = null;
-    for (const selector of downloadSelectors) {
-      const elements = page.locator(selector);
-      const count = await elements.count();
-      if (count > 0) {
-        downloadLink = await findVisibleElement(elements, `Download link (${selector})`, testId);
-        if (downloadLink) break;
-      }
-    }
-
-    if (downloadLink) {
-      const linkDetails = await validateElementDetails(downloadLink, 'Download link', testId);
-      
-      // Test download initiation
-      try {
-        const [download] = await Promise.all([
-          page.waitForEvent('download', { timeout: testData.timeouts.download }).catch(() => null),
-          downloadLink.click()
-        ]);
-
-        if (download) {
-          const filename = await download.suggestedFilename();
-          expect(filename).toMatch(testData.downloadFiles.supported);
-          fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Download initiated successfully: ${filename}\n`);
-          
-          // Cancel download to avoid large file transfer
-          await download.cancel();
-        } else {
-          // Check if we navigated to download page instead
-          const currentUrl = page.url();
-          if (expectedUrlPatterns.downloadSite.test(currentUrl)) {
-            fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Navigated to download page: ${currentUrl}\n`);
-          } else {
-            fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Download test inconclusive - no download or navigation\n`);
-          }
-        }
-      } catch (error) {
-        fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Download test failed: ${error.message}\n`);
-      }
-    } else {
-      fs.appendFileSync('test-results/smoke-logs.txt', `${testId} No download links found\n`);
+    for (const key of Object.keys(urlPatterns)) {
+      await test.step(key, async () => {
+        // Soft, so one page's defect doesn't hide the rest.
+        const loadError = await open(page, testInfo, key, testId).then(() => null, e => e.message);
+        expect.soft(loadError, `${key} loads`).toBeNull();
+        if (loadError) return;
+        await expect.soft(page, `${key} title`).toHaveTitle(testData.pageTitles[key]);
+        await expect.soft(jg.mainHeading(page), `${key} has one <h1>`).toHaveCount(1);
+      });
     }
   });
 
-  // TC_SMOKE_005: Search functionality
-  test('Search bar works with basic query', { annotation: { type: 'test_case', description: 'TC_SMOKE_005' } }, async ({ page }, testInfo) => {
+  test('TC_SMOKE_005 Footer shows the contact details and links to the site\'s pages and social profiles', {
+    tag: '@smoke',
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_005' }],
+  }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_005';
-    testInfo.setTimeout(45000);
 
-    const homepageUrl = buildURL(testInfo, urlPatterns.homepage, { cachebust: true });
-    await testPatterns.loadAndValidatePage(page, testInfo, homepageUrl, testId);
-
-    try {
-      // Use our robust search functionality
-      await performSearch(page, testInfo, selectors, testData.searchTerms.working, testId);
-      
-      // Look for search results
-      const { element: searchResults, count: resultCount } = await findSearchResults(page, testData.searchTerms.working, testId);
-      
-      if (searchResults && resultCount > 0) {
-        await expect(searchResults).toBeVisible({ timeout: testData.timeouts.medium });
-        fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Search results found (${resultCount} results)\n`);
-        
-        // Try to click first result if it's a link
-        try {
-          if (await searchResults.getAttribute('href')) {
-            await searchResults.click();
-            await page.waitForTimeout(2000);
-            const currentUrl = page.url();
-            fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Clicked search result, navigated to: ${currentUrl}\n`);
-          }
-        } catch (error) {
-          fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Search result click failed: ${error.message}\n`);
-        }
-      } else {
-        fs.appendFileSync('test-results/smoke-logs.txt', `${testId} No search results found\n`);
-      }
-    } catch (error) {
-      fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Search functionality test failed: ${error.message}\n`);
+    await open(page, testInfo, 'homepage', testId);
+    const footer = jg.footer(page);
+    for (const detail of Object.values(testData.contact)) {
+      await expect.soft(footer).toContainText(detail);
     }
+    for (const [name, key] of testData.footerLinks) {
+      await expect.soft(jg.footerLink(page, name), `footer link ${name}`).toHaveAttribute('href', urlPatterns[key]);
+    }
+    for (const [name, href] of testData.socialLinks) {
+      await expect.soft(jg.footerLink(page, name), `social link ${name}`).toHaveAttribute('href', href);
+    }
+    await expect.soft(jg.copyright(page)).toContainText(String(new Date().getFullYear()));
+
+    // A footer link really reaches its page.
+    await jg.footerLink(page, 'Privacy Notice').click();
+    await expect(page).toHaveURL(expectedUrlPatterns.page(urlPatterns.privacyNotice));
+    await expect(page).toHaveTitle(testData.pageTitles.privacyNotice);
   });
 
-  // TC_SMOKE_006: Responsive Design
-  test('Homepage is responsive on mobile', { annotation: { type: 'test_case', description: 'TC_SMOKE_006' } }, async ({ page }, testInfo) => {
+  test('TC_SMOKE_006 Contact form shows its fields, marks Email and the project required, and loads reCAPTCHA', {
+    tag: '@smoke',
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_006' }],
+  }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_006';
-    testInfo.setTimeout(30000);
 
-    // Set mobile viewport
-    await testPatterns.setViewport(page, testData.viewport.mobile, testId);
-    
-    const homepageUrl = buildURL(testInfo, urlPatterns.homepage, { cachebust: true });
-    await testPatterns.loadAndValidatePage(page, testInfo, homepageUrl, testId);
-
-    // Test mobile navigation
-    await handleMobileMenu(page, selectors, testId);
-
-    // Test navigation visibility on mobile
-    const navLocator = selectors.nav(page);
-    const navFallbacks = [
-      page.locator('nav, [role="navigation"]'),
-      page.locator('div[class*="nav"]'),
-      page.locator('.navbar, .navigation')
-    ];
-    await testElementVisibility(page, testInfo, navLocator, navFallbacks, 'Mobile navigation', testId);
-
-    // Test content visibility on mobile
-    const contentLocator = selectors.content(page);
-    const contentFallbacks = [
-      page.locator('h1, h2, p').first(),
-      page.locator('main, .main'),
-      page.locator('.content, #content')
-    ];
-    await testElementVisibility(page, testInfo, contentLocator, contentFallbacks, 'Mobile content', testId);
-
-    // Test for basic responsive behavior
-    try {
-      const navBox = await navLocator.boundingBox().catch(() => null);
-      const contentBox = await contentLocator.boundingBox().catch(() => null);
-      
-      if (navBox && contentBox) {
-        const noOverlap = navBox.y + navBox.height <= contentBox.y + 10; // 10px tolerance
-        if (noOverlap) {
-          fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Mobile layout: No navigation/content overlap\n`);
-        } else {
-          fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Mobile layout: Potential overlap detected\n`);
-        }
+    // Looked at only. Nothing is typed, and Send Message is never pressed.
+    await open(page, testInfo, 'contact', testId);
+    await expect(jg.contactForm(page)).toBeVisible();
+    for (const label of testData.contactFormFields) {
+      const field = jg.contactField(page, label);
+      await expect.soft(field, label).toBeVisible();
+      await expect.soft(field, `${label} is empty`).toHaveValue('');
+      if (testData.contactRequiredFields.includes(label)) {
+        await expect.soft(field, `${label} is required`).toHaveAttribute('required', '');
+      } else {
+        await expect.soft(field, `${label} is optional`).not.toHaveAttribute('required');
       }
-    } catch (error) {
-      fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Mobile layout check failed: ${error.message}\n`);
+    }
+    await expect.soft(jg.contactField(page, 'Email*')).toHaveAttribute('type', 'email');
+    await expect.soft(jg.recaptcha(page)).toBeAttached();
+    await expect(jg.contactSubmit(page)).toBeEnabled();
+  });
+
+  test('TC_SMOKE_007 Open Positions lists roles, its filters narrow the list, and a role\'s details open and close', {
+    tag: '@smoke',
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_007' }],
+  }, async ({ page }, testInfo) => {
+    const testId = 'TC_SMOKE_007';
+
+    await open(page, testInfo, 'positions', testId);
+    // The roles load from Greenhouse after the page does.
+    await expect(jg.roleApplyButtons(page).first()).toBeVisible({ timeout: testData.timeouts.long });
+    const allRoles = await jg.roleApplyButtons(page).count();
+    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ${allRoles} roles listed\n`);
+
+    // Each filter's name ends with its count, and shows that many roles.
+    for (const name of testData.roleFilters) {
+      await test.step(`${name} filter`, async () => {
+        const filter = jg.roleFilter(page, name);
+        await filter.click();
+        await expect(filter).toHaveAttribute('aria-pressed', 'true');
+        const count = Number((await filter.innerText()).match(/(\d+)\s*$/)[1]);
+        await expect.soft(jg.roleApplyButtons(page), `${name} shows ${count} roles`).toHaveCount(count);
+        if (name === 'All Roles') expect.soft(count, 'All Roles counts every role').toBe(allRoles);
+      });
     }
 
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Mobile responsiveness test completed\n`);
+    // About opens the role's details; closing puts the list back. Apply is
+    // never pressed.
+    await jg.roleFilter(page, 'All Roles').click();
+    await jg.roleAboutButtons(page).first().click();
+    await expect(jg.roleDialog(page)).toBeVisible();
+    await expect(jg.roleDialog(page).getByRole('tab', { name: 'Overview' })).toHaveAttribute('aria-selected', 'true');
+    await jg.roleDialogClose(page).click();
+    await expect(jg.roleDialog(page)).toHaveCount(0);
+  });
+
+  test('TC_SMOKE_008 Phone layout fits the screen and its menu opens and closes', {
+    tag: '@smoke',
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_008' }],
+  }, async ({ page }, testInfo) => {
+    test.skip(!onPhone(testInfo), 'Phone layout only: runs in the *-mobile projects');
+    const testId = 'TC_SMOKE_008';
+
+    for (const key of ['homepage', 'contact', 'positions', 'office', 'videos']) {
+      await test.step(`${key} fits`, async () => {
+        await open(page, testInfo, key, testId);
+        const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+        expect.soft(overflow, `${key} should not scroll sideways`).toBeLessThanOrEqual(0);
+      });
+    }
+
+    await open(page, testInfo, 'homepage', testId);
+    const firstLink = jg.navLink(page, testData.navLinks[0][0]);
+    await expect(firstLink).not.toBeInViewport();
+    await openPhoneMenu(page);
+    for (const [name] of testData.navLinks) {
+      await expect(jg.navLink(page, name)).toBeInViewport();
+    }
+    await jg.menuButton(page).tap();
+    await expect(firstLink).not.toBeInViewport();
   });
 });

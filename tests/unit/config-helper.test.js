@@ -20,14 +20,14 @@ test('getBaseURL', async t => {
     assert.equal(getBaseURL(info), 'https://staging.example.com');
   });
 
-  await t.test('falls back to placeholder default when baseURL is undefined', () => {
+  await t.test('falls back to the Jahnel Group site when baseURL is undefined', () => {
     const info = fakeTestInfo(undefined);
-    assert.equal(getBaseURL(info), 'https://www.example.com');
+    assert.equal(getBaseURL(info), 'https://www.jahnelgroup.com');
   });
 
-  await t.test('falls back to placeholder default when baseURL is falsy (empty string)', () => {
+  await t.test('falls back to the Jahnel Group site when baseURL is falsy (empty string)', () => {
     const info = fakeTestInfo('');
-    assert.equal(getBaseURL(info), 'https://www.example.com');
+    assert.equal(getBaseURL(info), 'https://www.jahnelgroup.com');
   });
 });
 
@@ -72,103 +72,84 @@ test('buildURL', async t => {
 });
 
 test('urlPatterns', async t => {
-  const expectedKeys = [
-    'homepage',
-    'libraries',
-    'releases',
-    'documentation',
-    'community',
-    'search',
-    'docLibsVersion',
-    'releaseNotes',
-  ];
-
-  await t.test('is an object with exactly the expected keys', () => {
-    assert.equal(typeof urlPatterns, 'object');
-    assert.deepEqual(Object.keys(urlPatterns).sort(), [...expectedKeys].sort());
-  });
-
-  await t.test('docLibsVersion is a function returning a string containing the version arg', () => {
-    assert.equal(typeof urlPatterns.docLibsVersion, 'function');
-    const result = urlPatterns.docLibsVersion('2_3_4');
-    assert.equal(typeof result, 'string');
-    assert.ok(result.includes('2_3_4'));
-  });
-
-  await t.test('releaseNotes is a function returning a string containing the version arg', () => {
-    assert.equal(typeof urlPatterns.releaseNotes, 'function');
-    const result = urlPatterns.releaseNotes('9_9_9');
-    assert.equal(typeof result, 'string');
-    assert.ok(result.includes('9_9_9'));
+  await t.test('has the 27 pages the crawl found, each a distinct path starting with "/"', () => {
+    const paths = Object.values(urlPatterns);
+    assert.equal(paths.length, 27);
+    assert.equal(new Set(paths).size, 27, 'no duplicate paths');
+    for (const [key, path] of Object.entries(urlPatterns)) {
+      assert.match(path, /^\//, `urlPatterns.${key}`);
+    }
   });
 });
 
 test('expectedUrlPatterns', async t => {
-  const expectedKeys = [
-    'afterCTAClick',
-    'afterSearch',
-    'afterLogoClick',
-    'githubBoost',
-    'downloadSite',
-    'communityLinks',
-  ];
-
-  await t.test('is an object with exactly the expected keys', () => {
-    assert.equal(typeof expectedUrlPatterns, 'object');
-    assert.deepEqual(Object.keys(expectedUrlPatterns).sort(), [...expectedKeys].sort());
+  await t.test('homepage matches the root, with or without a query, and not another page', () => {
+    assert.match('https://www.jahnelgroup.com/', expectedUrlPatterns.homepage);
+    assert.match('https://www.jahnelgroup.com/?cachebust=1', expectedUrlPatterns.homepage);
+    assert.doesNotMatch('https://www.jahnelgroup.com/team', expectedUrlPatterns.homepage);
   });
 
-  await t.test('every value is a RegExp', () => {
-    for (const key of expectedKeys) {
-      assert.ok(
-        expectedUrlPatterns[key] instanceof RegExp,
-        `expected expectedUrlPatterns.${key} to be a RegExp`
-      );
-    }
+  await t.test('page(path) matches that page, and not a longer path that starts the same', () => {
+    const team = expectedUrlPatterns.page(urlPatterns.team);
+    assert.match('https://www.jahnelgroup.com/team', team);
+    assert.match('https://www.jahnelgroup.com/team/', team);
+    assert.match('https://www.jahnelgroup.com/team?cachebust=1', team);
+    assert.doesNotMatch('https://www.jahnelgroup.com/teams', team);
+    assert.doesNotMatch('https://www.jahnelgroup.com/culture', team);
   });
 
-  await t.test('afterCTAClick matches a post-CTA-click URL and rejects an unrelated one', () => {
-    assert.match('https://www.example.com/libraries/', expectedUrlPatterns.afterCTAClick);
-    assert.doesNotMatch('https://www.example.com/about/', expectedUrlPatterns.afterCTAClick);
+  await t.test('page(path) treats the path literally', () => {
+    assert.doesNotMatch('https://www.jahnelgroupXcom/team', expectedUrlPatterns.page('/team'));
   });
 
-  await t.test('afterSearch matches a search results URL and rejects an unrelated one', () => {
-    assert.match('https://www.example.com/search/?q=widgets', expectedUrlPatterns.afterSearch);
-    assert.doesNotMatch('https://www.example.com/about/', expectedUrlPatterns.afterSearch);
-  });
-
-  await t.test('afterLogoClick matches the homepage root', () => {
-    assert.match('https://www.example.com/', expectedUrlPatterns.afterLogoClick);
-  });
-
-  await t.test('githubBoost matches the placeholder github org pattern and rejects an unrelated URL', () => {
-    assert.match('https://github.com/<your-org>/example-repo', expectedUrlPatterns.githubBoost);
-    assert.doesNotMatch('https://gitlab.com/other-org/example-repo', expectedUrlPatterns.githubBoost);
-  });
-
-  await t.test('downloadSite matches a download URL and rejects an unrelated one', () => {
-    assert.match('https://downloads.example.com/latest', expectedUrlPatterns.downloadSite);
-    assert.doesNotMatch('https://www.example.com/about/', expectedUrlPatterns.downloadSite);
-  });
-
-  await t.test('communityLinks matches a github issues URL and rejects an unrelated one', () => {
-    assert.match('https://github.com/example-org/example-repo/issues', expectedUrlPatterns.communityLinks);
-    assert.doesNotMatch('https://www.example.com/about/', expectedUrlPatterns.communityLinks);
+  await t.test('mailto and tel match the site\'s contact links and reject others', () => {
+    assert.match('mailto:general@jahnelgroup.com', expectedUrlPatterns.mailto);
+    assert.doesNotMatch('mailto:someone@example.com', expectedUrlPatterns.mailto);
+    assert.match('tel:+15183560039', expectedUrlPatterns.tel);
+    assert.doesNotMatch('tel:356-0039', expectedUrlPatterns.tel);
   });
 });
 
 test('testData', async t => {
-  await t.test('searchTerms.working and .alternative are non-empty strings', () => {
-    assert.equal(typeof testData.searchTerms.working, 'string');
-    assert.ok(testData.searchTerms.working.length > 0);
-    assert.equal(typeof testData.searchTerms.alternative, 'string');
-    assert.ok(testData.searchTerms.alternative.length > 0);
+  await t.test('there is an expected title for every page, each naming the site', () => {
+    assert.deepEqual(Object.keys(testData.pageTitles).sort(), Object.keys(urlPatterns).sort());
+    for (const [key, title] of Object.entries(testData.pageTitles)) {
+      assert.ok(title.includes(testData.siteName), `pageTitles.${key}`);
+    }
   });
 
-  await t.test('downloadFiles.tarGz/.zip/.supported are RegExps', () => {
-    assert.ok(testData.downloadFiles.tarGz instanceof RegExp);
-    assert.ok(testData.downloadFiles.zip instanceof RegExp);
-    assert.ok(testData.downloadFiles.supported instanceof RegExp);
+  await t.test('every header, Services, and footer link names a known page', () => {
+    for (const [name, key] of [...testData.navLinks, ...testData.serviceLinks, ...testData.footerLinks]) {
+      assert.ok(urlPatterns[key], `${name} -> ${key}`);
+    }
+  });
+
+  await t.test('lists the five header links, six services, and five social links', () => {
+    assert.equal(testData.navLinks.length, 5);
+    assert.equal(testData.serviceLinks.length, 6);
+    assert.equal(testData.socialLinks.length, 5);
+    for (const [name, href] of testData.socialLinks) {
+      assert.match(href, /^https:\/\//, name);
+    }
+  });
+
+  await t.test('every required contact field is one of the form\'s fields', () => {
+    assert.equal(new Set(testData.contactFormFields).size, testData.contactFormFields.length, 'no duplicate fields');
+    for (const field of testData.contactRequiredFields) {
+      assert.ok(testData.contactFormFields.includes(field), field);
+    }
+  });
+
+  await t.test('lists the four role filters, starting with All Roles', () => {
+    assert.equal(testData.roleFilters.length, 4);
+    assert.equal(testData.roleFilters[0], 'All Roles');
+  });
+
+  await t.test('contact address, phone, and email are non-empty strings', () => {
+    for (const key of ['address', 'phone', 'email']) {
+      assert.equal(typeof testData.contact[key], 'string');
+      assert.ok(testData.contact[key].length > 0);
+    }
   });
 
   await t.test('timeouts.short/medium/long/download are numbers', () => {

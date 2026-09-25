@@ -11,7 +11,11 @@ export async function logAndScreenshot(page, testInfo, message, path, logFile = 
   if (!page.isClosed()) {
     try {
       fs.mkdirSync(nodePath.dirname(path), { recursive: true });
-      await page.screenshot({ path, fullPage: true, timeout: 3000 });
+      // A full-page shot of a very tall page (the phone photo gallery is
+      // 163,000px) outlasts the timeout and leaves the browser busy, which
+      // then times out the next page load. Shoot just the screen instead.
+      const tall = await page.evaluate(() => document.documentElement.scrollHeight > 20000).catch(() => false);
+      await page.screenshot({ path, fullPage: !tall, timeout: 3000 });
       fs.appendFileSync(logFile, `Screenshot saved: ${path}\n`);
     } catch (err) {
       fs.appendFileSync(logFile, `Screenshot failed: ${err.message}\n`);

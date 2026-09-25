@@ -32,8 +32,9 @@ sources for test counts, spec lists, pass rates, and CI schedules.
     Atlas.
   - **Careers.** Careers and Open Positions. The roles are loaded from
     Greenhouse, with filters (All roles, JG Internal, Latin America,
-    External) and an Overview and an Apply button per role. Tests check that
-    the list loads and the filters and overviews work. They don't check a
+    External) and an About and an Apply button per role. About opens the
+    role's details. Tests check that the list loads, that the filters work,
+    and that a role's details open and close. They don't check a
     fixed count of roles, which changes as roles open and close.
   - **Contact form, looked at but never sent.** On the homepage and Contact
     page: the fields and their labels are present, Email and Message are
@@ -60,14 +61,15 @@ sources for test counts, spec lists, pass rates, and CI schedules.
     not look like an attack on a live site.
   - **Search and downloads.** The site has neither.
 - **Browsers and devices:** Chromium on desktop (`production`, 1280×720) and
-  Chromium on a phone (`production-mobile`). Step 3 of the Site config sets
-  the phone viewport, and it must match `playwright.config.js`.
+  Chromium emulating a Pixel 5 phone (`production-mobile`), matching
+  `playwright.config.js`. It's a phone emulation, not a narrow window: on a
+  phone, the header menu is behind a menu button that slides it in.
 
 ## Environments
 
 | Environment | URL | Playwright project | What we may do there |
 |---|---|---|---|
-| Staging | None. The client hasn't provided a staging copy. | `staging` (unused) | Nothing. |
+| Staging | None. The client hasn't provided a staging copy, so `staging` points at the live site. | `staging`, `staging-mobile` | The same as Production: read-only. |
 | Production | https://www.jahnelgroup.com | `production`, `production-mobile` | **Read-only.** Load pages and look: navigate, read the page, and open and close menus, filters, and modals. **Never submit a form**, not even an empty one: the contact form sends real mail, and an application goes to Greenhouse. Never type into a form, or press a form's submit button. Keep the request rate gentle: one worker, no load or stress runs. |
 
 **Test accounts and data:** None. The site has no logins, and read-only

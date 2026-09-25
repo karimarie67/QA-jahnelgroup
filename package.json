@@ -5,7 +5,7 @@
   "scripts": {
     "test": "playwright test tests/",
     "test:smoke": "playwright test tests/smoke_tests.spec.js",
-    "test:regression": "playwright test tests/documentation_tests.spec.js tests/download_search_tests.spec.js tests/error_handling_tests.spec.js",
+    "test:regression": "playwright test tests/error_handling_tests.spec.js",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "coverage": "node scripts/coverage-map.js",

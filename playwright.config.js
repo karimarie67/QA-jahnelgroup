@@ -1,4 +1,4 @@
-const { defineConfig } = require('@playwright/test');
+const { defineConfig, devices } = require('@playwright/test');
 
 module.exports = defineConfig({
   reporter: [
@@ -20,8 +20,9 @@ module.exports = defineConfig({
     {
       name: 'staging',
       use: {
-        // TODO(Engagement): replace with your actual staging URL
-        baseURL: 'https://staging.example.com',
+        // The site has no staging copy; staging points at the live site, where
+        // every test is read-only.
+        baseURL: 'https://www.jahnelgroup.com',
         browserName: 'chromium',
         headless: true,
         viewport: { width: 1280, height: 720 },
@@ -31,8 +32,7 @@ module.exports = defineConfig({
     {
       name: 'production',
       use: {
-        // TODO(Engagement): replace with your actual production URL
-        baseURL: 'https://www.example.com',
+        baseURL: 'https://www.jahnelgroup.com',
         browserName: 'chromium',
         headless: true,
         viewport: { width: 1280, height: 720 },
@@ -42,22 +42,22 @@ module.exports = defineConfig({
     {
       name: 'staging-mobile',
       use: {
-        // TODO(Engagement): replace with your actual staging URL
-        baseURL: 'https://staging.example.com',
-        browserName: 'chromium',
+        // Phone emulation, not just a narrow window: on a phone the header
+        // menu becomes a menu button that slides the menu in.
+        ...devices['Pixel 5'],
+        baseURL: 'https://www.jahnelgroup.com',
         headless: true,
-        viewport: { width: 800, height: 600 },
         trace: 'on-first-retry',
       },
     },
     {
       name: 'production-mobile',
       use: {
-        // TODO(Engagement): replace with your actual production URL
-        baseURL: 'https://www.example.com',
-        browserName: 'chromium',
+        // Phone emulation, not just a narrow window: on a phone the header
+        // menu becomes a menu button that slides the menu in.
+        ...devices['Pixel 5'],
+        baseURL: 'https://www.jahnelgroup.com',
         headless: true,
-        viewport: { width: 800, height: 600 },
         trace: 'on-first-retry',
       },
     },
@@ -85,4 +85,6 @@ module.exports = defineConfig({
   testMatch: ['**/*.spec.js'],
   timeout: 90000,
   retries: 1,
+  // One page at a time: the tests run against the live site.
+  workers: 1,
 });

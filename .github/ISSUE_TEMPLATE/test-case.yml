@@ -104,7 +104,7 @@ body:
     attributes:
       label: Automation File Path
       description: Spec file and test name, once automated
-      placeholder: "tests/download_search_tests.spec.js › TC_SEARCH_001"
+      placeholder: "tests/smoke_tests.spec.js › TC_SMOKE_001"
 
   - type: textarea
     id: notes

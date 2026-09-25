@@ -132,3 +132,21 @@ test('selectors function API', async t => {
     });
   }
 });
+
+test('selectors.jg', async t => {
+  const names = [
+    'nav', 'logo', 'menuButton', 'navLink', 'servicesButton', 'servicesMenu', 'serviceLink',
+    'mainHeading', 'footer', 'footerLink', 'copyright',
+    'contactForm', 'contactField', 'recaptcha', 'contactSubmit',
+    'roleFilters', 'roleFilter', 'roleAboutButtons', 'roleApplyButtons', 'roleDialog', 'roleDialogClose',
+    'notFoundHeading',
+  ];
+  await t.test('has exactly the expected elements', () => {
+    assert.deepEqual(Object.keys(selectors.jg).sort(), [...names].sort());
+  });
+  for (const name of names) {
+    await t.test(`selectors.jg.${name} is a function`, () => {
+      assert.equal(typeof selectors.jg[name], 'function');
+    });
+  }
+});

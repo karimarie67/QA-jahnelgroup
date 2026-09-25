@@ -4,21 +4,17 @@ const fs = require('fs');
 const path = require('path');
 
 // Production domains
-// TODO(Engagement): replace with your site's real production domain(s)
 const PRODUCTION_DOMAINS = [
-  'https://www.example.com'
+  'https://www.jahnelgroup.com'
 ];
 
 // Versions to spot-check
-// TODO(Engagement): if your site has versioned documentation, list version identifiers here to spot-check each one; leave empty to skip this feature
+// The Jahnel Group site has no versioned documentation, so this stays empty.
 const VERSIONS_TO_CHECK = [];
 
 // Content identifiers to spot-check
-// TODO(Engagement): replace with real content identifiers from your site, or leave as placeholders if unused (only relevant when VERSIONS_TO_CHECK is non-empty)
-const CONTENT_IDENTIFIERS_TO_SPOT_CHECK = [
-  'example-item-one',
-  'example-item-two'
-];
+// Unused: only relevant when VERSIONS_TO_CHECK is non-empty.
+const CONTENT_IDENTIFIERS_TO_SPOT_CHECK = [];
 
 // State tracking
 const visited = new Set();
@@ -41,9 +37,9 @@ function isProductionUrl(url) {
   return PRODUCTION_DOMAINS.some(domain => url.startsWith(domain));
 }
 
-// TODO(Engagement): replace '/doc/libs/' with your site's actual versioned-documentation path prefix, or adjust this check entirely if your site has no separate doc-path structure
+// The Jahnel Group site has no separate documentation section.
 function isDocUrl(url) {
-  return url.includes('/doc/libs/');
+  return false;
 }
 
 function shouldDeeplyClawl(url) {
@@ -123,7 +119,9 @@ async function checkPage(page, url, sourceUrl = 'direct', depth = 0) {
       timeout: 45000 
     });
     
-    const status = response?.status || 0;
+    // status is a method; read without the call, it's a function, and no
+    // comparison below would ever be true.
+    const status = response ? response.status() : 0;
 
     if (status >= 400) {
       broken.push({
@@ -179,7 +177,8 @@ async function checkPage(page, url, sourceUrl = 'direct', depth = 0) {
       source: normalizeUrl(sourceUrl),
       url: normalizedUrl,
       status: 'error',
-      type: error.message
+      // A page that fails to load is as broken as a 404.
+      type: isDocUrl(normalizedUrl) ? 'doc' : 'site'
     });
   }
 }
@@ -284,7 +283,9 @@ test.describe('Production Link Check', () => {
     docPagesChecked = 0;
   });
 
-  test('should check all main site pages and spot-check documentation', async ({ page }) => {
+  test('TC_LINKS_001 No link between the site\'s pages is broken', {
+    annotation: [{ type: 'test_case', description: 'TC_LINKS_001' }],
+  }, async ({ page }) => {
     console.log('='.repeat(80));
     console.log('🚀 PRODUCTION LINK CHECKER');
     console.log('='.repeat(80));
@@ -302,11 +303,9 @@ test.describe('Production Link Check', () => {
     // Main site pages
     const startUrls = [
       `${PRODUCTION_DOMAINS[0]}/`,
-      `${PRODUCTION_DOMAINS[0]}/libraries/`,
-      `${PRODUCTION_DOMAINS[0]}/docs/`,
-      `${PRODUCTION_DOMAINS[0]}/releases/`,
-      `${PRODUCTION_DOMAINS[0]}/news/`,
-      `${PRODUCTION_DOMAINS[0]}/community/`,
+      `${PRODUCTION_DOMAINS[0]}/case-studies`,
+      `${PRODUCTION_DOMAINS[0]}/careers`,
+      `${PRODUCTION_DOMAINS[0]}/culture`,
     ];
 
     console.log('Checking main site pages...');
@@ -337,13 +336,12 @@ test.describe('Production Link Check', () => {
     // Fail test if there are broken site links (not doc links)
     const siteBroken = broken.filter(b => b.type === 'site');
     
-    // Always pass the test but report findings
     if (siteBroken.length > 0) {
-      console.log(`\n⚠️  WARNING: Found ${siteBroken.length} broken site links, but test will pass for reporting purposes.`);
+      console.log(`\n⚠️  Found ${siteBroken.length} broken site links.`);
       console.log(`Check the CSV reports in test-results/link-check/ for details.`);
     }
-    
-    // Optional: Uncomment the line below if you want the test to actually fail on broken links
-    // expect(siteBroken.length, `Found ${siteBroken.length} broken site links`).toBe(0);
+
+    // Fails on any broken link between the site's own pages.
+    expect(siteBroken.length, `Found ${siteBroken.length} broken site links`).toBe(0);
   });
 });
