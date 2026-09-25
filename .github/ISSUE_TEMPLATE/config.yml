@@ -1,11 +1,11 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Team Discussion
-    url: https://example.com/TODO-replace-with-your-teams-chat
-    about: "TODO: replace with your Engagement's chat/discussion channel"
-  - name: Documentation
-    url: https://example.com/TODO-replace-with-your-docs
-    about: "TODO: replace with a link to your project's documentation"
-  - name: Team Mailing List / Discussions
-    url: https://example.com/TODO-replace-with-your-mailing-list
-    about: "TODO: replace with your team's mailing list or discussion forum"
+  - name: Engagement brief
+    url: https://github.com/karimarie67/QA-jahnelgroup/blob/main/docs/engagement-brief.md
+    about: "What we test on jahnelgroup.com, what we don't, and the read-only rule"
+  - name: QA Handbook
+    url: https://github.com/karimarie67/QA-jahnelgroup/blob/main/docs/qa-handbook.md
+    about: "How we test: the QA chain, testing strategy, bugs and severity, and writing automated tests"
+  - name: Project board
+    url: https://github.com/users/karimarie67/projects/8
+    about: "Where every story, test case, and bug stands"

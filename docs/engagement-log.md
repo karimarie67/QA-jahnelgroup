@@ -309,3 +309,33 @@ Status option IDs:
 **Next**
 
 - Step 6: point the issue forms' contact links.
+
+## Step 6 — Point the issue forms' contact links (2026-09-25)
+
+**What we did**
+
+- Replaced the three `example.com` placeholders in
+  `.github/ISSUE_TEMPLATE/config.yml`. The links shown when someone opens a
+  new issue now go to the Engagement brief, the QA handbook, and the project
+  board.
+- Ticked the brief's contact-links kickoff item.
+
+**Decisions**
+
+- **Link the brief, the handbook, and the board for now.** The Engagement has
+  no chat channel or mailing list yet (the brief's Chat is `TBD`). When it
+  does, add them here.
+- **Not stacked.** #6 and #7 had both landed on `main`, so this step branches
+  from `main`.
+
+**Result**
+
+| Check | Outcome |
+|---|---|
+| `grep -c example.com .github/ISSUE_TEMPLATE/config.yml` | 0 |
+| `ruby -ryaml` parse of `config.yml` | Parses: 3 contact links (Engagement brief, QA Handbook, Project board) |
+| Each link's target | `docs/engagement-brief.md` and `docs/qa-handbook.md` are on `main`; project #8 exists |
+
+**Next**
+
+- Step 7: run the browser tests in CI.
