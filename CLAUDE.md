@@ -2,7 +2,7 @@
 
 ### Issue tracker
 
-Issues are tracked as GitHub Issues in this repo (karimarie67/QA-framework-template), via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+Issues are tracked as GitHub Issues in this repo (karimarie67/QA-jahnelgroup), via the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 
@@ -15,9 +15,9 @@ Single-context layout (`CONTEXT.md` + `docs/adr/` at the repo root). See `docs/a
 <!-- atlas-v3:guidance:start -->
 ## Workspace framing
 
-Atlas workspace: **QA-framework-template**. Confirmed repositories:
+Atlas workspace: **QA-jahnelgroup**. Confirmed repositories:
 
-- `QA-framework-template` at `.`; base `main`; source host `github`.
+- `QA-jahnelgroup` at `.`; base `main`; source host `github`.
 
 When isolation or parallel delivery benefits from worktrees, they live beneath
 `.claude/worktrees/<work-package>/<repository-id>/`. The frontier
@@ -28,7 +28,7 @@ repository keeps its own base SHA, branch, verification result, and pull request
 
 ## Repository framing
 
-**QA-framework-template** — a generic, site-agnostic Playwright QA automation Framework template: test suites, a CI-driven QA metrics dashboard, and process documentation, instantiated per client Engagement.
+**QA-jahnelgroup** — the Playwright QA automation Engagement for the Jahnel Group website (https://www.jahnelgroup.com), created from the `QA-framework-template` Framework: test suites, a CI-driven QA metrics dashboard, and the Engagement's process documentation.
 
 ### Structure
 
@@ -116,7 +116,7 @@ reread planning, tracker, triage, domain, testing, or tooling guidance.
 
 ## Atlas guardrails
 
-- Protected branches by repository: `QA-framework-template:main`, `QA-framework-template:develop`, `QA-framework-template:master`. Changes land through each repository's configured PR.
+- Protected branches by repository: `QA-jahnelgroup:main`, `QA-jahnelgroup:develop`, `QA-jahnelgroup:master`. Changes land through each repository's configured PR.
 - Never merge a PR. Follow `docs/agents/issue-tracker.md` for human-only tracker actions.
 - Never read or write live secret files. Use `.example` or `.template` files and ask a human to populate live values out of band.
 - Never force-push, bypass hooks, destroy uncommitted work, repoint remotes, or weaken guardrails.

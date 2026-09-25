@@ -1,6 +1,6 @@
-# QA-framework-template
+# QA-jahnelgroup
 
-A reusable, site-agnostic Playwright QA automation framework. Each client engagement instantiates it from this template and supplies its own site-specific configuration and specs.
+The QA automation Engagement for the Jahnel Group website (https://www.jahnelgroup.com), created from the reusable, site-agnostic Playwright `QA-framework-template` Framework. This repository supplies the site's own configuration and specs.
 
 ## Language
 

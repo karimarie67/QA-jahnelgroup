@@ -1,6 +1,6 @@
 # Issue tracker: GitHub
 
-Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for all operations.
+Issues and specs for this repo, `karimarie67/QA-jahnelgroup` (the QA automation Engagement for https://www.jahnelgroup.com), live as GitHub issues. Use the `gh` CLI for all operations.
 
 ## Conventions
 
@@ -120,7 +120,7 @@ Available to claim: Issue is open, unassigned, sits in Backlog or To Do, and has
 
 | Repository | Path | Source host | Base branch | PR creation command |
 |---|---|---|---|---|
-| `QA-framework-template` | `.` | github | `main` | `gh pr create --base main --head <feature-branch>` |
+| `QA-jahnelgroup` | `.` | github | `main` | `gh pr create --base main --head <feature-branch>` |
 
 Open one PR per affected repository.
 
