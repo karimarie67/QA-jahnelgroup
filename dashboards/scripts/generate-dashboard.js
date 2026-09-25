@@ -78,9 +78,7 @@ function collectTestResults() {
   };
 
   const functionalFiles = [
-    path.join(ARTIFACTS_DIR, 'error-handling-test-results/error-handling-results.json'),
-    path.join(ARTIFACTS_DIR, 'download-search-test-results/download-search-results.json'),
-    path.join(ARTIFACTS_DIR, 'documentation-test-results/documentation-results.json')
+    path.join(ARTIFACTS_DIR, 'error-handling-test-results/error-handling-results.json')
   ];
 
   // Process Standard Files

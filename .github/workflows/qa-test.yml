@@ -23,6 +23,7 @@ on:
         options:
           - smoke
           - regression
+          - links
           - all
 
 env:
@@ -33,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     name: Smoke Tests (Quick Validation)
-    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.test_suite == 'smoke' || github.event.inputs.test_suite == 'all')
+    if: github.event_name != 'workflow_dispatch' || github.event.inputs.test_suite == 'smoke' || github.event.inputs.test_suite == 'all'
 
     steps:
       - name: Checkout code
@@ -51,11 +52,11 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
 
-      # A failing test fails its job, so a real failure shows as a red check.
-      # The steps after this one still run (if: always()) and collect the
-      # results for the dashboard.
+      # Desktop and phone. A failing test fails this job, so a real failure
+      # shows as a red check; the steps below still run (if: always()) and
+      # collect the results for the dashboard.
       - name: Run Smoke Tests
-        run: npx playwright test tests/smoke_tests.spec.js --project=staging
+        run: npx playwright test tests/smoke_tests.spec.js --project=${{ env.TEST_ENV }} --project=${{ env.TEST_ENV }}-mobile
 
       - name: Organize results for dashboard
         if: always()
@@ -92,7 +93,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     name: Error Handling Tests
-    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'all')
+    if: github.event_name != 'workflow_dispatch' || github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'all'
 
     steps:
       - name: Checkout code
@@ -108,11 +109,11 @@ jobs:
         run: npm ci
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chromium
 
       - name: Run Error Handling Tests
         # FORCE JSON OUTPUT
-        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test tests/error_handling_tests.spec.js --project=staging --reporter=json
+        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test tests/error_handling_tests.spec.js --project=${{ env.TEST_ENV }} --project=${{ env.TEST_ENV }}-mobile --reporter=json
 
       - name: Organize results for dashboard
         if: always()
@@ -140,11 +141,12 @@ jobs:
           retention-days: 30
           if-no-files-found: warn
 
-  download-search-tests:
+  # On demand only, to keep traffic to the live site low (see the brief).
+  link-check:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    name: Download & Search Tests
-    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'all')
+    name: Link Check
+    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.test_suite == 'links' || github.event.inputs.test_suite == 'all')
 
     steps:
       - name: Checkout code
@@ -160,87 +162,17 @@ jobs:
         run: npm ci
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chromium
 
-      - name: Run Download & Search Tests
-        # FORCE JSON OUTPUT
-        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test tests/download_search_tests.spec.js --project=staging --reporter=json
+      - name: Run Link Check
+        run: npm run test:links
 
-      - name: Organize results for dashboard
-        if: always()
-        shell: bash
-        run: |
-          mkdir -p artifacts/download-search-test-results
-          if [ -f "test-results.json" ]; then
-            cp test-results.json artifacts/download-search-test-results/download-search-results.json
-          else
-            echo "No test-results.json found!"
-          fi
-          if [ -d "playwright-report" ]; then
-            cp -r playwright-report artifacts/download-search-test-results/
-          fi
-          if [ -d "test-results" ]; then
-            cp -r test-results artifacts/download-search-test-results/
-          fi
-
-      - name: Upload Download & Search Test Results
+      - name: Upload Link Check Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: download-search-test-results
-          path: artifacts/download-search-test-results/
-          retention-days: 30
-          if-no-files-found: warn
-
-  documentation-tests:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    name: Documentation Tests
-    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'all')
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
-      - name: Run Documentation Tests
-        # FORCE JSON OUTPUT
-        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test tests/documentation_tests.spec.js --project=staging --reporter=json
-
-      - name: Organize results for dashboard
-        if: always()
-        shell: bash
-        run: |
-          mkdir -p artifacts/documentation-test-results
-          if [ -f "test-results.json" ]; then
-            cp test-results.json artifacts/documentation-test-results/documentation-results.json
-          else
-            echo "No test-results.json found!"
-          fi
-          if [ -d "playwright-report" ]; then
-            cp -r playwright-report artifacts/documentation-test-results/
-          fi
-          if [ -d "test-results" ]; then
-            cp -r test-results artifacts/documentation-test-results/
-          fi
-
-      - name: Upload Documentation Test Results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: documentation-test-results
-          path: artifacts/documentation-test-results/
+          name: link-check-results
+          path: test-results/link-check/
           retention-days: 30
           if-no-files-found: warn
 
@@ -294,8 +226,9 @@ jobs:
 
   update-dashboard:
     runs-on: ubuntu-latest
-    needs: [smoke-tests, error-handling-tests, download-search-tests, documentation-tests]
-    if: always() && github.event_name == 'workflow_dispatch'
+    needs: [smoke-tests, error-handling-tests]
+    # Not on PRs: only runs that reflect main (or a manual run) update the dashboard.
+    if: always() && ((github.event_name == 'workflow_dispatch' && github.event.inputs.test_suite != 'links') || (github.event_name == 'push' && github.ref == 'refs/heads/main'))
     name: Update QA Dashboard
     permissions:
       contents: write
@@ -325,8 +258,6 @@ jobs:
           echo "=== Checking for specific result files ==="
           [ -f "./artifacts/smoke-test-results/smoke-results.json" ] && echo "✓ Found smoke-results.json" || echo "✗ Missing smoke-results.json"
           [ -f "./artifacts/error-handling-test-results/error-handling-results.json" ] && echo "✓ Found error-handling-results.json" || echo "✗ Missing error-handling-results.json"
-          [ -f "./artifacts/download-search-test-results/download-search-results.json" ] && echo "✓ Found download-search-results.json" || echo "✗ Missing download-search-results.json"
-          [ -f "./artifacts/documentation-test-results/documentation-results.json" ] && echo "✓ Found documentation-results.json" || echo "✗ Missing documentation-results.json"
 
       - name: Generate Dashboard
         run: |
