@@ -457,3 +457,107 @@ agreement (step 10).
 
 - Human: triage #10–#13 (confirm the severities, and remove `needs-triage`).
 - Step 9: write the stories and test cases.
+
+## Step 9 — Write the stories and test cases (2026-09-28)
+
+**What we did**
+
+- The client has no manual test cases (confirmed in step 2), so the stories
+  are drafted from the brief's scope. Each says it's QA-drafted and pending
+  agreement with the client contact.
+- Filed six user stories, each with numbered acceptance criteria, and one test
+  case per criterion (19 in all). Each test case is a sub-issue of its story.
+
+| Story | Acceptance criteria → test cases |
+|---|---|
+| #15 Visitor can get around the site on a computer or a phone | 8: `TC_SMOKE_001` #16, `TC_SMOKE_002` #17, `TC_SMOKE_003` #18, `TC_SMOKE_005` #19, `TC_SMOKE_008` #20, `TC_ERROR_001` #21, `TC_ERROR_004` #22, `TC_LINKS_001` #23 |
+| #24 Visitor can read what Jahnel Group offers and has built | 4: `TC_SMOKE_004` #25, `TC_CONTENT_001` #26, `TC_CONTENT_002` #27, `TC_ERROR_005` #28 |
+| #29 Prospective client can get in touch | 2: `TC_SMOKE_006` #30, `TC_CONTACT_001` #31 |
+| #32 Job seeker can find and read the open roles | 2: `TC_CAREERS_001` #33, `TC_SMOKE_007` #34 |
+| #35 Screen reader and keyboard users can find their way around | 2: `TC_A11Y_001` #36, `TC_A11Y_002` #37 |
+| #38 The live site runs its third-party scripts in production mode | 1: `TC_CONSOLE_001` #39 |
+
+- **Every filed finding is an acceptance criterion,** so fixing the site turns
+  its test green: #10 → `TC_SMOKE_004`, #11 → `TC_CONSOLE_001`,
+  #12 → `TC_A11Y_001`, #13 → `TC_A11Y_002`. Each finding has a comment naming
+  its test case.
+- **Seven new tests:**
+  - `tests/content_tests.spec.js`: `TC_CONTENT_001` (the case studies),
+    `TC_CONTENT_002` (the embeds on Videos and Our HQ), `TC_CONTACT_001` (the
+    Contact page's phone and email links), and `TC_CAREERS_001` (Careers to
+    Open Positions).
+  - `tests/accessibility_tests.spec.js`: `TC_A11Y_001` (landmarks) and
+    `TC_A11Y_002` (the phone menu button's `aria-expanded`).
+  - `TC_CONSOLE_001` (the pixel's debug mode) in
+    `tests/error_handling_tests.spec.js`.
+- Gave the 12 existing tests an `issue` annotation for their test case.
+- Wired in the new specs: a Functional Tests CI job (on push and PR, desktop
+  and phone), its results in the dashboard generator's inputs, both specs in
+  `template-check`'s list, and both in `npm run test:regression`. Added the
+  new config and selectors, with unit tests.
+- Labelled the 12 existing tests' cases `test-automated`, and the 7 new ones
+  `test-needs-automation`, since their tests are in this PR. Added all 25
+  stories and test cases to the board in Backlog.
+- Regenerated [`docs/coverage-map.md`](./coverage-map.md), and ticked the
+  brief's coverage item.
+- **Correction to step 7:** `docs/agents/testing.md`'s commands table still
+  said the browser suites ran by manual dispatch only, and the link checker
+  locally only. It now matches `qa-test.yml`, like the operators guide.
+
+**Decisions**
+
+- **Test IDs by area,** for the new tests (`TC_CONTENT`, `TC_CONTACT`,
+  `TC_CAREERS`, `TC_A11Y`, `TC_CONSOLE`). The existing IDs are kept as they
+  are, gaps included (`TC_ERROR_002`, `003`, and `006` were removed in step 3).
+- **The one-`<h1>` check stays in the content story (#24),** where
+  `TC_SMOKE_004` already checks every page. The accessibility story points to
+  it rather than repeating it.
+- **Embeds: present, titled, and from the right host.** How the players, the
+  map, and the tour behave inside is the vendors'. The brief puts it out of
+  scope.
+- **`TC_A11Y_001` checks landmarks only.** #12 also notes there's no skip
+  link, but a page with both landmarks doesn't need one, so the test
+  checks for the landmarks.
+- **`TC_CONSOLE_001` checks three pages.** The pixel is in the shared
+  `<head>`, so `/`, `/contact`, and `/positions` stand for all 27.
+- **Friday's two full runs were discarded.** They took over 1.5 hours each,
+  and failed almost every test with `net::ERR_INTERNET_DISCONNECTED`: the
+  machine lost its connection. They were rerun on Monday.
+
+**Result**
+
+| Check | Result |
+|---|---|
+| `npm run test:unit` | 292 passed, 0 failed |
+| `npm run test:template-check` | PASS (5 specs discovered) |
+| All four browser specs, desktop and phone (`production`, `production-mobile`), `--retries=0`, run twice | 27 passed, 2 skipped (phone-only tests on desktop), **7 failed**, the same both runs |
+| Each new passing test made to fail once (an expected value broken, then restored) | All 4 failed on the assertion under test |
+| `npm run coverage` | 19 automated test cases, each with a test case ID and an issue; no untraced tests |
+| The board (GraphQL item count) | 29 items (4 findings, 6 stories, 19 test cases), all in Backlog |
+
+**The 7 failures are the four known defects,** and nothing else:
+
+| Test | Projects | Defect |
+|---|---|---|
+| `TC_SMOKE_004` | desktop, phone | #10: `/contact` has no `<h1>` |
+| `TC_CONSOLE_001` | desktop, phone | #11: the pixel starts with `debug:true`, on all three pages checked |
+| `TC_A11Y_001` | desktop, phone | #12: 22 pages without `<main>`, 20 without `<header>` |
+| `TC_A11Y_002` | phone | #13: no `aria-expanded`, closed or open |
+
+**CI** (PR #40's run
+[36427843183](https://github.com/karimarie67/QA-jahnelgroup/actions/runs/36427843183))
+matches the local runs exactly:
+
+| Job | Result |
+|---|---|
+| Smoke Tests | **Failed**: 13 passed, 1 skipped, 2 failed (`TC_SMOKE_004`, #10) |
+| Error Handling Tests | **Failed**: 6 passed, 2 failed (`TC_CONSOLE_001`, #11) |
+| Functional Tests | **Failed**: 8 passed, 1 skipped, 3 failed (`TC_A11Y_001`, #12, desktop and phone; `TC_A11Y_002`, #13, phone) |
+| Unit Tests, Template Structural Check | Passed |
+| Link Check, Update QA Dashboard | Skipped (not run on PRs) |
+
+**Next**
+
+- Human: agree the stories with the client contact, along with the brief.
+- Step 10: after this PR merges, relabel the new test cases
+  `test-automated`, watch the first runs on `main`, and rewrite the README.

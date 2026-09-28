@@ -140,6 +140,28 @@ test('testData', async t => {
     }
   });
 
+  await t.test('every case study names a known page', () => {
+    assert.equal(testData.caseStudies.length, 3);
+    for (const [name, key] of testData.caseStudies) {
+      assert.ok(urlPatterns[key], `${name} -> ${key}`);
+    }
+  });
+
+  await t.test('lists six embeds on Videos and four on Our HQ, each with a title and a host', () => {
+    assert.equal(testData.embeds.videos.length, 6);
+    assert.equal(testData.embeds.office.length, 4);
+    for (const [title, host] of [...testData.embeds.videos, ...testData.embeds.office]) {
+      assert.ok(title.length > 0);
+      assert.match(host, /^[a-z0-9.-]+\.[a-z]+$/, title);
+    }
+  });
+
+  await t.test('the contact links are a tel: and a mailto: link to the site\'s contacts', () => {
+    const [[, tel], [, mail]] = testData.contactLinks;
+    assert.match(tel, expectedUrlPatterns.tel);
+    assert.match(mail, expectedUrlPatterns.mailto);
+  });
+
   await t.test('lists the four role filters, starting with All Roles', () => {
     assert.equal(testData.roleFilters.length, 4);
     assert.equal(testData.roleFilters[0], 'All Roles');

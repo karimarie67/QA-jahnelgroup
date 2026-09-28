@@ -256,5 +256,11 @@ export const selectors = {
     roleDialog: page => page.getByRole('dialog').filter({ visible: true }),
     roleDialogClose: page => page.getByRole('dialog').filter({ visible: true }).getByRole('button', { name: 'Close application' }),
     notFoundHeading: page => page.getByRole('heading', { level: 1, name: /didn.t ship/i }),
+    // A link in the page's content whose name contains this text (a case
+    // study's link name also carries its sector and summary).
+    contentLink: (page, text) => page.getByRole('link', { name: new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) }).first(),
+    embed: (page, title) => page.locator(`iframe[title="${title.replace(/"/g, '\\"')}"]`),
+    mainLandmark: page => page.locator('main, [role="main"]'),
+    headerLandmark: page => page.locator('header, [role="banner"]'),
   },
 };

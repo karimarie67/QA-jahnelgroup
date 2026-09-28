@@ -139,7 +139,7 @@ test('selectors.jg', async t => {
     'mainHeading', 'footer', 'footerLink', 'copyright',
     'contactForm', 'contactField', 'recaptcha', 'contactSubmit',
     'roleFilters', 'roleFilter', 'roleAboutButtons', 'roleApplyButtons', 'roleDialog', 'roleDialogClose',
-    'notFoundHeading',
+    'notFoundHeading', 'contentLink', 'embed', 'mainLandmark', 'headerLandmark',
   ];
   await t.test('has exactly the expected elements', () => {
     assert.deepEqual(Object.keys(selectors.jg).sort(), [...names].sort());

@@ -44,7 +44,7 @@ Atlas runs these commands to prove that a change works.
 | unit | `npm run test:unit` | Unit tests for the Site config layer | On every push/PR to main/develop, as part of the automatic gate | inferred |
 | template-check | `npm run test:template-check` | Structural smoke check that the template's config/spec files are intact | On every push/PR to main/develop, as part of the automatic gate | inferred |
 | smoke | `npm run test:smoke` | Critical-path validation (tests/smoke_tests.spec.js) | On every push/PR to main/develop, desktop and phone, and on a manual run | inferred |
-| regression | `npm run test:regression` | error-handling suite (tests/error_handling_tests.spec.js) | On every push/PR to main/develop, desktop and phone, and on a manual run | inferred |
+| regression | `npm run test:regression` | error-handling, content, and accessibility suites | On every push/PR to main/develop, desktop and phone, and on a manual run | inferred |
 | links | `npm run test:links` | Link-checker suite | On demand only: a manual run with `links` or `all` | inferred |
 
 `verified` means setup ran the command here and it worked. `inferred` means the

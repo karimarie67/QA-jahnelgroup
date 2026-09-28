@@ -183,6 +183,35 @@ export const testData = {
   contactFormFields: ['Company', 'First Name', 'Last Name', 'Work Phone', 'Email*', 'Tell Us About Your Project*'],
   // The contact form fields marked required, by label.
   contactRequiredFields: ['Email*', 'Tell Us About Your Project*'],
+  // The Case Studies page's case studies, by the name in each link, and their pages.
+  caseStudies: [
+    ['AI-Assisted Onboarding', 'aiAssistedOnboarding'],
+    ['AI-Assisted Quality Documentation', 'aiAssistedQualityDocumentation'],
+    ['Agentic SDLC', 'agenticSdlc'],
+  ],
+  // Embedded players, maps, and tours, by the title each <iframe> carries, and
+  // the host its src must be on. Only their presence is checked.
+  embeds: {
+    videos: [
+      ['Jahnel Group TrackSuit Reveal', 'www.youtube-nocookie.com'],
+      ['The Charity Spotlight at Jahnel Group', 'player.vimeo.com'],
+      ['1 Million Pushup Challenge', 'www.youtube-nocookie.com'],
+      ['Why Choose Jahnel Group?', 'www.youtube-nocookie.com'],
+      ['14 Year Old Memorizes 256 Digits of Pi!', 'www.youtube-nocookie.com'],
+      ['Project Spotlight: 3D Printer', 'www.youtube-nocookie.com'],
+    ],
+    office: [
+      ['Directions to Jahnel Group from Albany', 'player.vimeo.com'],
+      ['Directions to Jahnel Group from Downtown Schenectady', 'player.vimeo.com'],
+      ['Jahnel Group on Google Maps', 'maps.google.com'],
+      ['Jahnel Group HQ Virtual Tour', 'mpembed.com'],
+    ],
+  },
+  // The Contact page's phone and email links, by their text.
+  contactLinks: [
+    ['(518) 356-0039', 'tel:+15183560039'],
+    ['general@jahnelgroup.com', 'mailto:general@jahnelgroup.com'],
+  ],
   // The Open Positions filters, by the start of their names. Each name ends
   // with its role count, which changes as roles open and close.
   roleFilters: ['All Roles', 'JG Internal', 'Latin America', 'External'],

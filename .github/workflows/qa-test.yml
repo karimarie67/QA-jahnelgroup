@@ -141,6 +141,58 @@ jobs:
           retention-days: 30
           if-no-files-found: warn
 
+  functional-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    name: Functional Tests
+    if: github.event_name != 'workflow_dispatch' || github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'all'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Functional Tests
+        # FORCE JSON OUTPUT
+        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test tests/content_tests.spec.js tests/accessibility_tests.spec.js --project=${{ env.TEST_ENV }} --project=${{ env.TEST_ENV }}-mobile --reporter=json
+
+      - name: Organize results for dashboard
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p artifacts/functional-test-results
+          if [ -f "test-results.json" ]; then
+            cp test-results.json artifacts/functional-test-results/functional-results.json
+          else
+            echo "No test-results.json found!"
+          fi
+          if [ -d "playwright-report" ]; then
+            cp -r playwright-report artifacts/functional-test-results/
+          fi
+          if [ -d "test-results" ]; then
+            cp -r test-results artifacts/functional-test-results/
+          fi
+
+      - name: Upload Functional Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: functional-test-results
+          path: artifacts/functional-test-results/
+          retention-days: 30
+          if-no-files-found: warn
+
   # On demand only, to keep traffic to the live site low (see the brief).
   link-check:
     runs-on: ubuntu-latest
@@ -226,7 +278,7 @@ jobs:
 
   update-dashboard:
     runs-on: ubuntu-latest
-    needs: [smoke-tests, error-handling-tests]
+    needs: [smoke-tests, error-handling-tests, functional-tests]
     # Not on PRs: only runs that reflect main (or a manual run) update the dashboard.
     if: always() && ((github.event_name == 'workflow_dispatch' && github.event.inputs.test_suite != 'links') || (github.event_name == 'push' && github.ref == 'refs/heads/main'))
     name: Update QA Dashboard
@@ -258,6 +310,7 @@ jobs:
           echo "=== Checking for specific result files ==="
           [ -f "./artifacts/smoke-test-results/smoke-results.json" ] && echo "✓ Found smoke-results.json" || echo "✗ Missing smoke-results.json"
           [ -f "./artifacts/error-handling-test-results/error-handling-results.json" ] && echo "✓ Found error-handling-results.json" || echo "✗ Missing error-handling-results.json"
+          [ -f "./artifacts/functional-test-results/functional-results.json" ] && echo "✓ Found functional-results.json" || echo "✗ Missing functional-results.json"
 
       - name: Generate Dashboard
         run: |

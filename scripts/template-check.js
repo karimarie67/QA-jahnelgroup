@@ -8,7 +8,7 @@
  *    selectors.js) import cleanly.
  * 2. Confirms the tracked playwright.config.js can discover every spec in
  *    its testDir (via `playwright test --list --reporter=json`), and that
- *    the three expected top-level specs are all present.
+ *    the five expected top-level specs are all present.
  *
  * This is not a syntax linter. `node --check` was considered and rejected:
  * on a `.js` file containing an `import` statement, Node's module-syntax
@@ -29,6 +29,8 @@ const repoRoot = path.resolve(__dirname, '..');
 const EXPECTED_SPECS = [
   'smoke_tests.spec.js',
   'error_handling_tests.spec.js',
+  'content_tests.spec.js',
+  'accessibility_tests.spec.js',
   'check-links.spec.js',
 ];
 
