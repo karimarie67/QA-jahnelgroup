@@ -10,6 +10,7 @@ fs.mkdirSync('test-results', { recursive: true });
 // filters, and dialogs. They never type into or send a form, because
 // jahnelgroup.com is the live site.
 const { jg } = selectors;
+const ISSUES = 'https://github.com/karimarie67/QA-jahnelgroup/issues';
 
 // The *-mobile projects emulate a phone, where the header menu is behind a
 // menu button.
@@ -43,7 +44,7 @@ test.describe('Smoke Tests', () => {
 
   test('TC_SMOKE_001 Home page loads with its title, logo, header menu, and main heading', {
     tag: '@smoke',
-    annotation: [{ type: 'test_case', description: 'TC_SMOKE_001' }],
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_001' }, { type: 'issue', description: `${ISSUES}/16` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_001';
 
@@ -58,7 +59,7 @@ test.describe('Smoke Tests', () => {
 
   test('TC_SMOKE_002 Header menu reaches Case Studies, Team, Culture, Careers, and Contact', {
     tag: '@smoke',
-    annotation: [{ type: 'test_case', description: 'TC_SMOKE_002' }],
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_002' }, { type: 'issue', description: `${ISSUES}/17` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_002';
 
@@ -76,7 +77,7 @@ test.describe('Smoke Tests', () => {
 
   test('TC_SMOKE_003 Services menu opens and reaches each service page', {
     tag: '@smoke',
-    annotation: [{ type: 'test_case', description: 'TC_SMOKE_003' }],
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_003' }, { type: 'issue', description: `${ISSUES}/18` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_003';
 
@@ -95,7 +96,7 @@ test.describe('Smoke Tests', () => {
 
   test('TC_SMOKE_004 Every page loads with its own title and a main heading', {
     tag: '@smoke',
-    annotation: [{ type: 'test_case', description: 'TC_SMOKE_004' }],
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_004' }, { type: 'issue', description: `${ISSUES}/25` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_004';
     testInfo.setTimeout(5 * 60 * 1000);
@@ -115,7 +116,7 @@ test.describe('Smoke Tests', () => {
 
   test('TC_SMOKE_005 Footer shows the contact details and links to the site\'s pages and social profiles', {
     tag: '@smoke',
-    annotation: [{ type: 'test_case', description: 'TC_SMOKE_005' }],
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_005' }, { type: 'issue', description: `${ISSUES}/19` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_005';
 
@@ -140,7 +141,7 @@ test.describe('Smoke Tests', () => {
 
   test('TC_SMOKE_006 Contact form shows its fields, marks Email and the project required, and loads reCAPTCHA', {
     tag: '@smoke',
-    annotation: [{ type: 'test_case', description: 'TC_SMOKE_006' }],
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_006' }, { type: 'issue', description: `${ISSUES}/30` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_006';
 
@@ -164,7 +165,7 @@ test.describe('Smoke Tests', () => {
 
   test('TC_SMOKE_007 Open Positions lists roles, its filters narrow the list, and a role\'s details open and close', {
     tag: '@smoke',
-    annotation: [{ type: 'test_case', description: 'TC_SMOKE_007' }],
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_007' }, { type: 'issue', description: `${ISSUES}/34` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_007';
 
@@ -198,7 +199,7 @@ test.describe('Smoke Tests', () => {
 
   test('TC_SMOKE_008 Phone layout fits the screen and its menu opens and closes', {
     tag: '@smoke',
-    annotation: [{ type: 'test_case', description: 'TC_SMOKE_008' }],
+    annotation: [{ type: 'test_case', description: 'TC_SMOKE_008' }, { type: 'issue', description: `${ISSUES}/20` }],
   }, async ({ page }, testInfo) => {
     test.skip(!onPhone(testInfo), 'Phone layout only: runs in the *-mobile projects');
     const testId = 'TC_SMOKE_008';

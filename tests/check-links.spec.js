@@ -1,5 +1,7 @@
 // check-links.spec.js
 const { test, expect } = require('@playwright/test');
+
+const ISSUES = 'https://github.com/karimarie67/QA-jahnelgroup/issues';
 const fs = require('fs');
 const path = require('path');
 
@@ -284,7 +286,7 @@ test.describe('Production Link Check', () => {
   });
 
   test('TC_LINKS_001 No link between the site\'s pages is broken', {
-    annotation: [{ type: 'test_case', description: 'TC_LINKS_001' }],
+    annotation: [{ type: 'test_case', description: 'TC_LINKS_001' }, { type: 'issue', description: `${ISSUES}/23` }],
   }, async ({ page }) => {
     console.log('='.repeat(80));
     console.log('🚀 PRODUCTION LINK CHECKER');

@@ -8,11 +8,12 @@ fs.mkdirSync('test-results', { recursive: true });
 
 // Read-only, like every test in this Engagement: no form is ever typed into or sent.
 const { jg } = selectors;
+const ISSUES = 'https://github.com/karimarie67/QA-jahnelgroup/issues';
 
 test.describe('Error Handling Tests', () => {
 
   test('TC_ERROR_001 Unknown page shows the 404 page', {
-    annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }],
+    annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }, { type: 'issue', description: `${ISSUES}/21` }],
   }, async ({ page }, testInfo) => {
     const response = await page.goto(buildURL(testInfo, '/this-page-does-not-exist-qa', { cachebust: true }));
     expect(response.status()).toBe(404);
@@ -23,7 +24,7 @@ test.describe('Error Handling Tests', () => {
   });
 
   test('TC_ERROR_004 Malformed addresses never cause a server error', {
-    annotation: [{ type: 'test_case', description: 'TC_ERROR_004' }],
+    annotation: [{ type: 'test_case', description: 'TC_ERROR_004' }, { type: 'issue', description: `${ISSUES}/22` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_ERROR_004';
 
@@ -41,7 +42,7 @@ test.describe('Error Handling Tests', () => {
   });
 
   test('TC_ERROR_005 Outbound links lead somewhere', {
-    annotation: [{ type: 'test_case', description: 'TC_ERROR_005' }],
+    annotation: [{ type: 'test_case', description: 'TC_ERROR_005' }, { type: 'issue', description: `${ISSUES}/28` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_ERROR_005';
     testInfo.setTimeout(3 * 60 * 1000);
@@ -70,6 +71,28 @@ test.describe('Error Handling Tests', () => {
       // Social sites often answer bots with 999 or 403; only a 404/410 or no answer is a broken link.
       expect.soft(response, `${href} did not respond`).not.toBeNull();
       if (response) expect.soft([404, 410], `${href} returned ${status}`).not.toContain(status);
+    }
+  });
+
+  test('TC_CONSOLE_001 No page runs the ads pixel in debug mode', {
+    annotation: [{ type: 'test_case', description: 'TC_CONSOLE_001' }, { type: 'issue', description: `${ISSUES}/39` }],
+  }, async ({ page }, testInfo) => {
+    // Story #38. The pixel is in the shared <head>, so a few pages stand for all.
+    for (const key of ['homepage', 'contact', 'positions']) {
+      await test.step(key, async () => {
+        const debugLines = [];
+        const collect = msg => { if (msg.text().startsWith('[oaiq]')) debugLines.push(msg.text()); };
+        page.on('console', collect);
+        await testPatterns.loadAndValidatePage(page, testInfo, buildURL(testInfo, urlPatterns[key], { cachebust: true }), 'TC_CONSOLE_001');
+        await expect(jg.footer(page)).toBeVisible();
+        // The pixel logs as it starts and again as it sends; give it a moment.
+        await page.waitForTimeout(2000);
+        page.off('console', collect);
+
+        // Fails on the live site today: known defect #11 (the pixel starts with debug:true).
+        expect.soft(await page.content(), `${key} starts the pixel with debug:true`).not.toMatch(/oaiq\("init",\{[^}]*debug:\s*true/);
+        expect.soft(debugLines, `${key} [oaiq] console messages`).toEqual([]);
+      });
     }
   });
 });
