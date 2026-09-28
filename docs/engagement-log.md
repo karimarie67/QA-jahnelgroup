@@ -544,6 +544,18 @@ agreement (step 10).
 | `TC_A11Y_001` | desktop, phone | #12: 22 pages without `<main>`, 20 without `<header>` |
 | `TC_A11Y_002` | phone | #13: no `aria-expanded`, closed or open |
 
+**CI** (PR #40's run
+[36427843183](https://github.com/karimarie67/QA-jahnelgroup/actions/runs/36427843183))
+matches the local runs exactly:
+
+| Job | Result |
+|---|---|
+| Smoke Tests | **Failed**: 13 passed, 1 skipped, 2 failed (`TC_SMOKE_004`, #10) |
+| Error Handling Tests | **Failed**: 6 passed, 2 failed (`TC_CONSOLE_001`, #11) |
+| Functional Tests | **Failed**: 8 passed, 1 skipped, 3 failed (`TC_A11Y_001`, #12, desktop and phone; `TC_A11Y_002`, #13, phone) |
+| Unit Tests, Template Structural Check | Passed |
+| Link Check, Update QA Dashboard | Skipped (not run on PRs) |
+
 **Next**
 
 - Human: agree the stories with the client contact, along with the brief.
