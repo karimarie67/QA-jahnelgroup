@@ -78,5 +78,24 @@
       "TC_A11Y_002 Phone menu button says whether the menu is open"
     ],
     "runNumber": "19"
+  },
+  {
+    "date": "2026-09-28",
+    "time": "2026-09-28T14:24:37.805Z",
+    "total": 36,
+    "passed": 27,
+    "failed": 7,
+    "passRate": 79.41176470588235,
+    "duration": 1052.868,
+    "failedTestNames": [
+      "TC_SMOKE_004 Every page loads with its own title and a main heading",
+      "TC_SMOKE_004 Every page loads with its own title and a main heading",
+      "TC_CONSOLE_001 No page runs the ads pixel in debug mode",
+      "TC_CONSOLE_001 No page runs the ads pixel in debug mode",
+      "TC_A11Y_001 Every page has a main and a header landmark",
+      "TC_A11Y_001 Every page has a main and a header landmark",
+      "TC_A11Y_002 Phone menu button says whether the menu is open"
+    ],
+    "runNumber": "21"
   }
 ]
