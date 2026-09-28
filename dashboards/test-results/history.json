@@ -59,5 +59,24 @@
       "TC_SMOKE_004 Every page loads with its own title and a main heading"
     ],
     "runNumber": "16"
+  },
+  {
+    "date": "2026-09-28",
+    "time": "2026-09-28T13:48:06.521Z",
+    "total": 36,
+    "passed": 27,
+    "failed": 7,
+    "passRate": 79.41176470588235,
+    "duration": 1047.663,
+    "failedTestNames": [
+      "TC_SMOKE_004 Every page loads with its own title and a main heading",
+      "TC_SMOKE_004 Every page loads with its own title and a main heading",
+      "TC_CONSOLE_001 No page runs the ads pixel in debug mode",
+      "TC_CONSOLE_001 No page runs the ads pixel in debug mode",
+      "TC_A11Y_001 Every page has a main and a header landmark",
+      "TC_A11Y_001 Every page has a main and a header landmark",
+      "TC_A11Y_002 Phone menu button says whether the menu is open"
+    ],
+    "runNumber": "19"
   }
 ]
