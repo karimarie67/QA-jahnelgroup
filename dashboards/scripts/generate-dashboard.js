@@ -307,7 +307,7 @@ ${generateBrowserBreakdown(metrics.allTestObjects)}
 ### 🔥 Smoke Tests
 ${generateTestTable(results.smoke)}
 
-### 🧩 Functional Tests (Errors, Docs, Search)
+### 🧩 Functional Tests (Errors, Content, Accessibility)
 ${generateTestTable(results.functional)}
 
 ---

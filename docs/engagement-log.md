@@ -561,3 +561,64 @@ matches the local runs exactly:
 - Human: agree the stories with the client contact, along with the brief.
 - Step 10: after this PR merges, relabel the new test cases
   `test-automated`, watch the first runs on `main`, and rewrite the README.
+
+## Step 10 — Close out (2026-09-28)
+
+**What we did**
+
+- After #40 merged, relabelled its seven new test cases (#26, #27, #31, #33,
+  #36, #37, #39) from `test-needs-automation` to `test-automated`, and set
+  their Automation Status to "Automated in Playwright (merged in #40)". All 19
+  test cases are now `test-automated`.
+- Watched the first run on `main` after #40
+  ([run 36429584531](https://github.com/karimarie67/QA-jahnelgroup/actions/runs/36429584531),
+  dashboard run #19), and read the dashboard it published.
+- Rewrote `README.md` as the Engagement's front door. It covers what the repo
+  tests and on which devices, where things stand, the rules the tests keep,
+  where everything is, how to run each suite and what CI runs when, and what
+  to do going forward. It links to the brief and this log rather than copying
+  from them. The Atlas section between the `atlas-v3:readme` markers is
+  carried over byte for byte.
+- Renamed the dashboard's functional section from the template's "(Errors,
+  Docs, Search)" to "(Errors, Content, Accessibility)", in
+  `dashboards/scripts/generate-dashboard.js`.
+- Ticked the brief's README kickoff item.
+
+**Decisions**
+
+- **The dashboard's test time adds up retries.** `TC_A11Y_001` shows 298.2 s
+  on desktop and 349.4 s on the phone, which looks like its 300 s timeout. It
+  isn't: CI retries a failed test once, and each attempt took 143–182 s, with
+  no timeout among its errors. The dashboard adds the two attempts together.
+- **The dashboard's history keeps a row from the template.** Its first row
+  (Sep 22, 16.0%, run #173) came over with the template's
+  `dashboards/test-results/history.json` when the repo was created. This
+  repo's own runs start at #14. CI owns that file, so it's left as it is. The
+  row goes once it's out of the last 10 runs, or sooner if the human removes
+  it.
+- **The README states where things stand by pointing at live sources**: the
+  issue labels, the board, the coverage map, and the dashboard. So it doesn't
+  go stale as defects are fixed.
+
+**Result**
+
+| Check | Result |
+|---|---|
+| Test case labels | 19 `test-automated`, 0 `test-needs-automation` |
+| Main's run 36429584531 | Smoke, Error Handling, and Functional **failed** on the four known defects only; Unit Tests and Template Structural Check passed; Update QA Dashboard succeeded and committed `a9a0a37` |
+| The run's own results (the jobs' JSON) | Smoke 13 passed, 2 failed, 1 skipped; Error Handling 6 passed, 2 failed; Functional 8 passed, 3 failed, 1 skipped. That's 27 passed, 7 failed, 2 skipped |
+| The dashboard's counts | 36 tests: 27 pass, 7 fail, 2 skipped. **They match** |
+| README's Atlas section | Byte-identical to before |
+| README's local links | All 12 resolve |
+| `npm run test:unit`, `npm run test:template-check` | 292 passed; PASS |
+
+**Kickoff checklist: 8 of 9.** The one left is "Brief filled in and agreed
+with the client contact". It needs a person at Jahnel Group to agree the
+brief and the six stories, and to fill in its `TBD`s: the people, the release
+gates, and the targets.
+
+**Next**
+
+- Human: agree the brief and the stories (#15, #24, #29, #32, #35, #38) with
+  the client contact.
+- Human: triage #10–#13.
