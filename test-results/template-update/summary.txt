@@ -1,0 +1,24 @@
+PR A verification for #42 (2026-10-05)
+
+== Step 1: lint, unit, template-check, coverage
+lint: pass; test:unit: 397 passed, 0 failed; template-check: PASS (5 specs, tag check OK); coverage map: only the Tags column changed (11 rows)
+
+== Step 2: tests per project (lists/)
+before 96 project|test pairs, after 91: only TC_LINKS_001 left local, staging, staging-mobile, production, production-mobile (it runs on link-checker). Nothing else differs.
+smoke (--grep @smoke, staging + staging-mobile) = the old smoke job's file list: identical (16)
+functional (--grep @regression, four staging projects) = the old error-handling + functional jobs' file lists: identical (20)
+
+== Step 3: the four specs on the live site, production + production-mobile, workers 1, retries 0, same day (before/ on main c84a207 in a baseline worktree, Playwright 1.55.1; after/ on this branch, 1.63.0)
+before: passed 27, failed 7, skipped 2, flaky 0
+after:  passed 27, failed 7, skipped 2, flaky 0
+36 of 36 tests agree on status and first error line
+failing (after):
+  production | TC_A11Y_001: Error: homepage has one <main>
+  production | TC_CONSOLE_001: Error: homepage starts the pixel with debug:true
+  production | TC_SMOKE_004: Error: contact has one <h1>
+  production-mobile | TC_A11Y_001: Error: homepage has one <main>
+  production-mobile | TC_A11Y_002: Error: closed
+  production-mobile | TC_CONSOLE_001: Error: homepage starts the pixel with debug:true
+  production-mobile | TC_SMOKE_004: Error: contact has one <h1>
+
+== npm audit: no high or critical (2 moderate)
