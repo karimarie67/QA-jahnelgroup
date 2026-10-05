@@ -22,3 +22,9 @@ failing (after):
   production-mobile | TC_SMOKE_004: Error: contact has one <h1>
 
 == npm audit: no high or critical (2 moderate)
+
+== Step 4: CI and the dashboard
+- PR #43's own pull_request run 37358649382 (smoke + functional on staging, the live site): compared by test with step 3's same-day main run: 36 of 36 agree; the 7 failures are the known defects.
+- regression dispatch 37360402062 exposed a dashboard bug (the template's too): with one artifact, download-artifact puts its files in artifacts/ itself; the generator found nothing, wrote its no-data placeholder over the dashboard and exited 0 (commit 8deff58, reverted in 3e19379). Scope change recorded on #42; fixed under a focused red-team review (passed) in 3ddf374, the same fix as the template's.
+- regression dispatch 37366573943, after the fix: the dashboard job succeeded; its row (run 27: total 20, passed 14, failed 5) equals its own functional artifact's (20, 14, 5); the dashboard is a real report. Its commit 4683857 is reverted in 70781eb (net-zero diff). Lint and Unit Tests in that run were cancelled by GitHub's runner incident; they pass locally (408 unit tests) and in the PR's own run.
+- The two-artifact case (both suites, on a push to main) is checked after the merge: the first push run's dashboard row must equal its smoke + functional artifacts' totals.
