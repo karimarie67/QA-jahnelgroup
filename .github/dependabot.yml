@@ -1,0 +1,47 @@
+# Dependabot version updates: one PR a week per group, never merged
+# automatically. Each PR runs the usual checks (lint, unit tests,
+# template-check) and the e2e jobs, which load the live site (read-only, one
+# worker); a human reviews and merges it.
+#
+# - An @playwright/test upgrade can change what the HTML report records: before
+#   merging one, run the suite once and compare with the last run.
+# - A github-actions PR changes .github/workflows/: per docs/agents/planning.md
+#   it gets the red-team review before it merges.
+# - The cooldown waits a few days after a release before proposing it, so a
+#   bad or compromised release is usually pulled before it reaches a PR.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 5
+    labels: [dependencies]
+    commit-message:
+      prefix: chore(deps)
+    groups:
+      # The lint packages on their own PR: an update can add a rule, and the
+      # Lint job (no warnings allowed) would then hold up every other update.
+      lint:
+        patterns: ['eslint', '@eslint/*', 'eslint-plugin-*', 'globals']
+      # Minor and patch updates together; a major update gets its own PR.
+      npm-minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 5
+    labels: [dependencies]
+    commit-message:
+      prefix: chore(ci)
+    groups:
+      actions:
+        patterns: ['*']

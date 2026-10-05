@@ -5,6 +5,14 @@ on:
     branches: [ main, develop ]
   push:
     branches: [ main, develop ]
+  # A nightly run, for monitoring a live site. Off in the template (its sites
+  # are placeholders); /new-engagement step 5 turns it on, together with the
+  # e2e jobs' and update-dashboard's `if:` (see their comments). GitHub runs a
+  # schedule from the default branch only, emails the person who last changed
+  # the cron when a run fails, and disables it after 60 days with no activity
+  # in a public repo.
+  # schedule:
+  #   - cron: '0 6 * * *'  # 06:00 UTC daily
   workflow_dispatch:
     inputs:
       environment:
@@ -26,10 +34,23 @@ on:
           - links
           - all
 
+# A dispatch picks the environment; a push, a PR, or a scheduled run uses
+# staging. To monitor production on the schedule instead:
+#   TEST_ENV: ${{ github.event.inputs.environment || (github.event_name == 'schedule' && 'production') || 'staging' }}
 env:
   TEST_ENV: ${{ github.event.inputs.environment || 'staging' }}
 
 jobs:
+  # The browser e2e jobs run on every push and PR, and on dispatch
+  # (/new-engagement step 5: this Engagement's Site config is real). They test
+  # the live site (there's no staging copy): read-only, one worker
+  # (playwright.config.js). A test that fails on a known site defect stays red
+  # (the human's choice, docs/engagement-log.md step 8).
+  # Each job runs the desktop and phone projects together, and selects its
+  # tests by suite tag (@smoke, @regression), so a new spec needs no edit
+  # here; scripts/tag-check.js (in template-check) holds the tag rules. A job
+  # whose tag matches no test fails ("No tests found"): drop the job with its
+  # last test.
   smoke-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -38,10 +59,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '20'
           cache: 'npm'
@@ -52,11 +73,11 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
 
-      # Desktop and phone. A failing test fails this job, so a real failure
-      # shows as a red check; the steps below still run (if: always()) and
-      # collect the results for the dashboard.
+      # A failing test fails its job, so a real failure shows as a red check.
+      # The steps after this one still run (if: always()) and collect the
+      # results for the dashboard.
       - name: Run Smoke Tests
-        run: npx playwright test tests/smoke_tests.spec.js --project=${{ env.TEST_ENV }} --project=${{ env.TEST_ENV }}-mobile
+        run: npx playwright test --grep @smoke --project=${{ env.TEST_ENV }} --project=${{ env.TEST_ENV }}-mobile
 
       - name: Organize results for dashboard
         if: always()
@@ -75,84 +96,32 @@ jobs:
             echo "✓ Copying playwright-report"
             cp -r playwright-report artifacts/smoke-test-results/
           fi
-          if [ -d "test-results" ]; then
-            echo "✓ Copying test-results directory"
-            cp -r test-results artifacts/smoke-test-results/
+          if [ -d "playwright-output" ]; then
+            echo "✓ Copying playwright-output directory"
+            cp -r playwright-output artifacts/smoke-test-results/
           fi
 
       - name: Upload Smoke Test Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: smoke-test-results
           path: artifacts/smoke-test-results/
           retention-days: 30
           if-no-files-found: warn
 
-  error-handling-tests:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    name: Error Handling Tests
-    if: github.event_name != 'workflow_dispatch' || github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'all'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chromium
-
-      - name: Run Error Handling Tests
-        # FORCE JSON OUTPUT
-        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test tests/error_handling_tests.spec.js --project=${{ env.TEST_ENV }} --project=${{ env.TEST_ENV }}-mobile --reporter=json
-
-      - name: Organize results for dashboard
-        if: always()
-        shell: bash
-        run: |
-          mkdir -p artifacts/error-handling-test-results
-          if [ -f "test-results.json" ]; then
-            cp test-results.json artifacts/error-handling-test-results/error-handling-results.json
-          else
-            echo "No test-results.json found!"
-          fi
-          if [ -d "playwright-report" ]; then
-            cp -r playwright-report artifacts/error-handling-test-results/
-          fi
-          if [ -d "test-results" ]; then
-            cp -r test-results artifacts/error-handling-test-results/
-          fi
-
-      - name: Upload Error Handling Test Results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: error-handling-test-results
-          path: artifacts/error-handling-test-results/
-          retention-days: 30
-          if-no-files-found: warn
-
   functional-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    name: Functional Tests
+    name: Functional Tests (@regression)
     if: github.event_name != 'workflow_dispatch' || github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'all'
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '20'
           cache: 'npm'
@@ -163,9 +132,19 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
 
+      # Every @regression test, desktop and phone, into one JSON file for the
+      # dashboard. The logged-in specs run on the -auth projects, after the
+      # login (<env>-setup), which runs whatever the grep. The
+      # login secrets are passed to this step only. A PR from a fork or
+      # Dependabot gets no secrets, so its login skips; a same-repo run
+      # without them fails. Never add a retries flag here: it would override the
+      # login's no-retry rule and could lock a real account out.
       - name: Run Functional Tests
-        # FORCE JSON OUTPUT
-        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test tests/content_tests.spec.js tests/accessibility_tests.spec.js --project=${{ env.TEST_ENV }} --project=${{ env.TEST_ENV }}-mobile --reporter=json
+        env:
+          QA_USERNAME: ${{ secrets.QA_USERNAME }}
+          QA_PASSWORD: ${{ secrets.QA_PASSWORD }}
+          QA_PR_WITHOUT_SECRETS: ${{ github.event.pull_request.head.repo.fork == true || github.actor == 'dependabot[bot]' }}
+        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test --grep @regression --project=${{ env.TEST_ENV }} --project=${{ env.TEST_ENV }}-mobile --project=${{ env.TEST_ENV }}-auth --project=${{ env.TEST_ENV }}-auth-mobile --reporter=json
 
       - name: Organize results for dashboard
         if: always()
@@ -180,20 +159,23 @@ jobs:
           if [ -d "playwright-report" ]; then
             cp -r playwright-report artifacts/functional-test-results/
           fi
-          if [ -d "test-results" ]; then
-            cp -r test-results artifacts/functional-test-results/
+          if [ -d "playwright-output" ]; then
+            cp -r playwright-output artifacts/functional-test-results/
           fi
 
       - name: Upload Functional Test Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: functional-test-results
           path: artifacts/functional-test-results/
           retention-days: 30
           if-no-files-found: warn
 
-  # On demand only, to keep traffic to the live site low (see the brief).
+  # On demand only: the link checker isn't part of the push and PR gate, and
+  # its results don't go to the dashboard. To crawl on the schedule too (a
+  # crawl is long; weekly may suit better than nightly), add
+  # `|| github.event_name == 'schedule'` to its `if:`.
   link-check:
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -202,10 +184,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '20'
           cache: 'npm'
@@ -221,10 +203,10 @@ jobs:
 
       - name: Upload Link Check Report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: link-check-results
-          path: test-results/link-check/
+          path: playwright-output/link-check/
           retention-days: 30
           if-no-files-found: warn
 
@@ -234,10 +216,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '20'
           cache: 'npm'
@@ -248,16 +230,40 @@ jobs:
       - name: Run Unit Tests
         run: npm run test:unit
 
+  # ESLint (eslint.config.js) over the template's JavaScript, on every push and
+  # PR: fails on any error or warning. Not a test result, so not part of the
+  # dashboard.
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    name: Lint
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
   template-check:
     runs-on: ubuntu-latest
     name: Template Structural Check
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '20'
           cache: 'npm'
@@ -278,8 +284,11 @@ jobs:
 
   update-dashboard:
     runs-on: ubuntu-latest
-    needs: [smoke-tests, error-handling-tests, functional-tests]
-    # Not on PRs: only runs that reflect main (or a manual run) update the dashboard.
+    needs: [smoke-tests, functional-tests]
+    # It commits to the branch that ran, so it must never run for a PR. It
+    # runs on dispatch (not a links-only run, which has no results) and on a
+    # push to main. With the schedule on, add `|| github.event_name == 'schedule'`
+    # inside the outer parentheses (always() stays outside).
     if: always() && ((github.event_name == 'workflow_dispatch' && github.event.inputs.test_suite != 'links') || (github.event_name == 'push' && github.ref == 'refs/heads/main'))
     name: Update QA Dashboard
     permissions:
@@ -287,18 +296,18 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Download all artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: ./artifacts
         continue-on-error: true
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '20'
 
@@ -309,7 +318,6 @@ jobs:
           echo ""
           echo "=== Checking for specific result files ==="
           [ -f "./artifacts/smoke-test-results/smoke-results.json" ] && echo "✓ Found smoke-results.json" || echo "✗ Missing smoke-results.json"
-          [ -f "./artifacts/error-handling-test-results/error-handling-results.json" ] && echo "✓ Found error-handling-results.json" || echo "✗ Missing error-handling-results.json"
           [ -f "./artifacts/functional-test-results/functional-results.json" ] && echo "✓ Found functional-results.json" || echo "✗ Missing functional-results.json"
 
       - name: Generate Dashboard

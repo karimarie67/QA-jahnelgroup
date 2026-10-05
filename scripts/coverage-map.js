@@ -90,7 +90,10 @@ export function renderMarkdown(tests) {
   const issueCell = url => {
     if (!url) return '—';
     const number = url.match(/\/issues\/(\d+)$/);
-    return number ? `[#${number[1]}](${url})` : cell(url);
+    if (number) return `[#${number[1]}](${url})`;
+    // A Jira ticket (docs/jira.md): shown by its key.
+    const jira = url.match(/\/browse\/([A-Z][A-Z0-9_]*-\d+)$/);
+    return jira ? `[${jira[1]}](${url})` : cell(url);
   };
   const tagsCell = tags => (tags.length ? tags.map(t => `\`${t.startsWith('@') ? t : `@${t}`}\``).join(' ') : '—');
   const clientCasesCell = cases => (cases.length ? cases.map(c => cell(c)).join(', ') : '—');

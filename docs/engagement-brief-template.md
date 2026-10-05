@@ -18,7 +18,7 @@ opening table.
 - **Product:** <name, one-line description>
 - **In scope:** <user journeys and features under test>
 - **Out of scope:** <what we deliberately don't test, and why>
-- **Browsers and devices:** <e.g. Chromium desktop and 800x600 mobile viewport>. Must match the `playwright.config.js` projects.
+- **Browsers and devices:** <e.g. Chromium desktop and Pixel 5 phone emulation; add Firefox, WebKit (Safari), or an iPhone if the client's users need them (`QA_BROWSERS`), and say how often they run>. Must match the `playwright.config.js` projects.
 
 ## Environments
 
@@ -27,7 +27,12 @@ opening table.
 | Staging | <url> | `staging` | <e.g. full suite, any time> |
 | Production | <url> | `production` | <e.g. read-only smoke tests after a release; no test data> |
 
-**Test accounts and data:** <which accounts, who owns them, where credentials live (a CI secret name, never a value), and what gets cleaned up>
+**No staging copy?** Say so in the Staging row, and point the `staging`
+projects at the live site under Production's rules (CI's default target is
+`staging`). **Request rate:** <e.g. one worker, requests spaced; what the site
+does when rate-limited>.
+
+**Test accounts and data:** <which accounts, who owns them, where credentials live (a CI secret name, never a value), and what gets cleaned up>. A site with a login: the test account is `QA_USERNAME` and `QA_PASSWORD` (repo secrets, set by a human), and it holds no real personal data, since a logged-in page's failure output can show what's on it.
 
 ## When the tests run
 
@@ -63,6 +68,8 @@ for this product:
 | Full-suite pass rate | <e.g. ≥ 95%> |
 | Open Critical bugs | <e.g. 0> |
 | Triage cadence | <e.g. weekly, Mondays> |
+| Visual checks (optional) | <e.g. the home and pricing pages, compared with reviewed baselines before each release; `siteConfig.visual`> |
+| Performance budgets (optional) | <e.g. LCP ≤ 2.5 s, CLS ≤ 0.1, TTFB ≤ 0.8 s, load ≤ 4 s, on the key pages; `siteConfig.perf`> |
 
 ## People and access
 
@@ -74,6 +81,7 @@ for this product:
 
 - **Chat:** <channel>
 - **Access needed:** <repos, environments, dashboards; who grants it>
+- **Tracker:** <GitHub Issues and this repo's project board (the default), or the client's Jira: the site and project key, the issue types for stories, test cases and bugs, how automation status is recorded, and the status mapping (see `docs/jira.md`)>
 
 ## Kickoff checklist
 

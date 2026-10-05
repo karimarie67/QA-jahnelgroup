@@ -1,5 +1,8 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // --- CONFIGURATION: QUALITY GATES ---
 const QUALITY_GATES = {
@@ -21,6 +24,10 @@ function main() {
     fs.mkdirSync(RESULTS_DIR, { recursive: true });
   }
 
+  // A payload belongs to the run that wrote it. Remove the last run's first,
+  // so no path below (the no-data return included) leaves a stale alert.
+  if (fs.existsSync(SLACK_FILE)) fs.unlinkSync(SLACK_FILE);
+
   const testResults = collectTestResults();
   const metrics = calculateMetrics(testResults);
 
@@ -39,8 +46,7 @@ function main() {
   updateHistory(metrics);
   const history = loadHistory();
 
-  const trends = calculateTrends(metrics, history);
-  const dashboard = generateDashboardMarkdown(metrics, testResults, history, trends);
+  const dashboard = generateDashboardMarkdown(metrics, testResults, history);
 
   fs.writeFileSync(DASHBOARD_PATH, dashboard);
 
@@ -51,35 +57,28 @@ function main() {
   );
 
   // --- SLACK PAYLOAD ---
-  if (metrics.failed > 0 || trends.flakyTests.length > 0) {
-    const slackPayload = {
-      text: `🚨 **QA Alert**`,
-      blocks: [
-        {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: `*${metrics.failed} Tests Failed* on \`${metrics.branch}\`\n<https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${metrics.runId}|View Dashboard>`
-          }
-        }
-      ]
-    };
-    fs.writeFileSync(SLACK_FILE, JSON.stringify(slackPayload));
-  }
+  // Nothing sends it yet; it's ready for a step that will (see slackPayload).
+  const payload = slackPayload(metrics, process.env);
+  if (payload) fs.writeFileSync(SLACK_FILE, JSON.stringify(payload));
 
   console.log('✅ Dashboard generated successfully!');
 }
 
-function collectTestResults() {
+/**
+ * Read the CI artifacts: the smoke suite's results, and the functional
+ * suite's (error handling, forms, and accessibility, in one file). The paths
+ * match the artifact names and files in .github/workflows/qa-test.yml.
+ * @param {string} artifactsDir
+ */
+function collectTestResults(artifactsDir = ARTIFACTS_DIR) {
   const results = { smoke: [], functional: [] };
 
   const files = {
-    smoke: path.join(ARTIFACTS_DIR, 'smoke-test-results/smoke-results.json')
+    smoke: path.join(artifactsDir, 'smoke-test-results/smoke-results.json')
   };
 
   const functionalFiles = [
-    path.join(ARTIFACTS_DIR, 'error-handling-test-results/error-handling-results.json'),
-    path.join(ARTIFACTS_DIR, 'functional-test-results/functional-results.json')
+    path.join(artifactsDir, 'functional-test-results/functional-results.json')
   ];
 
   // Process Standard Files
@@ -150,7 +149,12 @@ function parsePlaywrightJson(filepath) {
                 tests.push({
                   name: spec.title || test.title || 'Unknown Test',
                   status: testStatus(test),
-                  durationSec: test.results.reduce((acc, r) => acc + (r.duration || 0), 0) / 1000,
+                  // The last attempt's time: the one that decided the
+                  // verdict. Adding retries together made a test retried
+                  // once look as if it hit its timeout.
+                  durationSec: (test.results[test.results.length - 1].duration || 0) / 1000,
+                  attempts: test.results.length,
+                  allAttemptsSec: test.results.reduce((acc, r) => acc + (r.duration || 0), 0) / 1000,
                   projectName: test.projectName || 'Default',
                   error: failedAttempt ? failedAttempt.errors[0].message : null
                 });
@@ -181,7 +185,8 @@ function calculateMetrics(results) {
   const skipped = allTests.filter(t => t.status === 'skipped').length;
   const failedTests = allTests.filter(t => t.status === 'failed');
   const ran = allTests.length - skipped;
-  const totalDuration = allTests.reduce((acc, t) => acc + (t.durationSec || 0), 0);
+  // The run's time includes every attempt, retries too.
+  const totalDuration = allTests.reduce((acc, t) => acc + (t.allAttemptsSec ?? t.durationSec ?? 0), 0);
 
   return {
     totalTests: allTests.length,
@@ -189,7 +194,9 @@ function calculateMetrics(results) {
     flaky,
     skipped,
     failed: failedTests.length,
-    failedTestNames: failedTests.map(t => t.name),
+    // One name per failing test: a test that fails on desktop and phone is
+    // one failing test, not two.
+    failedTestNames: [...new Set(failedTests.map(t => t.name))],
     // Skipped tests didn't run, so they count neither for nor against.
     passRate: ran > 0 ? (passed / ran) * 100 : 0,
     totalDuration: totalDuration,
@@ -209,7 +216,7 @@ function updateHistory(metrics) {
   if (fs.existsSync(HISTORY_FILE)) {
     try {
       history = JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf8'));
-    } catch (e) {
+    } catch {
       console.warn('⚠️ Could not parse history file, starting fresh.');
     }
   }
@@ -239,29 +246,31 @@ function loadHistory() {
   return fs.existsSync(HISTORY_FILE) ? JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf8')) : [];
 }
 
-function calculateTrends(metrics, history) {
-  if (history.length < 2) return { durationDiff: 0, flakyTests: [] };
-
-  const prevRun = history[history.length - 2];
-  const durationDiff = metrics.totalDuration - (prevRun.duration || 0);
-
-  const recentHistory = history.slice(-10);
-  const failureCounts = {};
-
-  recentHistory.forEach(run => {
-    if (run.failedTestNames && Array.isArray(run.failedTestNames)) {
-      run.failedTestNames.forEach(name => {
-        failureCounts[name] = (failureCounts[name] || 0) + 1;
-      });
-    }
-  });
-
-  const flakyTests = Object.entries(failureCounts)
-    .filter(([name, count]) => count > 1)
-    .map(([name, count]) => ({ name, count }))
-    .sort((a, b) => b.count - a.count);
-
-  return { durationDiff, flakyTests };
+/**
+ * The Slack alert for this run, or null when there's nothing to report: this
+ * run's failures or flaky tests (passed only on retry). It looks at this run
+ * alone, never at earlier ones, so a clean run never sends an old alert.
+ * @param {{failed: number, flaky: number, branch: string, runId: string}} metrics
+ * @param {{GITHUB_REPOSITORY?: string}} env
+ */
+function slackPayload(metrics, env = {}) {
+  if (!(metrics.failed > 0 || metrics.flaky > 0)) return null;
+  const parts = [];
+  if (metrics.failed > 0) parts.push(`*${metrics.failed} failed*`);
+  if (metrics.flaky > 0) parts.push(`*${metrics.flaky} flaky*`);
+  const runUrl = `https://github.com/${env.GITHUB_REPOSITORY}/actions/runs/${metrics.runId}`;
+  return {
+    text: `QA alert: ${metrics.failed} failed, ${metrics.flaky} flaky on ${metrics.branch}`,
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `🚨 QA alert: ${parts.join(', ')} on \`${metrics.branch}\`\n<${runUrl}|View the run>`,
+        },
+      },
+    ],
+  };
 }
 
 // --- MARKDOWN GENERATION ---
@@ -273,7 +282,7 @@ No QA run data yet — this dashboard is regenerated automatically by CI. Run th
 `;
 }
 
-function generateDashboardMarkdown(metrics, results, history, trends) {
+function generateDashboardMarkdown(metrics, results, history) {
   const env = (metrics.environment || 'staging').toUpperCase();
   const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'full', timeStyle: 'short' });
   const durationText = `${formatDuration(metrics.totalDuration)}`;
@@ -307,7 +316,7 @@ ${generateBrowserBreakdown(metrics.allTestObjects)}
 ### 🔥 Smoke Tests
 ${generateTestTable(results.smoke)}
 
-### 🧩 Functional Tests (Errors, Content, Accessibility)
+### 🧩 Functional Tests
 ${generateTestTable(results.functional)}
 
 ---
@@ -364,7 +373,7 @@ function generateTestTable(tests) {
   let table = '| Test Name | Status | Duration | Project |\n|-----------|--------|----------|---------|\n';
   tests.forEach(test => {
     const statusIcon = icons[test.status] || '❌';
-    const dur = test.durationSec < 1 ? '<1s' : `${test.durationSec.toFixed(1)}s`;
+    const dur = (test.durationSec < 1 ? '<1s' : `${test.durationSec.toFixed(1)}s`) + (test.attempts > 1 ? ` ×${test.attempts}` : '');
     table += `| ${test.name} | ${statusIcon} ${test.status} | ${dur} | ${test.projectName} |\n`;
   });
   return table;
@@ -380,8 +389,10 @@ function generateHistoryTable(history) {
   }).join('\n');
 }
 
-if (require.main === module) {
+// Run when invoked as a command, not when imported (the unit tests import it).
+// realpath on both sides, so a symlinked path (macOS /tmp) still matches.
+if (process.argv[1] && fs.realpathSync(process.argv[1]) === fs.realpathSync(fileURLToPath(import.meta.url))) {
   main();
 }
 
-module.exports = { testStatus, parsePlaywrightJson, calculateMetrics };
+export { testStatus, parsePlaywrightJson, calculateMetrics, slackPayload, collectTestResults };

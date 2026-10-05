@@ -1,10 +1,13 @@
 import { test, expect } from '@playwright/test';
 import fs from 'fs';
 import { selectors } from '../selectors.js';
-import { buildURL, testData, urlPatterns, expectedUrlPatterns } from '../config-helper.js';
+import { buildURL, testData, urlPatterns, expectedUrlPatterns, siteConfig, pageTitles } from '../config-helper.js';
 import { testPatterns } from '../test-helpers.js';
 
-fs.mkdirSync('test-results', { recursive: true });
+// The Engagement's own test data (config-helper.js, siteConfig.jg).
+const site = siteConfig.jg;
+
+fs.mkdirSync('playwright-output', { recursive: true });
 
 // Read-only: these tests load pages and look, and open and close menus,
 // filters, and dialogs. They never type into or send a form, because
@@ -27,7 +30,7 @@ async function open(page, testInfo, key, testId) {
 // visible, so "open" means its first link is on screen. A tap before the
 // site's script has wired the button up does nothing, so tap until it opens.
 async function openPhoneMenu(page) {
-  const firstLink = jg.navLink(page, testData.navLinks[0][0]);
+  const firstLink = jg.navLink(page, site.navLinks[0][0]);
   await expect(async () => {
     await jg.menuButton(page).tap();
     await expect(firstLink).toBeInViewport({ timeout: 2000 });
@@ -40,10 +43,9 @@ async function openMenuOnPhone(page, testInfo) {
   }
 }
 
-test.describe('Smoke Tests', () => {
+test.describe('Smoke Tests', { tag: '@smoke' }, () => {
 
   test('TC_SMOKE_001 Home page loads with its title, logo, header menu, and main heading', {
-    tag: '@smoke',
     annotation: [{ type: 'test_case', description: 'TC_SMOKE_001' }, { type: 'issue', description: `${ISSUES}/16` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_001';
@@ -51,37 +53,35 @@ test.describe('Smoke Tests', () => {
     const { loadTime } = await open(page, testInfo, 'homepage', testId);
     expect(loadTime / 1000).toBeLessThanOrEqual(15);
 
-    await expect(page).toHaveTitle(testData.pageTitles.homepage);
+    await expect(page).toHaveTitle(pageTitles.homepage);
     await expect(jg.logo(page)).toBeVisible();
     await expect(onPhone(testInfo) ? jg.menuButton(page) : jg.servicesButton(page)).toBeVisible();
     await expect(jg.mainHeading(page)).toHaveText(/Where AI becomes reality/i);
   });
 
   test('TC_SMOKE_002 Header menu reaches Case Studies, Team, Culture, Careers, and Contact', {
-    tag: '@smoke',
     annotation: [{ type: 'test_case', description: 'TC_SMOKE_002' }, { type: 'issue', description: `${ISSUES}/17` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_002';
 
-    for (const [name, key] of testData.navLinks) {
+    for (const [name, key] of site.navLinks) {
       await test.step(name, async () => {
         await open(page, testInfo, 'homepage', testId);
         await openMenuOnPhone(page, testInfo);
         await jg.navLink(page, name).click();
         await expect(page).toHaveURL(expectedUrlPatterns.page(urlPatterns[key]));
-        await expect(page).toHaveTitle(testData.pageTitles[key]);
-        fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ${name} -> ${page.url()}\n`);
+        await expect(page).toHaveTitle(pageTitles[key]);
+        fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} ${name} -> ${page.url()}\n`);
       });
     }
   });
 
   test('TC_SMOKE_003 Services menu opens and reaches each service page', {
-    tag: '@smoke',
     annotation: [{ type: 'test_case', description: 'TC_SMOKE_003' }, { type: 'issue', description: `${ISSUES}/18` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_003';
 
-    for (const [name, key] of testData.serviceLinks) {
+    for (const [name, key] of site.serviceLinks) {
       await test.step(name, async () => {
         await open(page, testInfo, 'homepage', testId);
         await openMenuOnPhone(page, testInfo);
@@ -89,13 +89,12 @@ test.describe('Smoke Tests', () => {
         await expect(jg.servicesButton(page)).toHaveAttribute('aria-expanded', 'true');
         await jg.serviceLink(page, name).click();
         await expect(page).toHaveURL(expectedUrlPatterns.page(urlPatterns[key]));
-        await expect(page).toHaveTitle(testData.pageTitles[key]);
+        await expect(page).toHaveTitle(pageTitles[key]);
       });
     }
   });
 
   test('TC_SMOKE_004 Every page loads with its own title and a main heading', {
-    tag: '@smoke',
     annotation: [{ type: 'test_case', description: 'TC_SMOKE_004' }, { type: 'issue', description: `${ISSUES}/25` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_004';
@@ -107,7 +106,7 @@ test.describe('Smoke Tests', () => {
         const loadError = await open(page, testInfo, key, testId).then(() => null, e => e.message);
         expect.soft(loadError, `${key} loads`).toBeNull();
         if (loadError) return;
-        await expect.soft(page, `${key} title`).toHaveTitle(testData.pageTitles[key]);
+        await expect.soft(page, `${key} title`).toHaveTitle(pageTitles[key]);
         // Fails on the live site today: known defect #10 (/contact has no <h1>).
         await expect.soft(jg.mainHeading(page), `${key} has one <h1>`).toHaveCount(1);
       });
@@ -115,20 +114,19 @@ test.describe('Smoke Tests', () => {
   });
 
   test('TC_SMOKE_005 Footer shows the contact details and links to the site\'s pages and social profiles', {
-    tag: '@smoke',
     annotation: [{ type: 'test_case', description: 'TC_SMOKE_005' }, { type: 'issue', description: `${ISSUES}/19` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_005';
 
     await open(page, testInfo, 'homepage', testId);
     const footer = jg.footer(page);
-    for (const detail of Object.values(testData.contact)) {
+    for (const detail of Object.values(site.contact)) {
       await expect.soft(footer).toContainText(detail);
     }
-    for (const [name, key] of testData.footerLinks) {
+    for (const [name, key] of site.footerLinks) {
       await expect.soft(jg.footerLink(page, name), `footer link ${name}`).toHaveAttribute('href', urlPatterns[key]);
     }
-    for (const [name, href] of testData.socialLinks) {
+    for (const [name, href] of site.socialLinks) {
       await expect.soft(jg.footerLink(page, name), `social link ${name}`).toHaveAttribute('href', href);
     }
     await expect.soft(jg.copyright(page)).toContainText(String(new Date().getFullYear()));
@@ -136,11 +134,10 @@ test.describe('Smoke Tests', () => {
     // A footer link really reaches its page.
     await jg.footerLink(page, 'Privacy Notice').click();
     await expect(page).toHaveURL(expectedUrlPatterns.page(urlPatterns.privacyNotice));
-    await expect(page).toHaveTitle(testData.pageTitles.privacyNotice);
+    await expect(page).toHaveTitle(pageTitles.privacyNotice);
   });
 
   test('TC_SMOKE_006 Contact form shows its fields, marks Email and the project required, and loads reCAPTCHA', {
-    tag: '@smoke',
     annotation: [{ type: 'test_case', description: 'TC_SMOKE_006' }, { type: 'issue', description: `${ISSUES}/30` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_006';
@@ -148,11 +145,11 @@ test.describe('Smoke Tests', () => {
     // Looked at only. Nothing is typed, and Send Message is never pressed.
     await open(page, testInfo, 'contact', testId);
     await expect(jg.contactForm(page)).toBeVisible();
-    for (const label of testData.contactFormFields) {
+    for (const label of site.contactFormFields) {
       const field = jg.contactField(page, label);
       await expect.soft(field, label).toBeVisible();
       await expect.soft(field, `${label} is empty`).toHaveValue('');
-      if (testData.contactRequiredFields.includes(label)) {
+      if (site.contactRequiredFields.includes(label)) {
         await expect.soft(field, `${label} is required`).toHaveAttribute('required', '');
       } else {
         await expect.soft(field, `${label} is optional`).not.toHaveAttribute('required');
@@ -164,7 +161,6 @@ test.describe('Smoke Tests', () => {
   });
 
   test('TC_SMOKE_007 Open Positions lists roles, its filters narrow the list, and a role\'s details open and close', {
-    tag: '@smoke',
     annotation: [{ type: 'test_case', description: 'TC_SMOKE_007' }, { type: 'issue', description: `${ISSUES}/34` }],
   }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_007';
@@ -173,10 +169,10 @@ test.describe('Smoke Tests', () => {
     // The roles load from Greenhouse after the page does.
     await expect(jg.roleApplyButtons(page).first()).toBeVisible({ timeout: testData.timeouts.long });
     const allRoles = await jg.roleApplyButtons(page).count();
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ${allRoles} roles listed\n`);
+    fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} ${allRoles} roles listed\n`);
 
     // Each filter's name ends with its count, and shows that many roles.
-    for (const name of testData.roleFilters) {
+    for (const name of site.roleFilters) {
       await test.step(`${name} filter`, async () => {
         const filter = jg.roleFilter(page, name);
         await filter.click();
@@ -198,7 +194,6 @@ test.describe('Smoke Tests', () => {
   });
 
   test('TC_SMOKE_008 Phone layout fits the screen and its menu opens and closes', {
-    tag: '@smoke',
     annotation: [{ type: 'test_case', description: 'TC_SMOKE_008' }, { type: 'issue', description: `${ISSUES}/20` }],
   }, async ({ page }, testInfo) => {
     test.skip(!onPhone(testInfo), 'Phone layout only: runs in the *-mobile projects');
@@ -213,10 +208,10 @@ test.describe('Smoke Tests', () => {
     }
 
     await open(page, testInfo, 'homepage', testId);
-    const firstLink = jg.navLink(page, testData.navLinks[0][0]);
+    const firstLink = jg.navLink(page, site.navLinks[0][0]);
     await expect(firstLink).not.toBeInViewport();
     await openPhoneMenu(page);
-    for (const [name] of testData.navLinks) {
+    for (const [name] of site.navLinks) {
       await expect(jg.navLink(page, name)).toBeInViewport();
     }
     await jg.menuButton(page).tap();

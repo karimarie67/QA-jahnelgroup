@@ -3,6 +3,13 @@
  *
  * Cross-references a parsed `cases.json` against GitHub issues and the
  * coverage map's collected tests, for traceability.
+ *
+ * Without `final`, a case's issue may still be `test-needs-automation` (its
+ * test is in an open PR). With `final` (step 10, after every batch has
+ * merged), each non-stale, non-covered case must also have its story
+ * recorded, and each automatable or partly-automatable case must be
+ * `test-automated` with its test recorded, so a skipped relabel (step 9)
+ * cannot pass.
  */
 import { countBuckets } from './report.js';
 
@@ -18,9 +25,10 @@ function label(c) {
  *   `gh issue list --state all --json number,title,labels,state` output
  * @param {{testCase: string|null, clientCases: string[]}[]} coverageTests
  *   `collectTests()` output from `scripts/coverage-map.js`
+ * @param {{final?: boolean}} [options]
  * @returns {{ok: boolean, errors: string[], counts: object}}
  */
-export function reconcile(casesFile, issues, coverageTests) {
+export function reconcile(casesFile, issues, coverageTests, { final = false } = {}) {
   const cases = casesFile.cases ?? [];
   const errors = [];
   const issueByNumber = new Map(issues.map(i => [i.number, i]));
@@ -78,9 +86,15 @@ export function reconcile(casesFile, issues, coverageTests) {
         }
       }
 
-      // Rule 3: bucket vs label.
+      // Rule 3: bucket vs label, and never two automation labels at once (the
+      // Test Case form applies `test-manual` by default, so an issue made on
+      // the web and relabelled by hand can end up with both).
       if (issue) {
         const issueLabels = (issue.labels ?? []).map(l => l.name);
+        const automationLabels = LABELS.filter(l => issueLabels.includes(l));
+        if (automationLabels.length > 1) {
+          errors.push(`${label(c)}: issue #${issue.number} has conflicting labels ${automationLabels.join(', ')}; keep exactly one`);
+        }
         if (bucket === 'manual' && !issueLabels.includes('test-manual')) {
           errors.push(`${label(c)}: issue #${issue.number} missing label test-manual`);
         }
@@ -97,6 +111,22 @@ export function reconcile(casesFile, issues, coverageTests) {
     // Rule 4: a case whose issue is labelled test-automated, and every
     // covered case, has a matching coverage test.
     const issueLabels = issue ? (issue.labels ?? []).map(l => l.name) : [];
+
+    // Final: everything created in step 6 is recorded, and everything
+    // automatable is relabelled test-automated with its test recorded.
+    if (final && !covered) {
+      if (!c.import?.story) {
+        errors.push(`${label(c)}: missing import.story`);
+      }
+      if (bucket === 'automatable' || bucket === 'partly-automatable') {
+        if (issue && !issueLabels.includes('test-automated')) {
+          errors.push(`${label(c)}: issue #${issue.number} must be labelled test-automated once its test has merged`);
+        }
+        if (!c.import?.test) {
+          errors.push(`${label(c)}: missing import.test`);
+        }
+      }
+    }
     const needsCoverageTest = covered || issueLabels.includes('test-automated');
     if (needsCoverageTest) {
       const test = coverageTests.find(t => t.testCase === tcid);

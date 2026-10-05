@@ -209,3 +209,67 @@ test('validate: rule 7 - non-covered test_case_id values are unique', async t =>
     assert.equal(result.ok, true);
   });
 });
+
+test('validate: stages - triage checks what steps 2 to 4 promise, without needing IDs', async t => {
+  const probed = (overrides = {}) => makeCase({ import: baseImport({ bucket: 'automatable', probe: 'Login page loads; form has two fields', ...overrides }) });
+
+  await t.test('triage passes for a probed, bucketed case that has no test case ID yet', () => {
+    const tc = makeCase({ client_id: 'TC_LOGIN_001', import: baseImport({ bucket: 'automatable', probe: 'page loads' }) });
+    assert.equal(validate([tc], { stage: 'triage' }).ok, true);
+    // The same case fails `full` until assign-ids has run (rule 5).
+    assert.equal(validate([tc], { stage: 'full' }).ok, false);
+  });
+
+  await t.test('triage fails a case with no probe note, or a blank one', () => {
+    for (const probe of [null, '', '   ']) {
+      const result = validate([probed({ probe })], { stage: 'triage' });
+      assert.equal(result.ok, false, `probe ${JSON.stringify(probe)} should fail`);
+      assert.ok(result.errors.some(e => e.includes('import.probe is required')));
+    }
+  });
+
+  await t.test('the default stage is still `full`, which does not ask for a probe', () => {
+    assert.equal(validate([probed({ probe: null })]).ok, true);
+  });
+
+  await t.test('a stale case needs an outcome, and each outcome needs its detail', () => {
+    const stale = stale_ => makeCase({ import: baseImport({ bucket: 'stale', probe: 'no such page', stale: { missing: 'Checkout page', ...stale_ } }) });
+
+    const noOutcome = validate([stale({})], { stage: 'triage' });
+    assert.ok(noOutcome.errors.some(e => e.includes('import.stale.outcome')));
+
+    const badOutcome = validate([stale({ outcome: 'ignore' })], { stage: 'triage' });
+    assert.ok(badOutcome.errors.some(e => e.includes('import.stale.outcome')));
+
+    const questionNoText = validate([stale({ outcome: 'question' })], { stage: 'triage' });
+    assert.ok(questionNoText.errors.some(e => e.includes('import.stale.question')));
+    assert.equal(validate([stale({ outcome: 'question', question: 'Is the checkout page retired?' })], { stage: 'triage' }).ok, true);
+
+    const findingNoIssue = validate([stale({ outcome: 'finding' })], { stage: 'triage' });
+    assert.ok(findingNoIssue.errors.some(e => e.includes('import.stale.finding_issue')));
+    assert.equal(validate([stale({ outcome: 'finding', finding_issue: 31 })], { stage: 'triage' }).ok, true);
+  });
+
+  await t.test('`all` runs both sets of rules and reports each error once', () => {
+    const tc = makeCase({ client_id: 'TC_LOGIN_001', import: baseImport({ bucket: 'automatable', probe: null }) });
+    const result = validate([tc], { stage: 'all' });
+    assert.ok(result.errors.some(e => e.includes('import.probe is required')));
+    assert.ok(result.errors.some(e => e.includes('import.test_case_id must equal client_id')));
+    assert.equal(new Set(result.errors).size, result.errors.length);
+  });
+
+  await t.test('an unknown stage is an error', () => {
+    assert.throws(() => validate([], { stage: 'nope' }), /Unknown validation stage/);
+  });
+});
+
+test('validate: the probe stage checks only that every case has a probe note', () => {
+  const unbucketed = makeCase({ import: baseImport({ probe: 'page loads' }) });
+  assert.equal(validate([unbucketed], { stage: 'probe' }).ok, true);
+  assert.equal(validate([unbucketed], { stage: 'triage' }).ok, false, 'triage still wants a bucket');
+
+  const unprobed = makeCase({ import: baseImport({ bucket: 'manual', reason: 'needs a human' }) });
+  const result = validate([unprobed], { stage: 'probe' });
+  assert.equal(result.ok, false);
+  assert.ok(result.errors.every(e => e.includes('import.probe is required')));
+});

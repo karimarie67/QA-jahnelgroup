@@ -8,7 +8,13 @@
  *    selectors.js) import cleanly.
  * 2. Confirms the tracked playwright.config.js can discover every spec in
  *    its testDir (via `playwright test --list --reporter=json`), and that
- *    the five expected top-level specs are all present.
+ *    the expected specs (EXPECTED_SPECS) are all present.
+ * 3. Confirms every `tests/….spec.js` that package.json's scripts,
+ *    .github/workflows/qa-test.yml, or scripts/test-skeleton.js name exists
+ *    (scripts/spec-references.js).
+ * 4. Confirms every test's tags fit the rules CI selects by: one suite tag
+ *    that fits its file, and nothing that would fool --grep
+ *    (scripts/tag-check.js).
  *
  * This is not a syntax linter. `node --check` was considered and rejected:
  * on a `.js` file containing an `import` statement, Node's module-syntax
@@ -21,6 +27,8 @@
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { findMissingSpecReferences } from './spec-references.js';
+import { findTagProblems } from './tag-check.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -83,7 +91,7 @@ function listDiscoveredSpecs() {
   let parsed;
   try {
     parsed = JSON.parse(stdout);
-  } catch (err) {
+  } catch {
     console.error('FAIL: `playwright test --list --reporter=json` did not produce parseable JSON.');
     console.error('--- raw stdout ---');
     console.error(stdout);
@@ -114,7 +122,7 @@ function listDiscoveredSpecs() {
     }
   }
 
-  return fileNames;
+  return { fileNames, report: parsed };
 }
 
 function checkExpectedSpecsPresent(discoveredFileNames) {
@@ -144,10 +152,34 @@ function checkExpectedSpecsPresent(discoveredFileNames) {
   );
 }
 
+function checkSpecReferences() {
+  const missing = findMissingSpecReferences(repoRoot);
+  if (missing.length > 0) {
+    console.error('FAIL: these files name spec files that do not exist (remove or update them):');
+    for (const { file, spec } of missing) {
+      console.error(`  - ${file}: ${spec}`);
+    }
+    process.exit(1);
+  }
+  console.log('OK: every spec named in package.json, qa-test.yml, and test-skeleton.js exists.');
+}
+
+function checkTags(report) {
+  const problems = findTagProblems(report);
+  if (problems.length > 0) {
+    console.error('FAIL: these tests break the tag rules CI selects by (scripts/tag-check.js):');
+    for (const p of problems) console.error(`  - ${p}`);
+    process.exit(1);
+  }
+  console.log('OK: every test has exactly one suite tag that fits its file, and nothing would fool --grep.');
+}
+
 async function main() {
   await checkModuleImports();
-  const discovered = listDiscoveredSpecs();
-  checkExpectedSpecsPresent(discovered);
+  const { fileNames, report } = listDiscoveredSpecs();
+  checkExpectedSpecsPresent(fileNames);
+  checkSpecReferences();
+  checkTags(report);
   console.log('template-check: PASS');
   process.exit(0);
 }

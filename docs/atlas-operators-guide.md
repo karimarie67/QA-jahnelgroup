@@ -19,15 +19,15 @@ what Atlas will write on a ticket later, while it does the work.
 
 | Item | Value |
 |---|---|
-| Workspace name | QA-jahnelgroup |
-| What this repository is for | The Playwright QA automation Engagement for the Jahnel Group website (https://www.jahnelgroup.com), created from the QA-framework-template Framework: its test suites, a CI-driven QA metrics dashboard, and the Engagement's process documentation. |
+| Workspace name | QA-framework-template |
+| What this repository is for | A generic, site-agnostic Playwright QA automation Framework template: test suites, a CI-driven QA metrics dashboard, and process documentation, instantiated per client Engagement. |
 | Folder for proof of work | `test-results` |
 
 Atlas may change the repositories below, and nothing else.
 
 | Repository | Path | Base branch |
 |---|---|---|
-| `QA-jahnelgroup` | `.` | `main` |
+| `QA-framework-template` | `.` | `main` |
 
 A *base branch* is the line of work that new work starts from. Atlas starts
 each new branch from it. Atlas opens one pull request for each repository it
@@ -40,12 +40,13 @@ Atlas runs these commands to prove that a change works.
 
 | Check | Command | What it covers | When it runs | Status |
 |---|---|---|---|---|
-| test | `npm run test` | Full Playwright suite under tests/ | Before PR and after implementation | inferred |
-| unit | `npm run test:unit` | Unit tests for the Site config layer | On every push/PR to main/develop, as part of the automatic gate | inferred |
-| template-check | `npm run test:template-check` | Structural smoke check that the template's config/spec files are intact | On every push/PR to main/develop, as part of the automatic gate | inferred |
-| smoke | `npm run test:smoke` | Critical-path validation (tests/smoke_tests.spec.js) | On every push/PR to main/develop, desktop and phone, and on a manual run | inferred |
-| regression | `npm run test:regression` | error-handling, content, and accessibility suites | On every push/PR to main/develop, desktop and phone, and on a manual run | inferred |
-| links | `npm run test:links` | Link-checker suite | On demand only: a manual run with `links` or `all` | inferred |
+| test | `npm run test` | Full Playwright suite under tests/ (against the live site, one worker) | Before PR and after implementation | inferred |
+| unit | `npm run test:unit` | Unit tests for the Site config (config-helper, selectors), the coverage map, the dashboard generator, the tag check, board/label setup, and the import-test-cases scripts | On every push/PR to main/develop, as part of the automatic gate | verified |
+| template-check | `npm run test:template-check` | Structural check: the config imports, the specs are found, every spec CI names exists, and every test's tags fit the rules CI selects by | On every push/PR to main/develop, as part of the automatic gate | verified |
+| lint | `npm run lint` | ESLint over the JavaScript (outside `examples/`): recommended rules, and the Playwright plugin's for the specs; fails on any error or warning | On every push/PR to main/develop (`lint` job), and before a PR | verified |
+| smoke | `npm run test:smoke` | Tests tagged `@smoke` (TC_SMOKE_001–008), desktop and phone, against the live site | On every push/PR to main/develop, and on a manual run | inferred |
+| regression | `npm run test:regression` | Tests tagged `@regression`: error handling, content, and accessibility, desktop and phone, against the live site | On every push/PR to main/develop, and on a manual run | inferred |
+| links | `npm run test:links` | The link checker (`@links`), on its own project | On demand only: a manual run with `links` or `all` | inferred |
 
 `verified` means setup ran the command here and it worked. `inferred` means the
 repository names the command, but setup did not run it. `unavailable` means the
