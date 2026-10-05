@@ -3,7 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { testStatus, parsePlaywrightJson, calculateMetrics, slackPayload, collectTestResults } from '../../dashboards/scripts/generate-dashboard.js';
+import { spawnSync } from 'node:child_process';
+import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
+import { testStatus, parsePlaywrightJson, calculateMetrics, slackPayload, collectTestResults, generate } from '../../dashboards/scripts/generate-dashboard.js';
 
 const attempt = (status, duration = 1000) => ({ status, duration, errors: status === 'failed' ? [{ message: 'boom' }] : [] });
 
@@ -132,5 +135,89 @@ test('collectTestResults', async t => {
     const empty = fs.mkdtempSync(path.join(os.tmpdir(), 'artifacts-'));
     const results = collectTestResults(empty);
     assert.equal(results.smoke.length + results.functional.length, 0);
+  });
+});
+
+// The single-artifact layout, and a run with no results (the update-dashboard
+// job's two cases that used to go wrong: see the generator's
+// resultFileCandidates and generate).
+const report = specs => JSON.stringify({ suites: [{ specs }] });
+const oneSpec = (title, status) => ({ title, tests: [{ projectName: 'staging', status, results: [attempt(status === 'expected' ? 'passed' : 'failed')] }] });
+function artifacts(files) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'artifacts-'));
+  for (const [rel, body] of Object.entries(files)) {
+    fs.mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true });
+    fs.writeFileSync(path.join(dir, rel), body);
+  }
+  return dir;
+}
+
+test('collectTestResults: where a single artifact lands', async t => {
+  await t.test('a functional file at the root alone (a regression-only run) is read', () => {
+    const r = collectTestResults(artifacts({ 'functional-results.json': report([oneSpec('TC_A 1', 'expected'), oneSpec('TC_B 2', 'unexpected')]) }));
+    assert.equal(r.functional.length, 2);
+    assert.equal(r.smoke.length, 0);
+  });
+
+  await t.test('a smoke file at the root alone (a smoke-only run) is read', () => {
+    const r = collectTestResults(artifacts({ 'smoke-results.json': report([oneSpec('TC_S 1', 'expected')]) }));
+    assert.equal(r.smoke.length, 1);
+  });
+
+  await t.test('the subfolder is preferred when a file is in both places', () => {
+    const r = collectTestResults(artifacts({
+      'functional-test-results/functional-results.json': report([oneSpec('TC_SUB 1', 'expected')]),
+      'functional-results.json': report([oneSpec('TC_ROOT 1', 'expected'), oneSpec('TC_ROOT 2', 'expected')]),
+    }));
+    assert.deepEqual(r.functional.map(x => x.name), ['TC_SUB 1']);
+  });
+});
+
+test('generate', async t => {
+  const outDirs = () => {
+    const out = fs.mkdtempSync(path.join(os.tmpdir(), 'dashboard-'));
+    return { dashboardPath: path.join(out, 'qa-metrics.md'), resultsDir: path.join(out, 'test-results') };
+  };
+  const env = { GITHUB_RUN_NUMBER: '7', GITHUB_RUN_ID: '123', GITHUB_REF: 'refs/heads/main', GITHUB_REPOSITORY: 'o/r', TEST_ENV: 'staging' };
+
+  await t.test('with results: writes the dashboard, a history row, and the latest results', () => {
+    const o = outDirs();
+    const m = generate({ artifactsDir: artifacts({ 'functional-results.json': report([oneSpec('TC_A 1', 'expected'), oneSpec('TC_B 2', 'unexpected')]) }), ...o, env });
+    assert.equal(m.totalTests, 2);
+    const history = JSON.parse(fs.readFileSync(path.join(o.resultsDir, 'history.json'), 'utf8'));
+    assert.deepEqual(history.map(h => [h.runNumber, h.total, h.passed, h.failed]), [['7', 2, 1, 1]]);
+    assert.match(fs.readFileSync(o.dashboardPath, 'utf8'), /Run:\*\* \[#7\]\(https:\/\/github\.com\/o\/r\/actions\/runs\/123\)/);
+    assert.ok(fs.existsSync(path.join(o.resultsDir, 'latest-results.json')));
+    assert.ok(fs.existsSync(path.join(o.resultsDir, 'slack-payload.json')), 'a failing run writes its payload');
+  });
+
+  for (const [name, files] of [
+    ['no results file', {}],
+    ['an empty results file', { 'functional-results.json': '' }],
+    ['a results file with no tests', { 'functional-test-results/functional-results.json': JSON.stringify({ suites: [] }) }],
+  ]) {
+    await t.test(`${name}: throws, and leaves every file as it was`, () => {
+      const o = outDirs();
+      fs.mkdirSync(o.resultsDir, { recursive: true });
+      const before = { [o.dashboardPath]: '# the last dashboard', [path.join(o.resultsDir, 'history.json')]: '[{"runNumber":"6"}]', [path.join(o.resultsDir, 'slack-payload.json')]: '{"old":true}' };
+      for (const [f, body] of Object.entries(before)) fs.writeFileSync(f, body);
+      assert.throws(() => generate({ artifactsDir: artifacts(files), ...o, env }), /No test results to report/);
+      for (const [f, body] of Object.entries(before)) assert.equal(fs.readFileSync(f, 'utf8'), body, f);
+      assert.equal(fs.existsSync(path.join(o.resultsDir, 'latest-results.json')), false);
+    });
+  }
+});
+
+test('the generator as CI runs it, with no artifacts', async t => {
+  await t.test('exits 1 with an ::error:: line, and the committed dashboard files are unchanged', () => {
+    const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+    assert.equal(fs.existsSync(path.join(repo, 'artifacts')), false, 'this test needs no artifacts/ folder');
+    const tracked = ['dashboards/qa-metrics.md', 'dashboards/test-results/history.json', 'dashboards/test-results/latest-results.json', 'dashboards/test-results/slack-payload.json'];
+    const hash = f => (fs.existsSync(path.join(repo, f)) ? crypto.createHash('sha256').update(fs.readFileSync(path.join(repo, f))).digest('hex') : 'absent');
+    const before = tracked.map(hash);
+    const run = spawnSync(process.execPath, [path.join(repo, 'dashboards/scripts/generate-dashboard.js')], { cwd: repo, encoding: 'utf8', env: { ...process.env, GITHUB_RUN_NUMBER: '999' } });
+    assert.equal(run.status, 1);
+    assert.match(run.stderr, /::error::No test results to report/);
+    assert.deepEqual(tracked.map(hash), before);
   });
 });

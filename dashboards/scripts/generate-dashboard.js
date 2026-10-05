@@ -15,53 +15,77 @@ const ARTIFACTS_DIR = path.join(__dirname, '../../artifacts');
 const DASHBOARD_PATH = path.join(__dirname, '../qa-metrics.md');
 const RESULTS_DIR = path.join(__dirname, '../test-results');
 const HISTORY_FILE = path.join(RESULTS_DIR, 'history.json');
-const SLACK_FILE = path.join(RESULTS_DIR, 'slack-payload.json');
 
-function main() {
-  console.log('🔄 Generating QA Dashboard (v9.0 - Chart Removed)...');
+/**
+ * Build the dashboard from the downloaded artifacts: the dashboard markdown,
+ * the run's history row, the latest results, and the Slack payload. Throws,
+ * before touching any file, when the artifacts hold no tests at all (no
+ * results file, or files with zero tests): a run with no results is a
+ * failure, and writing it up would wipe the dashboard or record a run that
+ * never happened.
+ * @param {{artifactsDir?: string, dashboardPath?: string, resultsDir?: string, env?: Record<string, string|undefined>}} options
+ */
+function generate({ artifactsDir = ARTIFACTS_DIR, dashboardPath = DASHBOARD_PATH, resultsDir = RESULTS_DIR, env = process.env } = {}) {
+  console.log('🔄 Generating QA Dashboard...');
 
-  if (!fs.existsSync(RESULTS_DIR)) {
-    fs.mkdirSync(RESULTS_DIR, { recursive: true });
+  const testResults = collectTestResults(artifactsDir);
+  const total = testResults.smoke.length + testResults.functional.length;
+  if (total === 0) {
+    throw new Error(`No test results to report: no tests in ${resultFileCandidates(artifactsDir, 'smoke').join(' or ')}, or in ${resultFileCandidates(artifactsDir, 'functional').join(' or ')}. The dashboard was left unchanged.`);
   }
 
-  // A payload belongs to the run that wrote it. Remove the last run's first,
-  // so no path below (the no-data return included) leaves a stale alert.
-  if (fs.existsSync(SLACK_FILE)) fs.unlinkSync(SLACK_FILE);
+  fs.mkdirSync(resultsDir, { recursive: true });
+  const historyFile = path.join(resultsDir, 'history.json');
+  const slackFile = path.join(resultsDir, 'slack-payload.json');
 
-  const testResults = collectTestResults();
-  const metrics = calculateMetrics(testResults);
+  // A payload belongs to the run that wrote it: remove the last run's first.
+  if (fs.existsSync(slackFile)) fs.unlinkSync(slackFile);
 
-  if (metrics.totalTests === 0) {
-    // No real artifacts were found (see collectTestResults). Render an explicit
-    // "no data" dashboard instead of a full report - recording this as a real
-    // history entry would read as "a run happened and everything failed"
-    // rather than "no run happened", permanently skewing the trend series and
-    // flaky-test detection with a data point that never represented a run.
-    console.warn('⚠️ No real test results to report - skipping history update, writing a no-data dashboard.');
-    fs.writeFileSync(DASHBOARD_PATH, generateNoDataMarkdown());
-    console.log('✅ Dashboard generated successfully (no data).');
-    return;
-  }
+  const metrics = calculateMetrics(testResults, env);
+  updateHistory(metrics, historyFile, env);
+  const history = loadHistory(historyFile);
 
-  updateHistory(metrics);
-  const history = loadHistory();
-
-  const dashboard = generateDashboardMarkdown(metrics, testResults, history);
-
-  fs.writeFileSync(DASHBOARD_PATH, dashboard);
+  fs.writeFileSync(dashboardPath, generateDashboardMarkdown(metrics, testResults, history, env));
 
   // Save detailed latest results
   fs.writeFileSync(
-    path.join(RESULTS_DIR, 'latest-results.json'),
+    path.join(resultsDir, 'latest-results.json'),
     JSON.stringify({ timestamp: new Date().toISOString(), metrics, testResults }, null, 2)
   );
 
   // --- SLACK PAYLOAD ---
   // Nothing sends it yet; it's ready for a step that will (see slackPayload).
-  const payload = slackPayload(metrics, process.env);
-  if (payload) fs.writeFileSync(SLACK_FILE, JSON.stringify(payload));
+  const payload = slackPayload(metrics, env);
+  if (payload) fs.writeFileSync(slackFile, JSON.stringify(payload));
 
   console.log('✅ Dashboard generated successfully!');
+  return metrics;
+}
+
+function main() {
+  try {
+    generate();
+  } catch (err) {
+    // A failed job: its commit step doesn't run, so nothing is pushed.
+    console.error(`::error::${err.message}`);
+    process.exitCode = 1;
+  }
+}
+
+/**
+ * Where a suite's results file can be, in order. The update-dashboard job
+ * downloads every artifact into artifacts/: with two or more, each lands in
+ * artifacts/<artifact name>/; with exactly one (a smoke-only or
+ * regression-only run), its files land in artifacts/ itself. The two file
+ * names differ, so the second place can't mix up the suites.
+ * @param {string} artifactsDir
+ * @param {'smoke'|'functional'} suite
+ */
+function resultFileCandidates(artifactsDir, suite) {
+  return [
+    path.join(artifactsDir, `${suite}-test-results`, `${suite}-results.json`),
+    path.join(artifactsDir, `${suite}-results.json`),
+  ];
 }
 
 /**
@@ -72,41 +96,15 @@ function main() {
  */
 function collectTestResults(artifactsDir = ARTIFACTS_DIR) {
   const results = { smoke: [], functional: [] };
-
-  const files = {
-    smoke: path.join(artifactsDir, 'smoke-test-results/smoke-results.json')
-  };
-
-  const functionalFiles = [
-    path.join(artifactsDir, 'functional-test-results/functional-results.json')
-  ];
-
-  // Process Standard Files
-  for (const [key, filepath] of Object.entries(files)) {
-    if (fs.existsSync(filepath)) {
-      console.log(`Found ${key} results: ${filepath}`);
-      results[key] = parsePlaywrightJson(filepath);
+  for (const suite of Object.keys(results)) {
+    const file = resultFileCandidates(artifactsDir, suite).find(f => fs.existsSync(f));
+    if (file) {
+      console.log(`Found ${suite} results: ${file}`);
+      results[suite] = parsePlaywrightJson(file);
     } else {
-      console.log(`⚠️ Missing ${key} results at: ${filepath}`);
+      console.log(`⚠️ No ${suite} results (looked in ${resultFileCandidates(artifactsDir, suite).join(' and ')})`);
     }
   }
-
-  // Process & Combine Functional Files
-  functionalFiles.forEach(filepath => {
-    if (fs.existsSync(filepath)) {
-      console.log(`Found functional results: ${filepath}`);
-      const tests = parsePlaywrightJson(filepath);
-      results.functional = results.functional.concat(tests);
-    } else {
-      console.log(`⚠️ Missing functional file: ${filepath}`);
-    }
-  });
-
-  if (Object.values(results).every(arr => arr.length === 0)) {
-    console.warn("⚠️ No artifacts found. Dashboard will show a 'no data' state.");
-    return results;
-  }
-
   return results;
 }
 
@@ -174,7 +172,7 @@ function parsePlaywrightJson(filepath) {
   }
 }
 
-function calculateMetrics(results) {
+function calculateMetrics(results, env = process.env) {
   const allTests = [
     ...results.smoke,
     ...results.functional
@@ -204,24 +202,24 @@ function calculateMetrics(results) {
     functionalCount: results.functional.length,
     allTestObjects: allTests,
     timestamp: new Date().toISOString(),
-    environment: process.env.TEST_ENV || 'staging',
-    runId: process.env.GITHUB_RUN_ID || 'local',
-    runNumber: process.env.GITHUB_RUN_NUMBER || '0',
-    branch: process.env.GITHUB_REF?.replace('refs/heads/', '') || 'unknown'
+    environment: env.TEST_ENV || 'staging',
+    runId: env.GITHUB_RUN_ID || 'local',
+    runNumber: env.GITHUB_RUN_NUMBER || '0',
+    branch: env.GITHUB_REF?.replace('refs/heads/', '') || 'unknown'
   };
 }
 
-function updateHistory(metrics) {
+function updateHistory(metrics, historyFile = HISTORY_FILE, env = process.env) {
   let history = [];
-  if (fs.existsSync(HISTORY_FILE)) {
+  if (fs.existsSync(historyFile)) {
     try {
-      history = JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf8'));
+      history = JSON.parse(fs.readFileSync(historyFile, 'utf8'));
     } catch {
       console.warn('⚠️ Could not parse history file, starting fresh.');
     }
   }
 
-  const runNumber = process.env.GITHUB_RUN_NUMBER || '0';
+  const runNumber = env.GITHUB_RUN_NUMBER || '0';
 
   const newEntry = {
     date: new Date().toISOString().split('T')[0],
@@ -239,11 +237,11 @@ function updateHistory(metrics) {
   history.push(newEntry);
 
   if (history.length > 50) history = history.slice(-50);
-  fs.writeFileSync(HISTORY_FILE, JSON.stringify(history, null, 2));
+  fs.writeFileSync(historyFile, JSON.stringify(history, null, 2));
 }
 
-function loadHistory() {
-  return fs.existsSync(HISTORY_FILE) ? JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf8')) : [];
+function loadHistory(historyFile = HISTORY_FILE) {
+  return fs.existsSync(historyFile) ? JSON.parse(fs.readFileSync(historyFile, 'utf8')) : [];
 }
 
 /**
@@ -275,14 +273,7 @@ function slackPayload(metrics, env = {}) {
 
 // --- MARKDOWN GENERATION ---
 
-function generateNoDataMarkdown() {
-  return `# 📊 QA Metrics Dashboard
-
-No QA run data yet — this dashboard is regenerated automatically by CI. Run the workflow to populate it.
-`;
-}
-
-function generateDashboardMarkdown(metrics, results, history) {
+function generateDashboardMarkdown(metrics, results, history, runEnv = process.env) {
   const env = (metrics.environment || 'staging').toUpperCase();
   const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'full', timeStyle: 'short' });
   const durationText = `${formatDuration(metrics.totalDuration)}`;
@@ -292,7 +283,7 @@ function generateDashboardMarkdown(metrics, results, history) {
 > **Automated Quality Gate Report**
 
 **Last Updated:** ${timestamp} | **Env:** ${env} | **Branch:** ${metrics.branch}
-**Run:** [#${metrics.runNumber}](https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${metrics.runId})
+**Run:** [#${metrics.runNumber}](https://github.com/${runEnv.GITHUB_REPOSITORY}/actions/runs/${metrics.runId})
 
 ---
 
@@ -395,4 +386,4 @@ if (process.argv[1] && fs.realpathSync(process.argv[1]) === fs.realpathSync(file
   main();
 }
 
-export { testStatus, parsePlaywrightJson, calculateMetrics, slackPayload, collectTestResults };
+export { testStatus, parsePlaywrightJson, calculateMetrics, slackPayload, collectTestResults, generate };
