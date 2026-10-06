@@ -46,3 +46,7 @@ PR B verification for #42 (2026-10-06): TC_A11Y_003 (#45), TC_FORM_001 (#46), TC
 - TC_FORM_001 with a field labelled 'Nope': one visible field labelled "Nope", exit 1
 - TC_PERF_001 with perf.pages ['/'] and an LCP budget of 1 ms: /: LCP 736 ms, budget 1 ms, exit 1
 - TC_A11Y_003 fails today on real violations (#48-#54), so no injected fault was needed to show it can fail.
+
+== CI
+- PR #55's own run 37473463016: 42 results; TC_A11Y_003, TC_FORM_001 and TC_PERF_001 ran on staging and staging-mobile; the only failures are the seven known defects (TC_SMOKE_004, TC_CONSOLE_001, TC_A11Y_001 x2 each; TC_A11Y_002 on the phone) and TC_A11Y_003 x2 (#48-#54). Lint, Unit Tests, Template Structural Check: success.
+- regression dispatch 37476055576: Update QA Dashboard succeeded; its row (run 33: 26 tests, 18 passed, 7 failed) equals its functional artifact (the 20 earlier functional results + the 6 new); the dashboard is a real report. Its commit afa34cc is reverted in ec9f5e9 (net-zero diff).
