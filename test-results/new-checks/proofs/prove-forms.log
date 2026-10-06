@@ -1,0 +1,66 @@
+
+Running 1 test using 1 worker
+
+Third-party request (not failed): POST https://px.ads.linkedin.com/wa/?medium=fetch&fmt=g
+Third-party request (not failed): POST https://bzr.openai.com/v1/sdk/events?pid=3FyEBkYTNGNoXGi7dLwKVv&st=oaiq-web&sv=0.1.41&t=1791294307836&ec=2
+  ✘  1 [production] › tests/forms_tests.spec.js:17:3 › Forms Tests › TC_FORM_001 Every form field has its label, type, and required state @regression @forms (21.7s)
+
+
+  1) [production] › tests/forms_tests.spec.js:17:3 › Forms Tests › TC_FORM_001 Every form field has its label, type, and required state @regression @forms 
+
+    Error: /contact: one visible field labelled "Nope"
+
+    expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('#conForm').first().getByLabel('Nope', { exact: true }).visible()
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - /contact: one visible field labelled "Nope" locator('#conForm').first().getByLabel('Nope', { exact: true }).visible() with timeout 5000ms
+      - waiting for locator('#conForm').first().getByLabel('Nope', { exact: true }).visible()
+        14 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      43 |         // Exact label, visible only: a hidden spam-trap field can share a label.
+      44 |         const input = form.getByLabel(field.label, { exact: true }).filter({ visible: true });
+    > 45 |         await expect.soft(input, `${f.path}: one visible field labelled "${field.label}"`).toHaveCount(1);
+         |                                                                                            ^
+      46 |         if (field.type) {
+      47 |           await expect.soft(input.first(), `${f.path}: "${field.label}" has type ${field.type}`).toHaveAttribute('type', field.type);
+      48 |         }
+        at /Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/forms_tests.spec.js:45:92
+
+    Error: /contact: "Nope" is not required
+
+    expect(locator).toHaveJSProperty(expected) failed
+
+    Locator: locator('#conForm').first().getByLabel('Nope', { exact: true }).visible().first()
+    Expected: false
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - /contact: "Nope" is not required locator('#conForm').first().getByLabel('Nope', { exact: true }).visible().first() with timeout 5000ms
+      - waiting for locator('#conForm').first().getByLabel('Nope', { exact: true }).visible().first()
+
+
+      48 |         }
+      49 |         if (typeof field.required === 'boolean') {
+    > 50 |           await expect.soft(input.first(), `${f.path}: "${field.label}" is ${field.required ? '' : 'not '}required`).toHaveJSProperty('required', field.required);
+         |                                                                                                                      ^
+      51 |         }
+      52 |       }
+      53 |     }
+        at /Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/forms_tests.spec.js:50:118
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    playwright-output/forms_tests-Forms-Tests-TC-93e38-bel-type-and-required-state-production/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: playwright-output/forms_tests-Forms-Tests-TC-93e38-bel-type-and-required-state-production/error-context.md
+
+  1 failed
+    [production] › tests/forms_tests.spec.js:17:3 › Forms Tests › TC_FORM_001 Every form field has its label, type, and required state @regression @forms 

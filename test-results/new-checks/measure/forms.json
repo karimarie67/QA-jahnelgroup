@@ -1,0 +1,415 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/25.7.0/bin/node",
+      "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/node_modules/.bin/playwright",
+      "test",
+      "--grep",
+      "TC_FORM_001",
+      "--project=production",
+      "--project=production-mobile",
+      "--retries=0",
+      "--reporter=list,json"
+    ],
+    "configFile": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright.config.js",
+    "rootDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "local",
+        "name": "local",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging",
+        "name": "staging",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production",
+        "name": "production",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-mobile",
+        "name": "staging-mobile",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-mobile",
+        "name": "production-mobile",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-setup",
+        "name": "staging-setup",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth\\.setup\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-auth",
+        "name": "staging-auth",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-auth-mobile",
+        "name": "staging-auth-mobile",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-setup",
+        "name": "production-setup",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth\\.setup\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-auth",
+        "name": "production-auth",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-auth-mobile",
+        "name": "production-auth-mobile",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "link-checker",
+        "name": "link-checker",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "timeout": 1800000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "forms_tests.spec.js",
+      "file": "forms_tests.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Forms Tests",
+          "file": "forms_tests.spec.js",
+          "line": 15,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_FORM_001 Every form field has its label, type, and required state",
+              "ok": true,
+              "tags": [
+                "regression",
+                "forms"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_FORM_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/forms_tests.spec.js",
+                        "line": 17,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production",
+                  "projectName": "production",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12334,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Third-party request (not failed): POST https://px.ads.linkedin.com/wa/?medium=fetch&fmt=g\n"
+                        },
+                        {
+                          "text": "Third-party request (not failed): POST https://bzr.openai.com/v1/sdk/events?pid=3FyEBkYTNGNoXGi7dLwKVv&st=oaiq-web&sv=0.1.41&t=1791293429696&ec=2\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-06T13:30:27.460Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_FORM_001",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/forms_tests.spec.js",
+                            "line": 17,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7210258585fd2f2b0ef5-dcf0927687559d27b63a",
+              "file": "forms_tests.spec.js",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "TC_FORM_001 Every form field has its label, type, and required state",
+              "ok": true,
+              "tags": [
+                "regression",
+                "forms"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_FORM_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/forms_tests.spec.js",
+                        "line": 17,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production-mobile",
+                  "projectName": "production-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12209,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Third-party request (not failed): POST https://px.ads.linkedin.com/wa/?medium=fetch&fmt=g\n"
+                        },
+                        {
+                          "text": "Third-party request (not failed): POST https://bzr.openai.com/v1/sdk/events?pid=3FyEBkYTNGNoXGi7dLwKVv&st=oaiq-web&sv=0.1.41&t=1791293442234&ec=2\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-06T13:30:40.492Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_FORM_001",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/forms_tests.spec.js",
+                            "line": 17,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7210258585fd2f2b0ef5-36886b168eb6ef913e8b",
+              "file": "forms_tests.spec.js",
+              "line": 17,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-06T13:30:27.031Z",
+    "duration": 25878.798,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

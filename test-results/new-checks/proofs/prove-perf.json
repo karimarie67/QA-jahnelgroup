@@ -1,0 +1,405 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/25.7.0/bin/node",
+      "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/node_modules/.bin/playwright",
+      "test",
+      "--grep",
+      "TC_PERF_001",
+      "--project=production",
+      "--retries=0",
+      "--reporter=list,json"
+    ],
+    "configFile": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright.config.js",
+    "rootDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "local",
+        "name": "local",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging",
+        "name": "staging",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production",
+        "name": "production",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-mobile",
+        "name": "staging-mobile",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-mobile",
+        "name": "production-mobile",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-setup",
+        "name": "staging-setup",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth\\.setup\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-auth",
+        "name": "staging-auth",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-auth-mobile",
+        "name": "staging-auth-mobile",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-setup",
+        "name": "production-setup",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth\\.setup\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-auth",
+        "name": "production-auth",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-auth-mobile",
+        "name": "production-auth-mobile",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "link-checker",
+        "name": "link-checker",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "timeout": 1800000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "performance_tests.spec.js",
+      "file": "performance_tests.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Performance Tests",
+          "file": "performance_tests.spec.js",
+          "line": 46,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_PERF_001 Every page loads within its performance budgets",
+              "ok": false,
+              "tags": [
+                "regression",
+                "perf"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_PERF_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                        "line": 49,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "issue",
+                      "description": "https://github.com/karimarie67/QA-jahnelgroup/issues/47",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                        "line": 49,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production",
+                  "projectName": "production",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2695,
+                      "error": {
+                        "message": "Error: /: LCP 736 ms, budget 1 ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m1\u001b[39m\nReceived:    \u001b[31m736\u001b[39m",
+                        "stack": "Error: /: LCP 736 ms, budget 1 ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m1\u001b[39m\nReceived:    \u001b[31m736\u001b[39m\n    at /Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js:62:108",
+                        "location": {
+                          "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                          "column": 108,
+                          "line": 62
+                        },
+                        "snippet": "  60 |       for (const [budgetKey, metric, label, show] of BUDGETS) {\n  61 |         if (budgets[budgetKey] === undefined) continue;\n> 62 |         expect.soft(m[metric], `${path}: ${label} ${show(m[metric])}, budget ${show(budgets[budgetKey])}`).toBeLessThanOrEqual(budgets[budgetKey]);\n     |                                                                                                            ^\n  63 |       }\n  64 |     }\n  65 |     // The measurements, for the report and the evidence."
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                            "column": 108,
+                            "line": 62
+                          },
+                          "message": "Error: /: LCP 736 ms, budget 1 ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m1\u001b[39m\nReceived:    \u001b[31m736\u001b[39m\n\n  60 |       for (const [budgetKey, metric, label, show] of BUDGETS) {\n  61 |         if (budgets[budgetKey] === undefined) continue;\n> 62 |         expect.soft(m[metric], `${path}: ${label} ${show(m[metric])}, budget ${show(budgets[budgetKey])}`).toBeLessThanOrEqual(budgets[budgetKey]);\n     |                                                                                                            ^\n  63 |       }\n  64 |     }\n  65 |     // The measurements, for the report and the evidence.\n    at /Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js:62:108"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "/: LCP 736 ms, CLS 0.000, TTFB 190 ms, load 1427 ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-06T13:45:29.342Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_PERF_001",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                            "line": 49,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "issue",
+                          "description": "https://github.com/karimarie67/QA-jahnelgroup/issues/47",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                            "line": 49,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "web-vitals.json",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJwYXRoIjogIi8iLAogICAgImxjcCI6IDczNiwKICAgICJjbHMiOiAwLjAwMDM5OTc4OTU5ODI1MzAzODIsCiAgICAidHRmYiI6IDE4OS41OTk5OTk5OTQwMzk1NCwKICAgICJsb2FkIjogMTQyNi45MDAwMDAwMDU5NjA1CiAgfQpd"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output/performance_tests-Performa-40113-hin-its-performance-budgets-production/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output/performance_tests-Performa-40113-hin-its-performance-budgets-production/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                        "column": 108,
+                        "line": 62
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "db5b0d4268a782a438b9-1f6eb32520440a4a930a",
+              "file": "performance_tests.spec.js",
+              "line": 49,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-06T13:45:28.922Z",
+    "duration": 3321.023,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

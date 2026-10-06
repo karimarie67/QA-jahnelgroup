@@ -1,0 +1,1438 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/25.7.0/bin/node",
+      "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/node_modules/.bin/playwright",
+      "test",
+      "--grep",
+      "TC_A11Y_003|TC_FORM_001|TC_PERF_001",
+      "--project=production",
+      "--project=production-mobile",
+      "--retries=0",
+      "--reporter=list,json,html"
+    ],
+    "configFile": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright.config.js",
+    "rootDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "local",
+        "name": "local",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging",
+        "name": "staging",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production",
+        "name": "production",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-mobile",
+        "name": "staging-mobile",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-mobile",
+        "name": "production-mobile",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-setup",
+        "name": "staging-setup",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth\\.setup\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-auth",
+        "name": "staging-auth",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-auth-mobile",
+        "name": "staging-auth-mobile",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-setup",
+        "name": "production-setup",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth\\.setup\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-auth",
+        "name": "production-auth",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-auth-mobile",
+        "name": "production-auth-mobile",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "link-checker",
+        "name": "link-checker",
+        "testDir": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "timeout": 1800000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ],
+      [
+        "html"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "accessibility_tests.spec.js",
+      "file": "accessibility_tests.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Accessibility Tests (story #35)",
+          "file": "accessibility_tests.spec.js",
+          "line": 20,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_A11Y_003 No page has a serious or critical accessibility violation",
+              "ok": false,
+              "tags": [
+                "regression",
+                "a11y"
+              ],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_A11Y_003",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js",
+                        "line": 60,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "issue",
+                      "description": "https://github.com/karimarie67/QA-jahnelgroup/issues/45",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js",
+                        "line": 60,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production",
+                  "projectName": "production",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 26370,
+                      "error": {
+                        "message": "Error: serious or critical accessibility violations\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 36\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"/: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/: serious frame-title (1)\",\u001b[39m\n\u001b[31m+   \"/ai-transformation: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-accelerated-app-dev: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-legacy-modernization: serious color-contrast (10)\",\u001b[39m\n\u001b[31m+   \"/ai-native-staff-aug: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/recruiting: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/subscription-ai: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/case-studies: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-onboarding: serious color-contrast (10)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-quality-documentation: serious color-contrast (9)\",\u001b[39m\n\u001b[31m+   \"/agentic-sdlc: serious color-contrast (9)\",\u001b[39m\n\u001b[31m+   \"/team: serious aria-command-name (115)\",\u001b[39m\n\u001b[31m+   \"/team: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/culture: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/culture: serious frame-title (1)\",\u001b[39m\n\u001b[31m+   \"/photos: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/videos: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/office: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/capital-region: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/war-week: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/mugshots: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/community-partnerships: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/jg-atlas: serious color-contrast (23)\",\u001b[39m\n\u001b[31m+   \"/careers: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/positions: serious aria-hidden-focus (1)\",\u001b[39m\n\u001b[31m+   \"/positions: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/contact: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+   \"/ai-security: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-security: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                        "stack": "Error: serious or critical accessibility violations\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 36\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"/: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/: serious frame-title (1)\",\u001b[39m\n\u001b[31m+   \"/ai-transformation: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-accelerated-app-dev: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-legacy-modernization: serious color-contrast (10)\",\u001b[39m\n\u001b[31m+   \"/ai-native-staff-aug: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/recruiting: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/subscription-ai: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/case-studies: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-onboarding: serious color-contrast (10)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-quality-documentation: serious color-contrast (9)\",\u001b[39m\n\u001b[31m+   \"/agentic-sdlc: serious color-contrast (9)\",\u001b[39m\n\u001b[31m+   \"/team: serious aria-command-name (115)\",\u001b[39m\n\u001b[31m+   \"/team: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/culture: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/culture: serious frame-title (1)\",\u001b[39m\n\u001b[31m+   \"/photos: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/videos: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/office: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/capital-region: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/war-week: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/mugshots: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/community-partnerships: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/jg-atlas: serious color-contrast (23)\",\u001b[39m\n\u001b[31m+   \"/careers: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/positions: serious aria-hidden-focus (1)\",\u001b[39m\n\u001b[31m+   \"/positions: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/contact: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+   \"/ai-security: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-security: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at /Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js:94:70",
+                        "location": {
+                          "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js",
+                          "column": 70,
+                          "line": 94
+                        },
+                        "snippet": "  92 |     }\n  93 |     await captureEvidence(page, testInfo);\n> 94 |     expect(blocking, 'serious or critical accessibility violations').toEqual([]);\n     |                                                                      ^\n  95 |   });\n  96 | });\n  97 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js",
+                            "column": 70,
+                            "line": 94
+                          },
+                          "message": "Error: serious or critical accessibility violations\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 36\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"/: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/: serious frame-title (1)\",\u001b[39m\n\u001b[31m+   \"/ai-transformation: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-accelerated-app-dev: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-legacy-modernization: serious color-contrast (10)\",\u001b[39m\n\u001b[31m+   \"/ai-native-staff-aug: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/recruiting: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/subscription-ai: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/case-studies: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-onboarding: serious color-contrast (10)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-quality-documentation: serious color-contrast (9)\",\u001b[39m\n\u001b[31m+   \"/agentic-sdlc: serious color-contrast (9)\",\u001b[39m\n\u001b[31m+   \"/team: serious aria-command-name (115)\",\u001b[39m\n\u001b[31m+   \"/team: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/culture: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/culture: serious frame-title (1)\",\u001b[39m\n\u001b[31m+   \"/photos: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/videos: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/office: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/capital-region: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/war-week: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/mugshots: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/community-partnerships: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/jg-atlas: serious color-contrast (23)\",\u001b[39m\n\u001b[31m+   \"/careers: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/positions: serious aria-hidden-focus (1)\",\u001b[39m\n\u001b[31m+   \"/positions: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/contact: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+   \"/ai-security: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-security: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  92 |     }\n  93 |     await captureEvidence(page, testInfo);\n> 94 |     expect(blocking, 'serious or critical accessibility violations').toEqual([]);\n     |                                                                      ^\n  95 |   });\n  96 | });\n  97 |\n    at /Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js:94:70"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "/: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/: serious frame-title (1 node), first: [\"#vidModalFrame\"]\n"
+                        },
+                        {
+                          "text": "/ai-transformation: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/ai-accelerated-app-dev: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/ai-legacy-modernization: serious color-contrast (10 nodes), first: [\".lmc-chk[data-check=\\\"\\\"]:nth-child(1) > .lmc-chk__label\"]\n"
+                        },
+                        {
+                          "text": "/ai-native-staff-aug: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/recruiting: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/subscription-ai: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/case-studies: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/ai-assisted-onboarding: serious color-contrast (10 nodes), first: [\"#s-snapshot > .wrap > .section-tag\"]\n"
+                        },
+                        {
+                          "text": "/ai-assisted-quality-documentation: serious color-contrast (9 nodes), first: [\"#s-snapshot > .wrap > .section-tag\"]\n"
+                        },
+                        {
+                          "text": "/agentic-sdlc: serious color-contrast (9 nodes), first: [\"#s-snapshot > .wrap > .section-tag\"]\n"
+                        },
+                        {
+                          "text": "/team: serious aria-command-name (115 nodes), first: [\"div[data-name=\\\"Darrin Jahnel\\\"]\"]\n"
+                        },
+                        {
+                          "text": "/team: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/culture: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/culture: serious frame-title (1 node), first: [\"#vidModalFrame\"]\n"
+                        },
+                        {
+                          "text": "/photos: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/videos: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/office: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/capital-region: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/war-week: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/mugshots: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/community-partnerships: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/jg-atlas: serious color-contrast (23 nodes), first: [\"#s-problem > .wrap > .section-tag\"]\n"
+                        },
+                        {
+                          "text": "/careers: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/positions: serious aria-hidden-focus (1 node), first: [\"#apply-modal\"]\n"
+                        },
+                        {
+                          "text": "/positions: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/contact: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/privacy-notice: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/privacy-notice: serious link-in-text-block (1 node), first: [\"a[href$=\\\"www.jahnelgroup.com\\\"]\"]\n"
+                        },
+                        {
+                          "text": "/security-compliance: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/security-compliance: serious link-in-text-block (1 node), first: [\"p:nth-child(54) > a[href$=\\\"contact\\\"]\"]\n"
+                        },
+                        {
+                          "text": "/ai-security: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/ai-security: serious link-in-text-block (1 node), first: [\"p:nth-child(76) > a\"]\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-06T13:43:28.228Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_A11Y_003",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js",
+                            "line": 60,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "issue",
+                          "description": "https://github.com/karimarie67/QA-jahnelgroup/issues/45",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js",
+                            "line": 60,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "axe /",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfSwKICB7CiAgICAicnVsZSI6ICJmcmFtZS10aXRsZSIsCiAgICAiaW1wYWN0IjogInNlcmlvdXMiLAogICAgImhlbHAiOiAiaHR0cHM6Ly9kZXF1ZXVuaXZlcnNpdHkuY29tL3J1bGVzL2F4ZS80LjEzL2ZyYW1lLXRpdGxlP2FwcGxpY2F0aW9uPXBsYXl3cmlnaHQiLAogICAgInRhcmdldHMiOiBbCiAgICAgIFsKICAgICAgICAiI3ZpZE1vZGFsRnJhbWUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /ai-transformation",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /ai-accelerated-app-dev",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /ai-legacy-modernization",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIubG1jLWNoa1tkYXRhLWNoZWNrPVwiXCJdOm50aC1jaGlsZCgxKSA+IC5sbWMtY2hrX19sYWJlbCIKICAgICAgXSwKICAgICAgWwogICAgICAgICIubG1jLWNoa1tkYXRhLWNoZWNrPVwiXCJdOm50aC1jaGlsZCgyKSA+IC5sbWMtY2hrX19sYWJlbCIKICAgICAgXSwKICAgICAgWwogICAgICAgICIubG1jLWNoa1tkYXRhLWNoZWNrPVwiXCJdOm50aC1jaGlsZCgzKSA+IC5sbWMtY2hrX19sYWJlbCIKICAgICAgXSwKICAgICAgWwogICAgICAgICIubG1jLWNoa1tkYXRhLWNoZWNrPVwiXCJdOm50aC1jaGlsZCg0KSA+IC5sbWMtY2hrX19sYWJlbCIKICAgICAgXSwKICAgICAgWwogICAgICAgICIubG1jLW1peF9fZm9vdCIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /ai-native-staff-aug",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /recruiting",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /subscription-ai",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /case-studies",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /ai-assisted-onboarding",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIjcy1zbmFwc2hvdCA+IC53cmFwID4gLnNlY3Rpb24tdGFnIgogICAgICBdLAogICAgICBbCiAgICAgICAgIiNzLWJ1aWxkID4gLndyYXAgPiAuc2VjdGlvbi10YWciCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiI3Mtb3V0Y29tZXMgPiAud3JhcCA+IC5zZWN0aW9uLXRhZyIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZXN0LW5vdGUiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiI3Mtd29ya2Zsb3cgPiAud3JhcCA+IC5zZWN0aW9uLXRhZyIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /ai-assisted-quality-documentation",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIjcy1zbmFwc2hvdCA+IC53cmFwID4gLnNlY3Rpb24tdGFnIgogICAgICBdLAogICAgICBbCiAgICAgICAgIiNzLWJ1aWxkID4gLndyYXAgPiAuc2VjdGlvbi10YWciCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiI3Mtb3V0Y29tZXMgPiAud3JhcCA+IC5zZWN0aW9uLXRhZyIKICAgICAgXSwKICAgICAgWwogICAgICAgICIjcy1zdGFjayA+IC53cmFwID4gLnNlY3Rpb24tdGFnIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /agentic-sdlc",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIjcy1zbmFwc2hvdCA+IC53cmFwID4gLnNlY3Rpb24tdGFnIgogICAgICBdLAogICAgICBbCiAgICAgICAgIiNzLXN5c3RlbSA+IC53cmFwID4gLnNlY3Rpb24tdGFnIgogICAgICBdLAogICAgICBbCiAgICAgICAgIiNzLW91dGNvbWVzID4gLndyYXAgPiAuc2VjdGlvbi10YWciCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiI3Mtc3RhY2sgPiAud3JhcCA+IC5zZWN0aW9uLXRhZyIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /team",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtY29tbWFuZC1uYW1lIiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1jb21tYW5kLW5hbWU/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiRGFycmluIEphaG5lbFwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiSmFzb24gSmFobmVsXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJKb24gS2VsbGVyXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJaYWNoIEhhcnRtYW5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlN0ZXZlbiBaZ2FsamljXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJMaW5kYSBNYXJ0aW5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkJyYW5kb24gQi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkpvcnkgSC5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIklhbiBCLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQW50aG9ueSBDLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS10aXRsZT1cIlRlYW0gUGhvdG9cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkRhbmkgTS5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkFsZXhhbmRlciBLLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiSmVzc2UgTC5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkVtaWx5IFMuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJKZW5uIEouXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJOaWNrIEIuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJNYXR0IEEuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJDaHJpcyBOLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiTWljaGFlbCBTLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiUGV0ZXIgSC5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlN0ZXZlIE4uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJBc2hsZXkgUy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlNlYW4gTS5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIk5pY2sgTi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlJlY2FyZG8gQy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkF1c3RpbiBNLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS10aXRsZT1cIlRlYW0gYXQgSkdIUVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiVG9tbXkgSy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlBhdWxvIFAuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJOaWNvbGUgUi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkNocmlzIFAuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJDYW1lcm9uIEwuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJTZWFuIFcuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJCcnVubyBHLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiTHVjYXMgVi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkx1a2UgUC5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkFsZXhhbmRyZSBOLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQWRhbSBXLUguXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJBbGV4IE4uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJCcmFuZG9uIFQuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJCcnlhbiBTLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiSmFtZXMgTi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIk1vcm7DqSBCLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiTWF0dCBCLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiU3VtbWVyIFF1YXJ0ZXJseSBDb25uZWN0aW9uc1wiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiSm9zZSBBLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiRGFuIEsuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJHdXN0YXZvIEIuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJKb2UgQy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIllnb3IgQS5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkF1c3RpbiBHLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiUnlhbiBTLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiSGVjdG9yIEcuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJNYXJjIE0uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJXYXNoaW5ndG9uIE0uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJWaW5pY2l1cyBNLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS10aXRsZT1cIkF3YXJkIENlcmVtb255XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJGZXJuYW5kYSBHLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiRmVybmFuZG8gUC5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkZyYW5rIE4uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJGcmVkIEQuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJSZWJlY2NhIEMuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJNaWxsaWUgRS5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkpldGhybyBCLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQ2hyeXN0aWFuIFIuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJKb3NodWEgQy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkplYW4gUi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIk1hdHRoZXcgVy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkJlbiBTLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQXdhZCBLLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQW5uLU1hcmllIEQuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJFdGhhbiBTLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQmljaCBELlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS10aXRsZT1cIkJsYWNrIFR1ZXNkYXlcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlNhbSBTLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiU2FuZGVyIE4uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJMYXVyYSBKLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiRG9tIEYuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJCcnVubyBBLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiSm9obiBILlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiU3RldmVuIFYuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJDaGVsc2VhIE0uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJBbGVrc2FuZHIgTS5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlNlcmdpbyBMLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiVGhhbGxlcyBTLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiUGF1bCBNLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQW5kcmV3IEguXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJNYXJjZWxvIFMuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJKb8OjbyBBLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQ29saW4gVy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkphbmVsbGUgTy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkRhbiBCLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiRGFuIEQuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJTYW0gQy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkdyZWcgVy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkV2YSBULlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiRmVybmFuZG8gRy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlRvbnkgTS5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkNhc2V5IFMuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJBc2h2aW4gRy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlBhdWwgQy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkthcmkgUy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlN5ZG5leSBNLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiTWljaGFlbCBQLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiTmljayBDLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQWJieSBSLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiVG9tIE8uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJKb3NodWEgSi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkFsb24gSy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkphcnJldHQgQi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkNhbGViIEouXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJCZW5qYW1pbiBGLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiS29zYWwgUy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkpvaG4gUC5cIl0iCiAgICAgIF0KICAgIF0KICB9LAogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /culture",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfSwKICB7CiAgICAicnVsZSI6ICJmcmFtZS10aXRsZSIsCiAgICAiaW1wYWN0IjogInNlcmlvdXMiLAogICAgImhlbHAiOiAiaHR0cHM6Ly9kZXF1ZXVuaXZlcnNpdHkuY29tL3J1bGVzL2F4ZS80LjEzL2ZyYW1lLXRpdGxlP2FwcGxpY2F0aW9uPXBsYXl3cmlnaHQiLAogICAgInRhcmdldHMiOiBbCiAgICAgIFsKICAgICAgICAiI3ZpZE1vZGFsRnJhbWUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /photos",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /videos",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /office",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /capital-region",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /war-week",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /mugshots",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /community-partnerships",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /jg-atlas",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIjcy1wcm9ibGVtID4gLndyYXAgPiAuc2VjdGlvbi10YWciCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiI3MtYnJhaW4gPiAud3JhcCA+IC5zZWN0aW9uLXRhZyIKICAgICAgXSwKICAgICAgWwogICAgICAgICIjcy1waXBlbGluZSA+IC53cmFwID4gLnNlY3Rpb24tdGFnIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5waGFzZS1yb3c6bnRoLWNoaWxkKDMpID4gLnBoYXNlLWNhcmQgPiAuc3RlcCIKICAgICAgXSwKICAgICAgWwogICAgICAgICIucGhhc2Utcm93Om50aC1jaGlsZCgzKSA+IC5waGFzZS1jYXJkID4gLnNpZGUgPiAucGx1Z2luIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5waGFzZS1yb3c6bnRoLWNoaWxkKDQpID4gLnBoYXNlLWNhcmQgPiAuc3RlcCIKICAgICAgXSwKICAgICAgWwogICAgICAgICIucGhhc2Utcm93Om50aC1jaGlsZCg0KSA+IC5waGFzZS1jYXJkID4gLnNpZGUgPiAucGx1Z2luIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5waGFzZS1yb3c6bnRoLWNoaWxkKDUpID4gLnBoYXNlLWNhcmQgPiAuc3RlcCIKICAgICAgXSwKICAgICAgWwogICAgICAgICIucGhhc2Utcm93Om50aC1jaGlsZCg1KSA+IC5waGFzZS1jYXJkID4gLnNpZGUgPiAucGx1Z2luIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5waGFzZS1yb3c6bnRoLWNoaWxkKDYpID4gLnBoYXNlLWNhcmQgPiAuc3RlcCIKICAgICAgXSwKICAgICAgWwogICAgICAgICIucGhhc2Utcm93Om50aC1jaGlsZCg2KSA+IC5waGFzZS1jYXJkID4gLnNpZGUgPiAucGx1Z2luIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5waGFzZS1yb3c6bnRoLWNoaWxkKDcpID4gLnBoYXNlLWNhcmQgPiAuc3RlcCIKICAgICAgXSwKICAgICAgWwogICAgICAgICIucGhhc2Utcm93Om50aC1jaGlsZCg3KSA+IC5waGFzZS1jYXJkID4gLnNpZGUgPiAucGx1Z2luIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5waGFzZS1yb3c6bnRoLWNoaWxkKDgpID4gLnBoYXNlLWNhcmQgPiAuc3RlcCIKICAgICAgXSwKICAgICAgWwogICAgICAgICIucGxhbm5lZCIKICAgICAgXSwKICAgICAgWwogICAgICAgICIucGhhc2Utcm93Om50aC1jaGlsZCg4KSA+IC5waGFzZS1jYXJkID4gLnNpZGUgPiAucGx1Z2luIgogICAgICBdLAogICAgICBbCiAgICAgICAgIiNzLWZvdW5kYXRpb24gPiAud3JhcCA+IC5zZWN0aW9uLXRhZyIKICAgICAgXSwKICAgICAgWwogICAgICAgICIjcy1wbGF0Zm9ybSA+IC53cmFwID4gLnNlY3Rpb24tdGFnIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /careers",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /positions",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtaGlkZGVuLWZvY3VzIiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1oaWRkZW4tZm9jdXM/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIjYXBwbHktbW9kYWwiCiAgICAgIF0KICAgIF0KICB9LAogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /contact",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /privacy-notice",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfSwKICB7CiAgICAicnVsZSI6ICJsaW5rLWluLXRleHQtYmxvY2siLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9saW5rLWluLXRleHQtYmxvY2s/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwid3d3LmphaG5lbGdyb3VwLmNvbVwiXSIKICAgICAgXQogICAgXQogIH0KXQ=="
+                        },
+                        {
+                          "name": "axe /security-compliance",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfSwKICB7CiAgICAicnVsZSI6ICJsaW5rLWluLXRleHQtYmxvY2siLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9saW5rLWluLXRleHQtYmxvY2s/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICJwOm50aC1jaGlsZCg1NCkgPiBhW2hyZWYkPVwiY29udGFjdFwiXSIKICAgICAgXQogICAgXQogIH0KXQ=="
+                        },
+                        {
+                          "name": "axe /ai-security",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvY29sb3ItY29udHJhc3Q/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIuZm9vdC1jb3B5ID4gc3BhbjpudGgtY2hpbGQoMSkiCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInByaXZhY3ktbm90aWNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJzZWN1cml0eS1jb21wbGlhbmNlXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJhaS1zZWN1cml0eVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIuZm9vdC1tYWRlIgogICAgICBdCiAgICBdCiAgfSwKICB7CiAgICAicnVsZSI6ICJsaW5rLWluLXRleHQtYmxvY2siLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9saW5rLWluLXRleHQtYmxvY2s/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICJwOm50aC1jaGlsZCg3NikgPiBhIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output/accessibility_tests-Access-cf8b0-cal-accessibility-violation-production/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output/accessibility_tests-Access-cf8b0-cal-accessibility-violation-production/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js",
+                        "column": 70,
+                        "line": 94
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "627ac7c2a532768c0306-fd9c716e2efa9092518f",
+              "file": "accessibility_tests.spec.js",
+              "line": 60,
+              "column": 3
+            },
+            {
+              "title": "TC_A11Y_003 No page has a serious or critical accessibility violation",
+              "ok": false,
+              "tags": [
+                "regression",
+                "a11y"
+              ],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_A11Y_003",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js",
+                        "line": 60,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "issue",
+                      "description": "https://github.com/karimarie67/QA-jahnelgroup/issues/45",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js",
+                        "line": 60,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production-mobile",
+                  "projectName": "production-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 27810,
+                      "error": {
+                        "message": "Error: serious or critical accessibility violations\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 64\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"/: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/: serious color-contrast (6)\",\u001b[39m\n\u001b[31m+   \"/: serious frame-title (1)\",\u001b[39m\n\u001b[31m+   \"/ai-transformation: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-transformation: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-accelerated-app-dev: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-accelerated-app-dev: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-legacy-modernization: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-legacy-modernization: serious color-contrast (10)\",\u001b[39m\n\u001b[31m+   \"/ai-native-staff-aug: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-native-staff-aug: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/recruiting: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/recruiting: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/subscription-ai: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/subscription-ai: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/case-studies: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/case-studies: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-onboarding: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-onboarding: serious color-contrast (10)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-quality-documentation: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-quality-documentation: serious color-contrast (9)\",\u001b[39m\n\u001b[31m+   \"/agentic-sdlc: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/agentic-sdlc: serious color-contrast (9)\",\u001b[39m\n\u001b[31m+   \"/team: serious aria-command-name (115)\",\u001b[39m\n\u001b[31m+   \"/team: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/team: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/culture: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/culture: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/culture: serious frame-title (1)\",\u001b[39m\n\u001b[31m+   \"/photos: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/photos: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/videos: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/videos: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/office: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/office: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/capital-region: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/capital-region: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/war-week: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/war-week: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/mugshots: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/mugshots: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/community-partnerships: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/community-partnerships: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/jg-atlas: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/jg-atlas: serious color-contrast (23)\",\u001b[39m\n\u001b[31m+   \"/jg-atlas: serious scrollable-region-focusable (1)\",\u001b[39m\n\u001b[31m+   \"/careers: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/careers: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/positions: serious aria-hidden-focus (1)\",\u001b[39m\n\u001b[31m+   \"/positions: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/positions: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/contact: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/contact: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+   \"/ai-security: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-security: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-security: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                        "stack": "Error: serious or critical accessibility violations\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 64\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"/: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/: serious color-contrast (6)\",\u001b[39m\n\u001b[31m+   \"/: serious frame-title (1)\",\u001b[39m\n\u001b[31m+   \"/ai-transformation: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-transformation: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-accelerated-app-dev: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-accelerated-app-dev: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-legacy-modernization: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-legacy-modernization: serious color-contrast (10)\",\u001b[39m\n\u001b[31m+   \"/ai-native-staff-aug: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-native-staff-aug: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/recruiting: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/recruiting: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/subscription-ai: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/subscription-ai: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/case-studies: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/case-studies: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-onboarding: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-onboarding: serious color-contrast (10)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-quality-documentation: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-quality-documentation: serious color-contrast (9)\",\u001b[39m\n\u001b[31m+   \"/agentic-sdlc: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/agentic-sdlc: serious color-contrast (9)\",\u001b[39m\n\u001b[31m+   \"/team: serious aria-command-name (115)\",\u001b[39m\n\u001b[31m+   \"/team: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/team: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/culture: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/culture: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/culture: serious frame-title (1)\",\u001b[39m\n\u001b[31m+   \"/photos: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/photos: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/videos: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/videos: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/office: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/office: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/capital-region: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/capital-region: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/war-week: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/war-week: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/mugshots: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/mugshots: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/community-partnerships: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/community-partnerships: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/jg-atlas: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/jg-atlas: serious color-contrast (23)\",\u001b[39m\n\u001b[31m+   \"/jg-atlas: serious scrollable-region-focusable (1)\",\u001b[39m\n\u001b[31m+   \"/careers: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/careers: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/positions: serious aria-hidden-focus (1)\",\u001b[39m\n\u001b[31m+   \"/positions: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/positions: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/contact: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/contact: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+   \"/ai-security: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-security: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-security: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at /Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js:94:70",
+                        "location": {
+                          "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js",
+                          "column": 70,
+                          "line": 94
+                        },
+                        "snippet": "  92 |     }\n  93 |     await captureEvidence(page, testInfo);\n> 94 |     expect(blocking, 'serious or critical accessibility violations').toEqual([]);\n     |                                                                      ^\n  95 |   });\n  96 | });\n  97 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js",
+                            "column": 70,
+                            "line": 94
+                          },
+                          "message": "Error: serious or critical accessibility violations\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 64\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"/: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/: serious color-contrast (6)\",\u001b[39m\n\u001b[31m+   \"/: serious frame-title (1)\",\u001b[39m\n\u001b[31m+   \"/ai-transformation: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-transformation: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-accelerated-app-dev: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-accelerated-app-dev: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-legacy-modernization: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-legacy-modernization: serious color-contrast (10)\",\u001b[39m\n\u001b[31m+   \"/ai-native-staff-aug: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-native-staff-aug: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/recruiting: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/recruiting: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/subscription-ai: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/subscription-ai: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/case-studies: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/case-studies: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-onboarding: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-onboarding: serious color-contrast (10)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-quality-documentation: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-assisted-quality-documentation: serious color-contrast (9)\",\u001b[39m\n\u001b[31m+   \"/agentic-sdlc: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/agentic-sdlc: serious color-contrast (9)\",\u001b[39m\n\u001b[31m+   \"/team: serious aria-command-name (115)\",\u001b[39m\n\u001b[31m+   \"/team: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/team: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/culture: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/culture: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/culture: serious frame-title (1)\",\u001b[39m\n\u001b[31m+   \"/photos: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/photos: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/videos: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/videos: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/office: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/office: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/capital-region: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/capital-region: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/war-week: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/war-week: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/mugshots: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/mugshots: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/community-partnerships: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/community-partnerships: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/jg-atlas: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/jg-atlas: serious color-contrast (23)\",\u001b[39m\n\u001b[31m+   \"/jg-atlas: serious scrollable-region-focusable (1)\",\u001b[39m\n\u001b[31m+   \"/careers: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/careers: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/positions: serious aria-hidden-focus (1)\",\u001b[39m\n\u001b[31m+   \"/positions: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/positions: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/contact: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/contact: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/privacy-notice: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/security-compliance: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+   \"/ai-security: critical aria-required-children (1)\",\u001b[39m\n\u001b[31m+   \"/ai-security: serious color-contrast (5)\",\u001b[39m\n\u001b[31m+   \"/ai-security: serious link-in-text-block (1)\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  92 |     }\n  93 |     await captureEvidence(page, testInfo);\n> 94 |     expect(blocking, 'serious or critical accessibility violations').toEqual([]);\n     |                                                                      ^\n  95 |   });\n  96 | });\n  97 |\n    at /Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js:94:70"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "/: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/: serious color-contrast (6 nodes), first: [\".btn-primary.btn-arrow[href$=\\\"contact\\\"]\"]\n"
+                        },
+                        {
+                          "text": "/: serious frame-title (1 node), first: [\"#vidModalFrame\"]\n"
+                        },
+                        {
+                          "text": "/ai-transformation: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/ai-transformation: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/ai-accelerated-app-dev: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/ai-accelerated-app-dev: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/ai-legacy-modernization: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/ai-legacy-modernization: serious color-contrast (10 nodes), first: [\".lmc-chk[data-check=\\\"\\\"]:nth-child(1) > .lmc-chk__label\"]\n"
+                        },
+                        {
+                          "text": "/ai-native-staff-aug: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/ai-native-staff-aug: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/recruiting: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/recruiting: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/subscription-ai: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/subscription-ai: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/case-studies: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/case-studies: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/ai-assisted-onboarding: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/ai-assisted-onboarding: serious color-contrast (10 nodes), first: [\"#s-snapshot > .wrap > .section-tag\"]\n"
+                        },
+                        {
+                          "text": "/ai-assisted-quality-documentation: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/ai-assisted-quality-documentation: serious color-contrast (9 nodes), first: [\"#s-snapshot > .wrap > .section-tag\"]\n"
+                        },
+                        {
+                          "text": "/agentic-sdlc: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/agentic-sdlc: serious color-contrast (9 nodes), first: [\"#s-snapshot > .wrap > .section-tag\"]\n"
+                        },
+                        {
+                          "text": "/team: serious aria-command-name (115 nodes), first: [\"div[data-name=\\\"Darrin Jahnel\\\"]\"]\n"
+                        },
+                        {
+                          "text": "/team: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/team: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/culture: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/culture: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/culture: serious frame-title (1 node), first: [\"#vidModalFrame\"]\n"
+                        },
+                        {
+                          "text": "/photos: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/photos: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/videos: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/videos: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/office: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/office: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/capital-region: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/capital-region: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/war-week: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/war-week: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/mugshots: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/mugshots: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/community-partnerships: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/community-partnerships: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/jg-atlas: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/jg-atlas: serious color-contrast (23 nodes), first: [\"#s-problem > .wrap > .section-tag\"]\n"
+                        },
+                        {
+                          "text": "/jg-atlas: serious scrollable-region-focusable (1 node), first: [\".flow-inner\"]\n"
+                        },
+                        {
+                          "text": "/careers: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/careers: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/positions: serious aria-hidden-focus (1 node), first: [\"#apply-modal\"]\n"
+                        },
+                        {
+                          "text": "/positions: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/positions: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/contact: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/contact: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/privacy-notice: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/privacy-notice: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/privacy-notice: serious link-in-text-block (1 node), first: [\"a[href$=\\\"www.jahnelgroup.com\\\"]\"]\n"
+                        },
+                        {
+                          "text": "/security-compliance: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/security-compliance: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/security-compliance: serious link-in-text-block (1 node), first: [\"p:nth-child(54) > a[href$=\\\"contact\\\"]\"]\n"
+                        },
+                        {
+                          "text": "/ai-security: critical aria-required-children (1 node), first: [\".dropdown\"]\n"
+                        },
+                        {
+                          "text": "/ai-security: serious color-contrast (5 nodes), first: [\".foot-copy > span:nth-child(1)\"]\n"
+                        },
+                        {
+                          "text": "/ai-security: serious link-in-text-block (1 node), first: [\"p:nth-child(76) > a\"]\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-06T13:44:15.690Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_A11Y_003",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js",
+                            "line": 60,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "issue",
+                          "description": "https://github.com/karimarie67/QA-jahnelgroup/issues/45",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js",
+                            "line": 60,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "axe /",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5idG4tcHJpbWFyeS5idG4tYXJyb3dbaHJlZiQ9XCJjb250YWN0XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9LAogIHsKICAgICJydWxlIjogImZyYW1lLXRpdGxlIiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvZnJhbWUtdGl0bGU/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIjdmlkTW9kYWxGcmFtZSIKICAgICAgXQogICAgXQogIH0KXQ=="
+                        },
+                        {
+                          "name": "axe /ai-transformation",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /ai-accelerated-app-dev",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /ai-legacy-modernization",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5sbWMtY2hrW2RhdGEtY2hlY2s9XCJcIl06bnRoLWNoaWxkKDEpID4gLmxtYy1jaGtfX2xhYmVsIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5sbWMtY2hrW2RhdGEtY2hlY2s9XCJcIl06bnRoLWNoaWxkKDIpID4gLmxtYy1jaGtfX2xhYmVsIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5sbWMtY2hrW2RhdGEtY2hlY2s9XCJcIl06bnRoLWNoaWxkKDMpID4gLmxtYy1jaGtfX2xhYmVsIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5sbWMtY2hrW2RhdGEtY2hlY2s9XCJcIl06bnRoLWNoaWxkKDQpID4gLmxtYy1jaGtfX2xhYmVsIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5sbWMtbWl4X19mb290IgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /ai-native-staff-aug",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /recruiting",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /subscription-ai",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /case-studies",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /ai-assisted-onboarding",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIiNzLXNuYXBzaG90ID4gLndyYXAgPiAuc2VjdGlvbi10YWciCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiI3MtYnVpbGQgPiAud3JhcCA+IC5zZWN0aW9uLXRhZyIKICAgICAgXSwKICAgICAgWwogICAgICAgICIjcy1vdXRjb21lcyA+IC53cmFwID4gLnNlY3Rpb24tdGFnIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5lc3Qtbm90ZSIKICAgICAgXSwKICAgICAgWwogICAgICAgICIjcy13b3JrZmxvdyA+IC53cmFwID4gLnNlY3Rpb24tdGFnIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /ai-assisted-quality-documentation",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIiNzLXNuYXBzaG90ID4gLndyYXAgPiAuc2VjdGlvbi10YWciCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiI3MtYnVpbGQgPiAud3JhcCA+IC5zZWN0aW9uLXRhZyIKICAgICAgXSwKICAgICAgWwogICAgICAgICIjcy1vdXRjb21lcyA+IC53cmFwID4gLnNlY3Rpb24tdGFnIgogICAgICBdLAogICAgICBbCiAgICAgICAgIiNzLXN0YWNrID4gLndyYXAgPiAuc2VjdGlvbi10YWciCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiLmZvb3QtY29weSA+IHNwYW46bnRoLWNoaWxkKDEpIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJwcml2YWN5LW5vdGljZVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwic2VjdXJpdHktY29tcGxpYW5jZVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwiYWktc2VjdXJpdHlcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiLmZvb3QtbWFkZSIKICAgICAgXQogICAgXQogIH0KXQ=="
+                        },
+                        {
+                          "name": "axe /agentic-sdlc",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIiNzLXNuYXBzaG90ID4gLndyYXAgPiAuc2VjdGlvbi10YWciCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiI3Mtc3lzdGVtID4gLndyYXAgPiAuc2VjdGlvbi10YWciCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiI3Mtb3V0Y29tZXMgPiAud3JhcCA+IC5zZWN0aW9uLXRhZyIKICAgICAgXSwKICAgICAgWwogICAgICAgICIjcy1zdGFjayA+IC53cmFwID4gLnNlY3Rpb24tdGFnIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /team",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtY29tbWFuZC1uYW1lIiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1jb21tYW5kLW5hbWU/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiRGFycmluIEphaG5lbFwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiSmFzb24gSmFobmVsXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJKb24gS2VsbGVyXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJaYWNoIEhhcnRtYW5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlN0ZXZlbiBaZ2FsamljXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJMaW5kYSBNYXJ0aW5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkJyYW5kb24gQi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkpvcnkgSC5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIklhbiBCLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQW50aG9ueSBDLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS10aXRsZT1cIlRlYW0gUGhvdG9cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkRhbmkgTS5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkFsZXhhbmRlciBLLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiSmVzc2UgTC5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkVtaWx5IFMuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJFdmEgVC5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkNocmlzIE4uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJTdGV2ZW4gVi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkZlcm5hbmRvIFAuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJCcnlhbiBTLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiU2VyZ2lvIEwuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJTYW0gUy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkJydW5vIEcuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJBc2hsZXkgUy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlRvbnkgTS5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkdyZWcgVy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkFuZHJldyBILlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS10aXRsZT1cIlRlYW0gYXQgSkdIUVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiRmVybmFuZGEgRy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkZyZWQgRC5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkpvc2h1YSBKLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQ2FtZXJvbiBMLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiUGF1bCBNLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiRG9tIEYuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJBdXN0aW4gTS5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlJlY2FyZG8gQy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlBhdWwgQy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlNlYW4gTS5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkJydW5vIEEuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJSeWFuIFMuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJCZW4gUy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkhlY3RvciBHLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQXdhZCBLLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiTmljayBCLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiTHVrZSBQLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiU3VtbWVyIFF1YXJ0ZXJseSBDb25uZWN0aW9uc1wiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiV2FzaGluZ3RvbiBNLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiRGFuIEIuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJEYW4gRC5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkV0aGFuIFMuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJEYW4gSy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIk1pY2hhZWwgUC5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkpvc2h1YSBDLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiTWF0dCBCLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQ2hyeXN0aWFuIFIuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJKYW5lbGxlIE8uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJGZXJuYW5kbyBHLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS10aXRsZT1cIkF3YXJkIENlcmVtb255XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJLYXJpIFMuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJBdXN0aW4gRy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlN5ZG5leSBNLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiTmljayBDLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQ2hyaXMgUC5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkFsZWtzYW5kciBNLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiUGF1bG8gUC5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkFkYW0gVy1ILlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiSm9lIEMuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJSZWJlY2NhIEMuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJUb21teSBLLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQ2hlbHNlYSBNLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiTHVjYXMgVi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIk5pY2sgTi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkJpY2ggRC5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlRvbSBPLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS10aXRsZT1cIkJsYWNrIFR1ZXNkYXlcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkpldGhybyBCLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiTmljb2xlIFIuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJKb3NlIEEuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJNaWxsaWUgRS5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIk1hdHRoZXcgVy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIk1hcmNlbG8gUy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkphbWVzIE4uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJDb2xpbiBXLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiSm9obiBILlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiTWljaGFlbCBTLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiTWF0dCBBLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiU2FtIEMuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJBbGV4IE4uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJMYXVyYSBKLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiWWdvciBBLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQXNodmluIEcuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJUaGFsbGVzIFMuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJDYXNleSBTLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiU2VhbiBXLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQWxleGFuZHJlIE4uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJKZWFuIFIuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJNYXJjIE0uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJGcmFuayBOLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQWJieSBSLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiSm/Do28gQS5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkFubi1NYXJpZSBELlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiSmVubiBKLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiQnJhbmRvbiBULlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiTW9ybsOpIEIuXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJTYW5kZXIgTi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIlZpbmljaXVzIE0uXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJQZXRlciBILlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiR3VzdGF2byBCLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiU3RldmUgTi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkFsb24gSy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkphcnJldHQgQi5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkNhbGViIEouXCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgImRpdltkYXRhLW5hbWU9XCJCZW5qYW1pbiBGLlwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJkaXZbZGF0YS1uYW1lPVwiS29zYWwgUy5cIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiZGl2W2RhdGEtbmFtZT1cIkpvaG4gUC5cIl0iCiAgICAgIF0KICAgIF0KICB9LAogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /culture",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9LAogIHsKICAgICJydWxlIjogImZyYW1lLXRpdGxlIiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvZnJhbWUtdGl0bGU/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIjdmlkTW9kYWxGcmFtZSIKICAgICAgXQogICAgXQogIH0KXQ=="
+                        },
+                        {
+                          "name": "axe /photos",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /videos",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /office",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /capital-region",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /war-week",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /mugshots",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /community-partnerships",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /jg-atlas",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIiNzLXByb2JsZW0gPiAud3JhcCA+IC5zZWN0aW9uLXRhZyIKICAgICAgXSwKICAgICAgWwogICAgICAgICIjcy1icmFpbiA+IC53cmFwID4gLnNlY3Rpb24tdGFnIgogICAgICBdLAogICAgICBbCiAgICAgICAgIiNzLXBpcGVsaW5lID4gLndyYXAgPiAuc2VjdGlvbi10YWciCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiLnBoYXNlLXJvdzpudGgtY2hpbGQoMykgPiAucGhhc2UtY2FyZCA+IC5zdGVwIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5waGFzZS1yb3c6bnRoLWNoaWxkKDMpID4gLnBoYXNlLWNhcmQgPiAuc2lkZSA+IC5wbHVnaW4iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiLnBoYXNlLXJvdzpudGgtY2hpbGQoNCkgPiAucGhhc2UtY2FyZCA+IC5zdGVwIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5waGFzZS1yb3c6bnRoLWNoaWxkKDQpID4gLnBoYXNlLWNhcmQgPiAuc2lkZSA+IC5wbHVnaW4iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiLnBoYXNlLXJvdzpudGgtY2hpbGQoNSkgPiAucGhhc2UtY2FyZCA+IC5zdGVwIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5waGFzZS1yb3c6bnRoLWNoaWxkKDUpID4gLnBoYXNlLWNhcmQgPiAuc2lkZSA+IC5wbHVnaW4iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiLnBoYXNlLXJvdzpudGgtY2hpbGQoNikgPiAucGhhc2UtY2FyZCA+IC5zdGVwIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5waGFzZS1yb3c6bnRoLWNoaWxkKDYpID4gLnBoYXNlLWNhcmQgPiAuc2lkZSA+IC5wbHVnaW4iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiLnBoYXNlLXJvdzpudGgtY2hpbGQoNykgPiAucGhhc2UtY2FyZCA+IC5zdGVwIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5waGFzZS1yb3c6bnRoLWNoaWxkKDcpID4gLnBoYXNlLWNhcmQgPiAuc2lkZSA+IC5wbHVnaW4iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiLnBoYXNlLXJvdzpudGgtY2hpbGQoOCkgPiAucGhhc2UtY2FyZCA+IC5zdGVwIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5wbGFubmVkIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5waGFzZS1yb3c6bnRoLWNoaWxkKDgpID4gLnBoYXNlLWNhcmQgPiAuc2lkZSA+IC5wbHVnaW4iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiI3MtZm91bmRhdGlvbiA+IC53cmFwID4gLnNlY3Rpb24tdGFnIgogICAgICBdLAogICAgICBbCiAgICAgICAgIiNzLXBsYXRmb3JtID4gLndyYXAgPiAuc2VjdGlvbi10YWciCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiLmZvb3QtY29weSA+IHNwYW46bnRoLWNoaWxkKDEpIgogICAgICBdLAogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJwcml2YWN5LW5vdGljZVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwic2VjdXJpdHktY29tcGxpYW5jZVwiXSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwiYWktc2VjdXJpdHlcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiLmZvb3QtbWFkZSIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAic2Nyb2xsYWJsZS1yZWdpb24tZm9jdXNhYmxlIiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvc2Nyb2xsYWJsZS1yZWdpb24tZm9jdXNhYmxlP2FwcGxpY2F0aW9uPXBsYXl3cmlnaHQiLAogICAgInRhcmdldHMiOiBbCiAgICAgIFsKICAgICAgICAiLmZsb3ctaW5uZXIiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /careers",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /positions",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtaGlkZGVuLWZvY3VzIiwKICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1oaWRkZW4tZm9jdXM/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAidGFyZ2V0cyI6IFsKICAgICAgWwogICAgICAgICIjYXBwbHktbW9kYWwiCiAgICAgIF0KICAgIF0KICB9LAogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /contact",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "axe /privacy-notice",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9LAogIHsKICAgICJydWxlIjogImxpbmstaW4tdGV4dC1ibG9jayIsCiAgICAiaW1wYWN0IjogInNlcmlvdXMiLAogICAgImhlbHAiOiAiaHR0cHM6Ly9kZXF1ZXVuaXZlcnNpdHkuY29tL3J1bGVzL2F4ZS80LjEzL2xpbmstaW4tdGV4dC1ibG9jaz9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgImFbaHJlZiQ9XCJ3d3cuamFobmVsZ3JvdXAuY29tXCJdIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /security-compliance",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9LAogIHsKICAgICJydWxlIjogImxpbmstaW4tdGV4dC1ibG9jayIsCiAgICAiaW1wYWN0IjogInNlcmlvdXMiLAogICAgImhlbHAiOiAiaHR0cHM6Ly9kZXF1ZXVuaXZlcnNpdHkuY29tL3J1bGVzL2F4ZS80LjEzL2xpbmstaW4tdGV4dC1ibG9jaz9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgInA6bnRoLWNoaWxkKDU0KSA+IGFbaHJlZiQ9XCJjb250YWN0XCJdIgogICAgICBdCiAgICBdCiAgfQpd"
+                        },
+                        {
+                          "name": "axe /ai-security",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJydWxlIjogImFyaWEtcmVxdWlyZWQtY2hpbGRyZW4iLAogICAgImltcGFjdCI6ICJjcml0aWNhbCIsCiAgICAiaGVscCI6ICJodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vcnVsZXMvYXhlLzQuMTMvYXJpYS1yZXF1aXJlZC1jaGlsZHJlbj9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5kcm9wZG93biIKICAgICAgXQogICAgXQogIH0sCiAgewogICAgInJ1bGUiOiAiY29sb3ItY29udHJhc3QiLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJoZWxwIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xMy9jb2xvci1jb250cmFzdD9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgIi5mb290LWNvcHkgPiBzcGFuOm50aC1jaGlsZCgxKSIKICAgICAgXSwKICAgICAgWwogICAgICAgICJhW2hyZWYkPVwicHJpdmFjeS1ub3RpY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cInNlY3VyaXR5LWNvbXBsaWFuY2VcIl0iCiAgICAgIF0sCiAgICAgIFsKICAgICAgICAiYVtocmVmJD1cImFpLXNlY3VyaXR5XCJdIgogICAgICBdLAogICAgICBbCiAgICAgICAgIi5mb290LW1hZGUiCiAgICAgIF0KICAgIF0KICB9LAogIHsKICAgICJydWxlIjogImxpbmstaW4tdGV4dC1ibG9jayIsCiAgICAiaW1wYWN0IjogInNlcmlvdXMiLAogICAgImhlbHAiOiAiaHR0cHM6Ly9kZXF1ZXVuaXZlcnNpdHkuY29tL3J1bGVzL2F4ZS80LjEzL2xpbmstaW4tdGV4dC1ibG9jaz9hcHBsaWNhdGlvbj1wbGF5d3JpZ2h0IiwKICAgICJ0YXJnZXRzIjogWwogICAgICBbCiAgICAgICAgInA6bnRoLWNoaWxkKDc2KSA+IGEiCiAgICAgIF0KICAgIF0KICB9Cl0="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output/accessibility_tests-Access-cf8b0-cal-accessibility-violation-production-mobile/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/playwright-output/accessibility_tests-Access-cf8b0-cal-accessibility-violation-production-mobile/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js",
+                        "column": 70,
+                        "line": 94
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "627ac7c2a532768c0306-ab6b0068719e71460502",
+              "file": "accessibility_tests.spec.js",
+              "line": 60,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "forms_tests.spec.js",
+      "file": "forms_tests.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Forms Tests",
+          "file": "forms_tests.spec.js",
+          "line": 15,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_FORM_001 Every form field has its label, type, and required state",
+              "ok": true,
+              "tags": [
+                "regression",
+                "forms"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_FORM_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/forms_tests.spec.js",
+                        "line": 17,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "issue",
+                      "description": "https://github.com/karimarie67/QA-jahnelgroup/issues/46",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/forms_tests.spec.js",
+                        "line": 17,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production",
+                  "projectName": "production",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11847,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Third-party request (not failed): POST https://px.ads.linkedin.com/wa/?medium=fetch&fmt=g\n"
+                        },
+                        {
+                          "text": "Third-party request (not failed): POST https://bzr.openai.com/v1/sdk/events?pid=3FyEBkYTNGNoXGi7dLwKVv&st=oaiq-web&sv=0.1.41&t=1791294237075&ec=2\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-06T13:43:55.349Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_FORM_001",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/forms_tests.spec.js",
+                            "line": 17,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "issue",
+                          "description": "https://github.com/karimarie67/QA-jahnelgroup/issues/46",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/forms_tests.spec.js",
+                            "line": 17,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7210258585fd2f2b0ef5-dcf0927687559d27b63a",
+              "file": "forms_tests.spec.js",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "TC_FORM_001 Every form field has its label, type, and required state",
+              "ok": true,
+              "tags": [
+                "regression",
+                "forms"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_FORM_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/forms_tests.spec.js",
+                        "line": 17,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "issue",
+                      "description": "https://github.com/karimarie67/QA-jahnelgroup/issues/46",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/forms_tests.spec.js",
+                        "line": 17,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production-mobile",
+                  "projectName": "production-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12226,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Third-party request (not failed): POST https://px.ads.linkedin.com/wa/?medium=fetch&fmt=g\n"
+                        },
+                        {
+                          "text": "Third-party request (not failed): POST https://bzr.openai.com/v1/sdk/events?pid=3FyEBkYTNGNoXGi7dLwKVv&st=oaiq-web&sv=0.1.41&t=1791294285993&ec=2\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-06T13:44:44.165Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_FORM_001",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/forms_tests.spec.js",
+                            "line": 17,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "issue",
+                          "description": "https://github.com/karimarie67/QA-jahnelgroup/issues/46",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/forms_tests.spec.js",
+                            "line": 17,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7210258585fd2f2b0ef5-36886b168eb6ef913e8b",
+              "file": "forms_tests.spec.js",
+              "line": 17,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "performance_tests.spec.js",
+      "file": "performance_tests.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Performance Tests",
+          "file": "performance_tests.spec.js",
+          "line": 46,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_PERF_001 Every page loads within its performance budgets",
+              "ok": true,
+              "tags": [
+                "regression",
+                "perf"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_PERF_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                        "line": 49,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "issue",
+                      "description": "https://github.com/karimarie67/QA-jahnelgroup/issues/47",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                        "line": 49,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production",
+                  "projectName": "production",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7862,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "/: LCP 556 ms, CLS 0.000, TTFB 152 ms, load 1508 ms\n/contact: LCP 1028 ms, CLS 0.000, TTFB 112 ms, load 371 ms\n/careers: LCP 196 ms, CLS 0.000, TTFB 79 ms, load 374 ms\n/positions: LCP 180 ms, CLS 0.002, TTFB 78 ms, load 174 ms\n/case-studies: LCP 176 ms, CLS 0.000, TTFB 81 ms, load 237 ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-06T13:44:07.373Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_PERF_001",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                            "line": 49,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "issue",
+                          "description": "https://github.com/karimarie67/QA-jahnelgroup/issues/47",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                            "line": 49,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "web-vitals.json",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJwYXRoIjogIi8iLAogICAgImxjcCI6IDU1NiwKICAgICJjbHMiOiAwLjAwMDQxMjMzOTg5OTI3NTAzOCwKICAgICJ0dGZiIjogMTUxLjY5OTk5OTk4ODA3OTA3LAogICAgImxvYWQiOiAxNTA4LjMwMDAwMDAxMTkyMQogIH0sCiAgewogICAgInBhdGgiOiAiL2NvbnRhY3QiLAogICAgImxjcCI6IDEwMjgsCiAgICAiY2xzIjogMCwKICAgICJ0dGZiIjogMTExLjkwMDAwMDAwNTk2MDQ2LAogICAgImxvYWQiOiAzNzAuNjAwMDAwMDIzODQxODYKICB9LAogIHsKICAgICJwYXRoIjogIi9jYXJlZXJzIiwKICAgICJsY3AiOiAxOTYsCiAgICAiY2xzIjogMCwKICAgICJ0dGZiIjogNzguNzk5OTk5OTgyMTE4NiwKICAgICJsb2FkIjogMzczLjUKICB9LAogIHsKICAgICJwYXRoIjogIi9wb3NpdGlvbnMiLAogICAgImxjcCI6IDE4MCwKICAgICJjbHMiOiAwLjAwMTk0NzIwMzM3MTI1OTkwMTMsCiAgICAidHRmYiI6IDc3LjU5OTk5OTk5NDAzOTU0LAogICAgImxvYWQiOiAxNzQuNDAwMDAwMDA1OTYwNDYKICB9LAogIHsKICAgICJwYXRoIjogIi9jYXNlLXN0dWRpZXMiLAogICAgImxjcCI6IDE3NiwKICAgICJjbHMiOiAwLAogICAgInR0ZmIiOiA4MC44MDAwMDAwMTE5MjA5MywKICAgICJsb2FkIjogMjM3CiAgfQpd"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "db5b0d4268a782a438b9-1f6eb32520440a4a930a",
+              "file": "performance_tests.spec.js",
+              "line": 49,
+              "column": 3
+            },
+            {
+              "title": "TC_PERF_001 Every page loads within its performance budgets",
+              "ok": true,
+              "tags": [
+                "regression",
+                "perf"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_PERF_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                        "line": 49,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "issue",
+                      "description": "https://github.com/karimarie67/QA-jahnelgroup/issues/47",
+                      "location": {
+                        "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                        "line": 49,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production-mobile",
+                  "projectName": "production-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7890,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "/: LCP 656 ms, CLS 0.000, TTFB 224 ms, load 1340 ms\n/contact: LCP 864 ms, CLS 0.000, TTFB 75 ms, load 268 ms\n/careers: LCP 240 ms, CLS 0.000, TTFB 129 ms, load 362 ms\n/positions: LCP 192 ms, CLS 0.008, TTFB 73 ms, load 192 ms\n/case-studies: LCP 264 ms, CLS 0.000, TTFB 83 ms, load 403 ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-06T13:44:56.549Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_PERF_001",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                            "line": 49,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "issue",
+                          "description": "https://github.com/karimarie67/QA-jahnelgroup/issues/47",
+                          "location": {
+                            "file": "/Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js",
+                            "line": 49,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "web-vitals.json",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJwYXRoIjogIi8iLAogICAgImxjcCI6IDY1NiwKICAgICJjbHMiOiAwLAogICAgInR0ZmIiOiAyMjMuNTk5OTk5OTk0MDM5NTQsCiAgICAibG9hZCI6IDEzMzkuNzk5OTk5OTgyMTE4NgogIH0sCiAgewogICAgInBhdGgiOiAiL2NvbnRhY3QiLAogICAgImxjcCI6IDg2NCwKICAgICJjbHMiOiAwLAogICAgInR0ZmIiOiA3NC42OTk5OTk5ODgwNzkwNywKICAgICJsb2FkIjogMjY4LjI5OTk5OTk4MjExODYKICB9LAogIHsKICAgICJwYXRoIjogIi9jYXJlZXJzIiwKICAgICJsY3AiOiAyNDAsCiAgICAiY2xzIjogMCwKICAgICJ0dGZiIjogMTI4LjgwMDAwMDAxMTkyMDkzLAogICAgImxvYWQiOiAzNjIuMzAwMDAwMDExOTIwOTMKICB9LAogIHsKICAgICJwYXRoIjogIi9wb3NpdGlvbnMiLAogICAgImxjcCI6IDE5MiwKICAgICJjbHMiOiAwLjAwODE4Mzc2OTE2OTIyNTc3NiwKICAgICJ0dGZiIjogNzMuNDAwMDAwMDA1OTYwNDYsCiAgICAibG9hZCI6IDE5MS42OTk5OTk5ODgwNzkwNwogIH0sCiAgewogICAgInBhdGgiOiAiL2Nhc2Utc3R1ZGllcyIsCiAgICAibGNwIjogMjY0LAogICAgImNscyI6IDAsCiAgICAidHRmYiI6IDgyLjkwMDAwMDAwNTk2MDQ2LAogICAgImxvYWQiOiA0MDMuMjAwMDAwMDE3ODgxNAogIH0KXQ=="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "db5b0d4268a782a438b9-089648f04039cabb708a",
+              "file": "performance_tests.spec.js",
+              "line": 49,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-06T13:43:27.616Z",
+    "duration": 96866.52799999999,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

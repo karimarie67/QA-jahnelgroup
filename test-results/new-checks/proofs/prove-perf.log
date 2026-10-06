@@ -1,0 +1,33 @@
+
+Running 1 test using 1 worker
+
+/: LCP 736 ms, CLS 0.000, TTFB 190 ms, load 1427 ms
+  ✘  1 [production] › tests/performance_tests.spec.js:49:3 › Performance Tests › TC_PERF_001 Every page loads within its performance budgets @regression @perf (2.7s)
+
+
+  1) [production] › tests/performance_tests.spec.js:49:3 › Performance Tests › TC_PERF_001 Every page loads within its performance budgets @regression @perf 
+
+    Error: /: LCP 736 ms, budget 1 ms
+
+    expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 1
+    Received:    736
+
+      60 |       for (const [budgetKey, metric, label, show] of BUDGETS) {
+      61 |         if (budgets[budgetKey] === undefined) continue;
+    > 62 |         expect.soft(m[metric], `${path}: ${label} ${show(m[metric])}, budget ${show(budgets[budgetKey])}`).toBeLessThanOrEqual(budgets[budgetKey]);
+         |                                                                                                            ^
+      63 |       }
+      64 |     }
+      65 |     // The measurements, for the report and the evidence.
+        at /Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/performance_tests.spec.js:62:108
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    playwright-output/performance_tests-Performa-40113-hin-its-performance-budgets-production/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: playwright-output/performance_tests-Performa-40113-hin-its-performance-budgets-production/error-context.md
+
+  1 failed
+    [production] › tests/performance_tests.spec.js:49:3 › Performance Tests › TC_PERF_001 Every page loads within its performance budgets @regression @perf 

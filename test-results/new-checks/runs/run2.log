@@ -1,0 +1,277 @@
+
+Running 6 tests using 1 worker
+
+/: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/: serious frame-title (1 node), first: ["#vidModalFrame"]
+/ai-transformation: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/ai-accelerated-app-dev: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/ai-legacy-modernization: serious color-contrast (10 nodes), first: [".lmc-chk[data-check=\"\"]:nth-child(1) > .lmc-chk__label"]
+/ai-native-staff-aug: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/recruiting: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/subscription-ai: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/case-studies: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/ai-assisted-onboarding: serious color-contrast (10 nodes), first: ["#s-snapshot > .wrap > .section-tag"]
+/ai-assisted-quality-documentation: serious color-contrast (9 nodes), first: ["#s-snapshot > .wrap > .section-tag"]
+/agentic-sdlc: serious color-contrast (9 nodes), first: ["#s-snapshot > .wrap > .section-tag"]
+/team: serious aria-command-name (115 nodes), first: ["div[data-name=\"Darrin Jahnel\"]"]
+/team: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/culture: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/culture: serious frame-title (1 node), first: ["#vidModalFrame"]
+/photos: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/videos: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/office: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/capital-region: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/war-week: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/mugshots: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/community-partnerships: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/jg-atlas: serious color-contrast (23 nodes), first: ["#s-problem > .wrap > .section-tag"]
+/careers: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/positions: serious aria-hidden-focus (1 node), first: ["#apply-modal"]
+/positions: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/contact: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/privacy-notice: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/privacy-notice: serious link-in-text-block (1 node), first: ["a[href$=\"www.jahnelgroup.com\"]"]
+/security-compliance: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/security-compliance: serious link-in-text-block (1 node), first: ["p:nth-child(54) > a[href$=\"contact\"]"]
+/ai-security: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/ai-security: serious link-in-text-block (1 node), first: ["p:nth-child(76) > a"]
+  ✘  1 [production] › tests/accessibility_tests.spec.js:60:3 › Accessibility Tests (story #35) › TC_A11Y_003 No page has a serious or critical accessibility violation @regression @a11y (26.4s)
+Third-party request (not failed): POST https://px.ads.linkedin.com/wa/?medium=fetch&fmt=g
+Third-party request (not failed): POST https://bzr.openai.com/v1/sdk/events?pid=3FyEBkYTNGNoXGi7dLwKVv&st=oaiq-web&sv=0.1.41&t=1791294237075&ec=2
+  ✓  2 [production] › tests/forms_tests.spec.js:17:3 › Forms Tests › TC_FORM_001 Every form field has its label, type, and required state @regression @forms (11.8s)
+/: LCP 556 ms, CLS 0.000, TTFB 152 ms, load 1508 ms
+/contact: LCP 1028 ms, CLS 0.000, TTFB 112 ms, load 371 ms
+/careers: LCP 196 ms, CLS 0.000, TTFB 79 ms, load 374 ms
+/positions: LCP 180 ms, CLS 0.002, TTFB 78 ms, load 174 ms
+/case-studies: LCP 176 ms, CLS 0.000, TTFB 81 ms, load 237 ms
+  ✓  3 [production] › tests/performance_tests.spec.js:49:3 › Performance Tests › TC_PERF_001 Every page loads within its performance budgets @regression @perf (7.9s)
+/: critical aria-required-children (1 node), first: [".dropdown"]
+/: serious color-contrast (6 nodes), first: [".btn-primary.btn-arrow[href$=\"contact\"]"]
+/: serious frame-title (1 node), first: ["#vidModalFrame"]
+/ai-transformation: critical aria-required-children (1 node), first: [".dropdown"]
+/ai-transformation: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/ai-accelerated-app-dev: critical aria-required-children (1 node), first: [".dropdown"]
+/ai-accelerated-app-dev: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/ai-legacy-modernization: critical aria-required-children (1 node), first: [".dropdown"]
+/ai-legacy-modernization: serious color-contrast (10 nodes), first: [".lmc-chk[data-check=\"\"]:nth-child(1) > .lmc-chk__label"]
+/ai-native-staff-aug: critical aria-required-children (1 node), first: [".dropdown"]
+/ai-native-staff-aug: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/recruiting: critical aria-required-children (1 node), first: [".dropdown"]
+/recruiting: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/subscription-ai: critical aria-required-children (1 node), first: [".dropdown"]
+/subscription-ai: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/case-studies: critical aria-required-children (1 node), first: [".dropdown"]
+/case-studies: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/ai-assisted-onboarding: critical aria-required-children (1 node), first: [".dropdown"]
+/ai-assisted-onboarding: serious color-contrast (10 nodes), first: ["#s-snapshot > .wrap > .section-tag"]
+/ai-assisted-quality-documentation: critical aria-required-children (1 node), first: [".dropdown"]
+/ai-assisted-quality-documentation: serious color-contrast (9 nodes), first: ["#s-snapshot > .wrap > .section-tag"]
+/agentic-sdlc: critical aria-required-children (1 node), first: [".dropdown"]
+/agentic-sdlc: serious color-contrast (9 nodes), first: ["#s-snapshot > .wrap > .section-tag"]
+/team: serious aria-command-name (115 nodes), first: ["div[data-name=\"Darrin Jahnel\"]"]
+/team: critical aria-required-children (1 node), first: [".dropdown"]
+/team: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/culture: critical aria-required-children (1 node), first: [".dropdown"]
+/culture: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/culture: serious frame-title (1 node), first: ["#vidModalFrame"]
+/photos: critical aria-required-children (1 node), first: [".dropdown"]
+/photos: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/videos: critical aria-required-children (1 node), first: [".dropdown"]
+/videos: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/office: critical aria-required-children (1 node), first: [".dropdown"]
+/office: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/capital-region: critical aria-required-children (1 node), first: [".dropdown"]
+/capital-region: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/war-week: critical aria-required-children (1 node), first: [".dropdown"]
+/war-week: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/mugshots: critical aria-required-children (1 node), first: [".dropdown"]
+/mugshots: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/community-partnerships: critical aria-required-children (1 node), first: [".dropdown"]
+/community-partnerships: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/jg-atlas: critical aria-required-children (1 node), first: [".dropdown"]
+/jg-atlas: serious color-contrast (23 nodes), first: ["#s-problem > .wrap > .section-tag"]
+/jg-atlas: serious scrollable-region-focusable (1 node), first: [".flow-inner"]
+/careers: critical aria-required-children (1 node), first: [".dropdown"]
+/careers: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/positions: serious aria-hidden-focus (1 node), first: ["#apply-modal"]
+/positions: critical aria-required-children (1 node), first: [".dropdown"]
+/positions: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/contact: critical aria-required-children (1 node), first: [".dropdown"]
+/contact: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/privacy-notice: critical aria-required-children (1 node), first: [".dropdown"]
+/privacy-notice: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/privacy-notice: serious link-in-text-block (1 node), first: ["a[href$=\"www.jahnelgroup.com\"]"]
+/security-compliance: critical aria-required-children (1 node), first: [".dropdown"]
+/security-compliance: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/security-compliance: serious link-in-text-block (1 node), first: ["p:nth-child(54) > a[href$=\"contact\"]"]
+/ai-security: critical aria-required-children (1 node), first: [".dropdown"]
+/ai-security: serious color-contrast (5 nodes), first: [".foot-copy > span:nth-child(1)"]
+/ai-security: serious link-in-text-block (1 node), first: ["p:nth-child(76) > a"]
+  ✘  4 [production-mobile] › tests/accessibility_tests.spec.js:60:3 › Accessibility Tests (story #35) › TC_A11Y_003 No page has a serious or critical accessibility violation @regression @a11y (27.8s)
+Third-party request (not failed): POST https://px.ads.linkedin.com/wa/?medium=fetch&fmt=g
+Third-party request (not failed): POST https://bzr.openai.com/v1/sdk/events?pid=3FyEBkYTNGNoXGi7dLwKVv&st=oaiq-web&sv=0.1.41&t=1791294285993&ec=2
+  ✓  5 [production-mobile] › tests/forms_tests.spec.js:17:3 › Forms Tests › TC_FORM_001 Every form field has its label, type, and required state @regression @forms (12.2s)
+/: LCP 656 ms, CLS 0.000, TTFB 224 ms, load 1340 ms
+/contact: LCP 864 ms, CLS 0.000, TTFB 75 ms, load 268 ms
+/careers: LCP 240 ms, CLS 0.000, TTFB 129 ms, load 362 ms
+/positions: LCP 192 ms, CLS 0.008, TTFB 73 ms, load 192 ms
+/case-studies: LCP 264 ms, CLS 0.000, TTFB 83 ms, load 403 ms
+  ✓  6 [production-mobile] › tests/performance_tests.spec.js:49:3 › Performance Tests › TC_PERF_001 Every page loads within its performance budgets @regression @perf (7.9s)
+
+
+  1) [production] › tests/accessibility_tests.spec.js:60:3 › Accessibility Tests (story #35) › TC_A11Y_003 No page has a serious or critical accessibility violation @regression @a11y 
+
+    Error: serious or critical accessibility violations
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 36
+
+    - Array []
+    + Array [
+    +   "/: serious color-contrast (5)",
+    +   "/: serious frame-title (1)",
+    +   "/ai-transformation: serious color-contrast (5)",
+    +   "/ai-accelerated-app-dev: serious color-contrast (5)",
+    +   "/ai-legacy-modernization: serious color-contrast (10)",
+    +   "/ai-native-staff-aug: serious color-contrast (5)",
+    +   "/recruiting: serious color-contrast (5)",
+    +   "/subscription-ai: serious color-contrast (5)",
+    +   "/case-studies: serious color-contrast (5)",
+    +   "/ai-assisted-onboarding: serious color-contrast (10)",
+    +   "/ai-assisted-quality-documentation: serious color-contrast (9)",
+    +   "/agentic-sdlc: serious color-contrast (9)",
+    +   "/team: serious aria-command-name (115)",
+    +   "/team: serious color-contrast (5)",
+    +   "/culture: serious color-contrast (5)",
+    +   "/culture: serious frame-title (1)",
+    +   "/photos: serious color-contrast (5)",
+    +   "/videos: serious color-contrast (5)",
+    +   "/office: serious color-contrast (5)",
+    +   "/capital-region: serious color-contrast (5)",
+    +   "/war-week: serious color-contrast (5)",
+    +   "/mugshots: serious color-contrast (5)",
+    +   "/community-partnerships: serious color-contrast (5)",
+    +   "/jg-atlas: serious color-contrast (23)",
+    +   "/careers: serious color-contrast (5)",
+    +   "/positions: serious aria-hidden-focus (1)",
+    +   "/positions: serious color-contrast (5)",
+    +   "/contact: serious color-contrast (5)",
+    +   "/privacy-notice: serious color-contrast (5)",
+    +   "/privacy-notice: serious link-in-text-block (1)",
+    +   "/security-compliance: serious color-contrast (5)",
+    +   "/security-compliance: serious link-in-text-block (1)",
+    +   "/ai-security: serious color-contrast (5)",
+    +   "/ai-security: serious link-in-text-block (1)",
+    + ]
+
+      92 |     }
+      93 |     await captureEvidence(page, testInfo);
+    > 94 |     expect(blocking, 'serious or critical accessibility violations').toEqual([]);
+         |                                                                      ^
+      95 |   });
+      96 | });
+      97 |
+        at /Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js:94:70
+
+    attachment #28: screenshot (image/png) ─────────────────────────────────────────────────────────
+    playwright-output/accessibility_tests-Access-cf8b0-cal-accessibility-violation-production/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: playwright-output/accessibility_tests-Access-cf8b0-cal-accessibility-violation-production/error-context.md
+
+  2) [production-mobile] › tests/accessibility_tests.spec.js:60:3 › Accessibility Tests (story #35) › TC_A11Y_003 No page has a serious or critical accessibility violation @regression @a11y 
+
+    Error: serious or critical accessibility violations
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 64
+
+    - Array []
+    + Array [
+    +   "/: critical aria-required-children (1)",
+    +   "/: serious color-contrast (6)",
+    +   "/: serious frame-title (1)",
+    +   "/ai-transformation: critical aria-required-children (1)",
+    +   "/ai-transformation: serious color-contrast (5)",
+    +   "/ai-accelerated-app-dev: critical aria-required-children (1)",
+    +   "/ai-accelerated-app-dev: serious color-contrast (5)",
+    +   "/ai-legacy-modernization: critical aria-required-children (1)",
+    +   "/ai-legacy-modernization: serious color-contrast (10)",
+    +   "/ai-native-staff-aug: critical aria-required-children (1)",
+    +   "/ai-native-staff-aug: serious color-contrast (5)",
+    +   "/recruiting: critical aria-required-children (1)",
+    +   "/recruiting: serious color-contrast (5)",
+    +   "/subscription-ai: critical aria-required-children (1)",
+    +   "/subscription-ai: serious color-contrast (5)",
+    +   "/case-studies: critical aria-required-children (1)",
+    +   "/case-studies: serious color-contrast (5)",
+    +   "/ai-assisted-onboarding: critical aria-required-children (1)",
+    +   "/ai-assisted-onboarding: serious color-contrast (10)",
+    +   "/ai-assisted-quality-documentation: critical aria-required-children (1)",
+    +   "/ai-assisted-quality-documentation: serious color-contrast (9)",
+    +   "/agentic-sdlc: critical aria-required-children (1)",
+    +   "/agentic-sdlc: serious color-contrast (9)",
+    +   "/team: serious aria-command-name (115)",
+    +   "/team: critical aria-required-children (1)",
+    +   "/team: serious color-contrast (5)",
+    +   "/culture: critical aria-required-children (1)",
+    +   "/culture: serious color-contrast (5)",
+    +   "/culture: serious frame-title (1)",
+    +   "/photos: critical aria-required-children (1)",
+    +   "/photos: serious color-contrast (5)",
+    +   "/videos: critical aria-required-children (1)",
+    +   "/videos: serious color-contrast (5)",
+    +   "/office: critical aria-required-children (1)",
+    +   "/office: serious color-contrast (5)",
+    +   "/capital-region: critical aria-required-children (1)",
+    +   "/capital-region: serious color-contrast (5)",
+    +   "/war-week: critical aria-required-children (1)",
+    +   "/war-week: serious color-contrast (5)",
+    +   "/mugshots: critical aria-required-children (1)",
+    +   "/mugshots: serious color-contrast (5)",
+    +   "/community-partnerships: critical aria-required-children (1)",
+    +   "/community-partnerships: serious color-contrast (5)",
+    +   "/jg-atlas: critical aria-required-children (1)",
+    +   "/jg-atlas: serious color-contrast (23)",
+    +   "/jg-atlas: serious scrollable-region-focusable (1)",
+    +   "/careers: critical aria-required-children (1)",
+    +   "/careers: serious color-contrast (5)",
+    +   "/positions: serious aria-hidden-focus (1)",
+    +   "/positions: critical aria-required-children (1)",
+    +   "/positions: serious color-contrast (5)",
+    +   "/contact: critical aria-required-children (1)",
+    +   "/contact: serious color-contrast (5)",
+    +   "/privacy-notice: critical aria-required-children (1)",
+    +   "/privacy-notice: serious color-contrast (5)",
+    +   "/privacy-notice: serious link-in-text-block (1)",
+    +   "/security-compliance: critical aria-required-children (1)",
+    +   "/security-compliance: serious color-contrast (5)",
+    +   "/security-compliance: serious link-in-text-block (1)",
+    +   "/ai-security: critical aria-required-children (1)",
+    +   "/ai-security: serious color-contrast (5)",
+    +   "/ai-security: serious link-in-text-block (1)",
+    + ]
+
+      92 |     }
+      93 |     await captureEvidence(page, testInfo);
+    > 94 |     expect(blocking, 'serious or critical accessibility violations').toEqual([]);
+         |                                                                      ^
+      95 |   });
+      96 | });
+      97 |
+        at /Users/kskinner/QA-jahnelgroup/.claude/worktrees/new-checks/QA-jahnelgroup/tests/accessibility_tests.spec.js:94:70
+
+    attachment #28: screenshot (image/png) ─────────────────────────────────────────────────────────
+    playwright-output/accessibility_tests-Access-cf8b0-cal-accessibility-violation-production-mobile/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: playwright-output/accessibility_tests-Access-cf8b0-cal-accessibility-violation-production-mobile/error-context.md
+
+  2 failed
+    [production] › tests/accessibility_tests.spec.js:60:3 › Accessibility Tests (story #35) › TC_A11Y_003 No page has a serious or critical accessibility violation @regression @a11y 
+    [production-mobile] › tests/accessibility_tests.spec.js:60:3 › Accessibility Tests (story #35) › TC_A11Y_003 No page has a serious or critical accessibility violation @regression @a11y 
+  4 passed (1.6m)
