@@ -1,1 +1,1 @@
-{"text":"🚨 **QA Alert**","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"*7 Tests Failed* on `main`\n<https://github.com/karimarie67/QA-jahnelgroup/actions/runs/36434275702|View Dashboard>"}}]}
+{"text":"QA alert: 7 failed, 0 flaky on main","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"🚨 QA alert: *7 failed* on `main`\n<https://github.com/karimarie67/QA-jahnelgroup/actions/runs/37468323459|View the run>"}}]}
