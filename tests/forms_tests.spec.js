@@ -9,8 +9,8 @@ import { captureEvidence } from '../utils.js';
 // while it runs. Requests to other origins (analytics, consent beacons) are
 // the page's own traffic: logged, not failed.
 //
-// A site with no forms: remove this spec, and drop it from the
-// functional-tests CI job, `test:regression`, and scripts/test-skeleton.js.
+// A site with no forms: remove this spec (CI selects tests by tag), and drop
+// it from scripts/template-check.js's spec list.
 
 test.describe('Forms Tests', { tag: ['@regression', '@forms'] }, () => {
 

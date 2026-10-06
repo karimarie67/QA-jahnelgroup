@@ -8,7 +8,7 @@
 |---|---|---|---|---|---|
 | TC_A11Y_001 | — | [#36](https://github.com/karimarie67/QA-jahnelgroup/issues/36) | `@regression` `@a11y` | `accessibility_tests.spec.js` | Accessibility Tests (story #35) › TC_A11Y_001 Every page has a main and a header landmark |
 | TC_A11Y_002 | — | [#37](https://github.com/karimarie67/QA-jahnelgroup/issues/37) | `@regression` `@a11y` | `accessibility_tests.spec.js` | Accessibility Tests (story #35) › TC_A11Y_002 Phone menu button says whether the menu is open |
-| TC_A11Y_003 | — | [#45](https://github.com/karimarie67/QA-jahnelgroup/issues/45) | `@regression` `@a11y` | `accessibility_tests.spec.js` | Accessibility Tests (story #35) › TC_A11Y_003 No page has a serious or critical accessibility violation |
+| TC_A11Y_003 | — | [#45](https://github.com/karimarie67/QA-jahnelgroup/issues/45) | `@regression` `@a11y` | `accessibility_tests.spec.js` | Accessibility Tests (story #35) › axe scan › TC_A11Y_003 No page has a serious or critical accessibility violation |
 | TC_CAREERS_001 | — | [#33](https://github.com/karimarie67/QA-jahnelgroup/issues/33) | `@regression` `@content` | `content_tests.spec.js` | Content Tests (stories #24, #29, #32) › TC_CAREERS_001 Careers previews open roles and See All Positions opens Open Positions |
 | TC_CONSOLE_001 | — | [#39](https://github.com/karimarie67/QA-jahnelgroup/issues/39) | `@regression` `@errors` | `error_handling_tests.spec.js` | Error Handling Tests › TC_CONSOLE_001 No page runs the ads pixel in debug mode |
 | TC_CONTACT_001 | — | [#31](https://github.com/karimarie67/QA-jahnelgroup/issues/31) | `@regression` `@content` | `content_tests.spec.js` | Content Tests (stories #24, #29, #32) › TC_CONTACT_001 Contact page's phone and email are links |
@@ -19,7 +19,7 @@
 | TC_ERROR_005 | — | [#28](https://github.com/karimarie67/QA-jahnelgroup/issues/28) | `@regression` `@errors` | `error_handling_tests.spec.js` | Error Handling Tests › TC_ERROR_005 Outbound links lead somewhere |
 | TC_FORM_001 | — | [#46](https://github.com/karimarie67/QA-jahnelgroup/issues/46) | `@regression` `@forms` | `forms_tests.spec.js` | Forms Tests › TC_FORM_001 Every form field has its label, type, and required state |
 | TC_LINKS_001 | — | [#23](https://github.com/karimarie67/QA-jahnelgroup/issues/23) | `@links` | `check-links.spec.js` | Production Link Check › TC_LINKS_001 No link between the site's pages is broken |
-| TC_PERF_001 | — | [#47](https://github.com/karimarie67/QA-jahnelgroup/issues/47) | `@regression` `@perf` | `performance_tests.spec.js` | Performance Tests › TC_PERF_001 Every page loads within its performance budgets |
+| TC_PERF_001 | — | [#47](https://github.com/karimarie67/QA-jahnelgroup/issues/47) | `@regression` `@perf` | `performance_tests.spec.js` | Performance Tests › TC_PERF_001 The key pages load within their performance budgets |
 | TC_SMOKE_001 | — | [#16](https://github.com/karimarie67/QA-jahnelgroup/issues/16) | `@smoke` | `smoke_tests.spec.js` | Smoke Tests › TC_SMOKE_001 Home page loads with its title, logo, header menu, and main heading |
 | TC_SMOKE_002 | — | [#17](https://github.com/karimarie67/QA-jahnelgroup/issues/17) | `@smoke` | `smoke_tests.spec.js` | Smoke Tests › TC_SMOKE_002 Header menu reaches Case Studies, Team, Culture, Careers, and Contact |
 | TC_SMOKE_003 | — | [#18](https://github.com/karimarie67/QA-jahnelgroup/issues/18) | `@smoke` | `smoke_tests.spec.js` | Smoke Tests › TC_SMOKE_003 Services menu opens and reaches each service page |

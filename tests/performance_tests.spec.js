@@ -46,7 +46,7 @@ async function measure(page, settleMs) {
 test.describe('Performance Tests', { tag: ['@regression', '@perf'] }, () => {
   test.skip(perf === null, 'no performance budgets configured (siteConfig.perf is not set)');
 
-  test('TC_PERF_001 Every page loads within its performance budgets', {
+  test('TC_PERF_001 The key pages load within their performance budgets', {
     annotation: [{ type: 'test_case', description: 'TC_PERF_001' }, { type: 'issue', description: 'https://github.com/karimarie67/QA-jahnelgroup/issues/47' }],
   }, async ({ page, browserName }, testInfo) => {
     test.skip(browserName !== 'chromium', 'LCP and CLS are Chromium metrics');
@@ -57,6 +57,11 @@ test.describe('Performance Tests', { tag: ['@regression', '@perf'] }, () => {
       await page.goto(buildURL(testInfo, path), { waitUntil: 'load' });
       const m = await measure(page, perf.settleMs ?? 1000);
       results.push({ path, ...m });
+      // A metric that was never reported reads 0, which is within any budget:
+      // it must fail, not pass.
+      for (const metric of ['lcp', 'ttfb', 'load']) {
+        expect.soft(m[metric], `${path}: ${metric.toUpperCase()} was measured`).toBeGreaterThan(0);
+      }
       for (const [budgetKey, metric, label, show] of BUDGETS) {
         if (budgets[budgetKey] === undefined) continue;
         expect.soft(m[metric], `${path}: ${label} ${show(m[metric])}, budget ${show(budgets[budgetKey])}`).toBeLessThanOrEqual(budgets[budgetKey]);
