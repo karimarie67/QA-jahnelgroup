@@ -1,1 +1,1 @@
-{"text":"QA alert: 7 failed, 0 flaky on feat/new-checks","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"🚨 QA alert: *7 failed* on `feat/new-checks`\n<https://github.com/karimarie67/QA-jahnelgroup/actions/runs/37476055576|View the run>"}}]}
+{"text":"QA alert: 7 failed, 0 flaky on main","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"🚨 QA alert: *7 failed* on `main`\n<https://github.com/karimarie67/QA-jahnelgroup/actions/runs/37468323459|View the run>"}}]}
