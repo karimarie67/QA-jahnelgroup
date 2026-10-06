@@ -7,7 +7,7 @@ sources for test counts, spec lists, pass rates, and CI schedules.
 -->
 
 **Status:** Draft (not yet agreed with the client contact)
-**Last reviewed:** 2026-09-25
+**Last reviewed:** 2026-10-06 (performance moved into scope; see the log)
 
 ## What we test
 
@@ -49,6 +49,20 @@ sources for test counts, spec lists, pass rates, and CI schedules.
     Google Map, and the Matterport tour on Our HQ are present.
   - **Phone layout.** No page scrolls sideways at phone width, and the phone
     menu opens and closes.
+  - **Accessibility scan.** An axe-core scan of all 27 pages against WCAG 2.1
+    A and AA, on desktop and phone: no serious or critical violation
+    (`TC_A11Y_003`). Third-party frames (reCAPTCHA, the video players, the
+    map, the tour) are skipped. It isn't a full audit with assistive
+    technology.
+  - **The contact form's fields, read-only.** Their labels, the Email field's
+    type, and which are required, with a check that loading the form sends
+    nothing to the site (`TC_FORM_001`).
+  - **Performance of the key pages** (added 2026-10-06, agreed by the QA lead
+    standing in for the client): LCP, CLS, TTFB, and load time of the home,
+    Contact, Careers, Open Positions, and Case Studies pages, measured in
+    the browser during a normal page load, on desktop and phone, against the
+    budgets in Targets (`TC_PERF_001`). One page at a time, as every test
+    here.
 - **Out of scope:**
   - **Submitting any form.** That covers the contact form and the job
     application form in the Apply modal. The site is live with no staging
@@ -57,8 +71,9 @@ sources for test counts, spec lists, pass rates, and CI schedules.
   - **Third-party content.** Greenhouse, reCAPTCHA, the video players, maps,
     and the tracking scripts belong to their vendors. We check they're on the
     page, not how they behave inside.
-  - **Performance and load testing, and security testing.** A test run must
-    not look like an attack on a live site.
+  - **Load testing, and security testing.** A test run must not look like an
+    attack on a live site. (Measuring the key pages' load, one page at a
+    time, is in scope: see above.)
   - **Search and downloads.** The site has neither.
 - **Browsers and devices:** Chromium on desktop (`production`, 1280×720) and
   Chromium emulating a Pixel 5 phone (`production-mobile`), matching
@@ -123,6 +138,7 @@ this product, to agree with the client contact:
 | Full-suite pass rate | TBD (suggested 100%, apart from known defects) |
 | Open Critical bugs | TBD (suggested 0) |
 | Triage cadence | TBD |
+| Performance budgets (`TC_PERF_001`) | LCP ≤ 2.5 s, CLS ≤ 0.1, TTFB ≤ 0.8 s, load ≤ 4 s, on the five key pages (Google's "good" thresholds; 4 s load). Measured worst over three runs on 2026-10-06: LCP 1.1 s, CLS 0.008, TTFB 242 ms, load 1.5 s |
 
 ## People and access
 

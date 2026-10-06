@@ -1,0 +1,52 @@
+PR B verification for #42 (2026-10-06): TC_A11Y_003 (#45), TC_FORM_001 (#46), TC_PERF_001 (#47). Live site, one worker, retries 0.
+
+== Checks: lint; 408 unit tests; template-check (7 specs, tag check); coverage map lists the three with their issues.
+
+== Measuring (measure/): the three new tests once with loose budgets, then TC_PERF_001 twice more.
+- TC_FORM_001 timed out at 90 s: /contact never goes network-idle (reCAPTCHA, analytics). The wait is capped at 10 s (also karimarie67/QA-framework-template#50); after that, forms.json: passed on desktop and phone in about 12 s.
+- TC_A11Y_003: seven serious or critical rules, filed as #48-#54:
+  critical aria-required-children
+    desktop: 0 pages, 0 elements | phone: 27 pages, 27 elements
+  serious aria-command-name
+    desktop: 1 pages, 115 elements | phone: 1 pages, 115 elements
+  serious aria-hidden-focus
+    desktop: 1 pages, 1 elements | phone: 1 pages, 1 elements
+  serious color-contrast
+    desktop: 27 pages, 171 elements | phone: 27 pages, 172 elements
+  serious frame-title
+    desktop: 2 pages, 2 elements | phone: 2 pages, 2 elements
+  serious link-in-text-block
+    desktop: 3 pages, 3 elements | phone: 3 pages, 3 elements
+  serious scrollable-region-focusable
+    desktop: 0 pages, 0 elements | phone: 1 pages, 1 elements
+- TC_PERF_001, three runs:
+  production /                     LCP 744/616/564 ms | CLS 0.000/0.000/0.000 | TTFB 232/176/160 ms | load 1455/1331/1259 ms
+  production /careers              LCP 192/140/200 ms | CLS 0.000/0.000/0.000 | TTFB 76/50/79 ms | load 314/238/392 ms
+  production /case-studies         LCP 152/176/152 ms | CLS 0.000/0.000/0.000 | TTFB 53/88/47 ms | load 370/328/287 ms
+  production /contact              LCP 1096/1032/1060 ms | CLS 0.000/0.000/0.000 | TTFB 164/50/79 ms | load 458/420/388 ms
+  production /positions            LCP 204/248/124 ms | CLS 0.002/0.002/0.002 | TTFB 84/145/49 ms | load 190/244/135 ms
+  production-mobile /              LCP 756/584/612 ms | CLS 0.000/0.000/0.000 | TTFB 242/188/219 ms | load 1055/1451/1445 ms
+  production-mobile /careers       LCP 228/200/192 ms | CLS 0.000/0.000/0.000 | TTFB 80/79/77 ms | load 404/455/369 ms
+  production-mobile /case-studies  LCP 204/428/172 ms | CLS 0.000/0.000/0.000 | TTFB 78/81/87 ms | load 323/395/231 ms
+  production-mobile /contact       LCP 948/912/928 ms | CLS 0.000/0.000/0.000 | TTFB 133/76/78 ms | load 420/364/423 ms
+  production-mobile /positions     LCP 204/148/212 ms | CLS 0.008/0.008/0.008 | TTFB 75/77/106 ms | load 198/163/210 ms
+  worst of all runs: LCP 1096 ms, CLS 0.008, TTFB 242 ms, load 1455 ms
+  Budgets agreed (the QA lead, for the client): LCP 2.5 s, CLS 0.1, TTFB 0.8 s, load 4 s.
+
+== The final config, twice (runs/):
+  before: passed 4, failed 2, skipped 0, flaky 0
+  after:  passed 4, failed 2, skipped 0, flaky 0
+  6 of 6 tests agree on status and first error line
+  failing (after):
+    production | TC_A11Y_003: Error: serious or critical accessibility violations
+    production-mobile | TC_A11Y_003: Error: serious or critical accessibility violations
+  TC_PERF_001 worst of all runs: LCP 1028 ms, CLS 0.008, TTFB 279 ms, load 1508 ms
+
+== Proven able to fail (proofs/; a scratch Site config, desktop only, nothing committed):
+- TC_FORM_001 with a field labelled 'Nope': one visible field labelled "Nope", exit 1
+- TC_PERF_001 with perf.pages ['/'] and an LCP budget of 1 ms: /: LCP 736 ms, budget 1 ms, exit 1
+- TC_A11Y_003 fails today on real violations (#48-#54), so no injected fault was needed to show it can fail.
+
+== CI
+- PR #55's own run 37473463016: 42 results; TC_A11Y_003, TC_FORM_001 and TC_PERF_001 ran on staging and staging-mobile; the only failures are the seven known defects (TC_SMOKE_004, TC_CONSOLE_001, TC_A11Y_001 x2 each; TC_A11Y_002 on the phone) and TC_A11Y_003 x2 (#48-#54). Lint, Unit Tests, Template Structural Check: success.
+- regression dispatch 37476055576: Update QA Dashboard succeeded; its row (run 33: 26 tests, 18 passed, 7 failed) equals its functional artifact (the 20 earlier functional results + the 6 new); the dashboard is a real report. Its commit afa34cc is reverted in ec9f5e9 (net-zero diff).

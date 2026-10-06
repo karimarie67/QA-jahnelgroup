@@ -660,3 +660,34 @@ assertions, and issues.
 
 **Next:** part 2 adds the axe accessibility scan, the read-only forms check,
 and performance budgets (with a brief update: performance moves into scope).
+
+## Template update, part 2: three new checks (2026-10-06)
+
+**What:** three new tests from the template, each a new test case (plan #42;
+story #44):
+
+- **TC_A11Y_003** (#45): an axe-core scan of all 27 pages against WCAG 2.1 A
+  and AA, desktop and phone, skipping third-party frames. Fails on serious
+  and critical violations.
+- **TC_FORM_001** (#46): the contact form's labels, the Email field's type,
+  and the required fields, read-only, failing on any non-GET/HEAD request to
+  the site while the form loads.
+- **TC_PERF_001** (#47): Web Vitals of the five key pages against budgets.
+
+**Decisions (the QA lead, standing in for the client, 2026-10-06):**
+performance moves into the brief's scope; the budgets are Google's "good"
+thresholds (LCP 2.5 s, CLS 0.1, TTFB 0.8 s) and 4 s for the load, against a
+measured worst of LCP 1.1 s, CLS 0.008, TTFB 242 ms, load 1.5 s over three
+runs; the axe scan's violations are filed one finding per rule.
+
+**Findings** (all `needs-triage`, in Backlog; TC_A11Y_003 stays red until
+they're fixed, as the other known defects): #48 colour contrast on every page
+(Medium), #49 the phone menu dropdown's roles (Medium; axe: critical), #50 the
+/team cards have no accessible name (Medium), #51 the Apply modal takes focus
+while hidden (Low), #52 the video modal frame has no title (Low), #53 links
+told apart by colour only on the trust pages (Low), #54 a /jg-atlas scroll
+area isn't keyboard-reachable on the phone (Low).
+
+**A template fix found on the way:** the forms spec waited for the network to
+go idle, which /contact never does (reCAPTCHA and analytics traffic), so the
+test timed out without checking anything. The wait is now capped at 10 s.
