@@ -113,5 +113,21 @@
       "TC_CONSOLE_001 No page runs the ads pixel in debug mode"
     ],
     "runNumber": "31"
+  },
+  {
+    "date": "2026-10-06",
+    "time": "2026-10-06T14:24:39.594Z",
+    "total": 26,
+    "passed": 18,
+    "failed": 7,
+    "passRate": 72,
+    "duration": 1023.953,
+    "failedTestNames": [
+      "TC_A11Y_001 Every page has a main and a header landmark",
+      "TC_A11Y_003 No page has a serious or critical accessibility violation",
+      "TC_A11Y_002 Phone menu button says whether the menu is open",
+      "TC_CONSOLE_001 No page runs the ads pixel in debug mode"
+    ],
+    "runNumber": "33"
   }
 ]
