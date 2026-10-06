@@ -124,13 +124,44 @@ export const defaultSiteConfig = {
   notFoundText: null,
   // TC_ERROR_004's addresses.
   malformedPaths: ['/team/////', '/careers/../contact', '/contact?..', '/CONTACT'],
-  // Set in the new-checks PR (TC_FORM_001).
-  forms: [],
-  a11y: { exclude: [] },
+  // The contact form, by its exact labels (asterisks included), as
+  // TC_SMOKE_006 checks it too. TC_FORM_001 only reads it: it never types or
+  // submits, and fails on any non-GET/HEAD request to the site's own origin.
+  forms: [
+    {
+      path: '/contact',
+      selector: '#conForm',
+      fields: [
+        { label: 'Company', required: false },
+        { label: 'First Name', required: false },
+        { label: 'Last Name', required: false },
+        { label: 'Work Phone', required: false },
+        { label: 'Email*', type: 'email', required: true },
+        { label: 'Tell Us About Your Project*', required: true },
+      ],
+    },
+  ],
+  // Third-party frames the site doesn't control: reCAPTCHA, the video
+  // players, the map, and the virtual tour.
+  a11y: {
+    exclude: [
+      'iframe[src*="recaptcha"]',
+      'iframe[src*="youtube-nocookie.com"]',
+      'iframe[src*="vimeo.com"]',
+      'iframe[src*="maps.google.com"]',
+      'iframe[src*="mpembed.com"]',
+    ],
+  },
   // The site has no logins (the brief), no API to test, and no visual checks.
   auth: null,
   api: null,
-  perf: null,
+  // The five key pages' Web Vitals (TC_PERF_001), against the brief's
+  // budgets: Google's "good" thresholds, and 4 s for the load. Measured worst
+  // over three runs on 2026-10-06: LCP 1.1 s, CLS 0.008, TTFB 242 ms, load 1.5 s.
+  perf: {
+    pages: ['/', '/contact', '/careers', '/positions', '/case-studies'],
+    budgets: { lcpMs: 2500, cls: 0.1, ttfbMs: 800, loadMs: 4000 },
+  },
   visual: null,
   // The Engagement's own test data, which the template's shape has no slot for.
   jg: {

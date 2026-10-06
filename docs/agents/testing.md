@@ -21,7 +21,7 @@ rereading this guide.
 | template-check | `npm run test:template-check` | Structural check: the config imports, the specs are found, every spec CI names exists, and every test's tags fit the rules CI selects by | On every push/PR to main/develop, as part of the automatic gate | verified |
 | lint | `npm run lint` | ESLint over the JavaScript (outside `examples/`): recommended rules, and the Playwright plugin's for the specs; fails on any error or warning | On every push/PR to main/develop (`lint` job), and before a PR | verified |
 | smoke | `npm run test:smoke` | Tests tagged `@smoke` (TC_SMOKE_001–008), desktop and phone, against the live site | On every push/PR to main/develop, and on a manual run | inferred |
-| regression | `npm run test:regression` | Tests tagged `@regression`: error handling, content, and accessibility, desktop and phone, against the live site | On every push/PR to main/develop, and on a manual run | inferred |
+| regression | `npm run test:regression` | Tests tagged `@regression`: error handling, content, accessibility (with the axe scan), the contact form (read-only), and performance budgets, desktop and phone, against the live site | On every push/PR to main/develop, and on a manual run | inferred |
 | links | `npm run test:links` | The link checker (`@links`), on its own project | On demand only: a manual run with `links` or `all` | inferred |
 
 `verified` means the command ran successfully here. `inferred` means configuration names it but setup did not execute it. `unavailable` is an explicit gap.

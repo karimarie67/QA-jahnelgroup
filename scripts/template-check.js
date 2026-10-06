@@ -40,6 +40,8 @@ const EXPECTED_SPECS = [
   'content_tests.spec.js',
   'accessibility_tests.spec.js',
   'check-links.spec.js',
+  'forms_tests.spec.js',
+  'performance_tests.spec.js',
 ];
 
 async function checkModuleImports() {

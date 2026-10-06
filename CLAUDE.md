@@ -32,7 +32,7 @@ repository keeps its own base SHA, branch, verification result, and pull request
 
 ### Structure
 
-- `tests/` — Playwright spec files for the site, each tagged (`smoke_tests.spec.js` `@smoke`; `error_handling_tests.spec.js`, `content_tests.spec.js`, and `accessibility_tests.spec.js` `@regression`; the on-demand `check-links.spec.js` link checker `@links`) plus `tests/unit/` unit tests. CI selects tests by tag; `template-check` enforces the tags
+- `tests/` — Playwright spec files for the site, each tagged (`smoke_tests.spec.js` `@smoke`; `error_handling_tests.spec.js`, `content_tests.spec.js`, `accessibility_tests.spec.js` (with the axe scan), the read-only `forms_tests.spec.js`, and `performance_tests.spec.js` `@regression`; the on-demand `check-links.spec.js` link checker `@links`) plus `tests/unit/` unit tests. CI selects tests by tag; `template-check` enforces the tags
 - `config-helper.js` (`siteConfig`, with this site's own data in `siteConfig.jg`), `selectors.js` (`selectors.jg.*`), `playwright.config.js` (`workers: 1`) — the Site config for https://www.jahnelgroup.com
 - `docs/` — Atlas agent docs, the Engagement brief (`engagement-brief.md`) and log (`engagement-log.md`), and remaining process documentation
 - `dashboards/` — QA metrics dashboard generator and published dashboard, auto-committed by CI after each run
