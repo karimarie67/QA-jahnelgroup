@@ -15,7 +15,7 @@ async function open(page, testInfo, key, testId) {
   await expect(jg.nav(page)).toBeAttached();
 }
 
-test.describe('Accessibility Tests (story #35)', () => {
+test.describe('Accessibility Tests (story #35)', { tag: ['@regression', '@a11y'] }, () => {
 
   test('TC_A11Y_001 Every page has a main and a header landmark', {
     annotation: [{ type: 'test_case', description: 'TC_A11Y_001' }, { type: 'issue', description: `${ISSUES}/36` }],

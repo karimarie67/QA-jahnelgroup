@@ -6,17 +6,17 @@
 
 | Test case | Client case | Issue | Tags | Spec | Test |
 |---|---|---|---|---|---|
-| TC_A11Y_001 | — | [#36](https://github.com/karimarie67/QA-jahnelgroup/issues/36) | — | `accessibility_tests.spec.js` | Accessibility Tests (story #35) › TC_A11Y_001 Every page has a main and a header landmark |
-| TC_A11Y_002 | — | [#37](https://github.com/karimarie67/QA-jahnelgroup/issues/37) | — | `accessibility_tests.spec.js` | Accessibility Tests (story #35) › TC_A11Y_002 Phone menu button says whether the menu is open |
-| TC_CAREERS_001 | — | [#33](https://github.com/karimarie67/QA-jahnelgroup/issues/33) | — | `content_tests.spec.js` | Content Tests (stories #24, #29, #32) › TC_CAREERS_001 Careers previews open roles and See All Positions opens Open Positions |
-| TC_CONSOLE_001 | — | [#39](https://github.com/karimarie67/QA-jahnelgroup/issues/39) | — | `error_handling_tests.spec.js` | Error Handling Tests › TC_CONSOLE_001 No page runs the ads pixel in debug mode |
-| TC_CONTACT_001 | — | [#31](https://github.com/karimarie67/QA-jahnelgroup/issues/31) | — | `content_tests.spec.js` | Content Tests (stories #24, #29, #32) › TC_CONTACT_001 Contact page's phone and email are links |
-| TC_CONTENT_001 | — | [#26](https://github.com/karimarie67/QA-jahnelgroup/issues/26) | — | `content_tests.spec.js` | Content Tests (stories #24, #29, #32) › TC_CONTENT_001 Case Studies page links to its three case studies |
-| TC_CONTENT_002 | — | [#27](https://github.com/karimarie67/QA-jahnelgroup/issues/27) | — | `content_tests.spec.js` | Content Tests (stories #24, #29, #32) › TC_CONTENT_002 Videos and Our HQ embed their videos, map, and tour, each with a title |
-| TC_ERROR_001 | — | [#21](https://github.com/karimarie67/QA-jahnelgroup/issues/21) | — | `error_handling_tests.spec.js` | Error Handling Tests › TC_ERROR_001 Unknown page shows the 404 page |
-| TC_ERROR_004 | — | [#22](https://github.com/karimarie67/QA-jahnelgroup/issues/22) | — | `error_handling_tests.spec.js` | Error Handling Tests › TC_ERROR_004 Malformed addresses never cause a server error |
-| TC_ERROR_005 | — | [#28](https://github.com/karimarie67/QA-jahnelgroup/issues/28) | — | `error_handling_tests.spec.js` | Error Handling Tests › TC_ERROR_005 Outbound links lead somewhere |
-| TC_LINKS_001 | — | [#23](https://github.com/karimarie67/QA-jahnelgroup/issues/23) | — | `check-links.spec.js` | Production Link Check › TC_LINKS_001 No link between the site's pages is broken |
+| TC_A11Y_001 | — | [#36](https://github.com/karimarie67/QA-jahnelgroup/issues/36) | `@regression` `@a11y` | `accessibility_tests.spec.js` | Accessibility Tests (story #35) › TC_A11Y_001 Every page has a main and a header landmark |
+| TC_A11Y_002 | — | [#37](https://github.com/karimarie67/QA-jahnelgroup/issues/37) | `@regression` `@a11y` | `accessibility_tests.spec.js` | Accessibility Tests (story #35) › TC_A11Y_002 Phone menu button says whether the menu is open |
+| TC_CAREERS_001 | — | [#33](https://github.com/karimarie67/QA-jahnelgroup/issues/33) | `@regression` `@content` | `content_tests.spec.js` | Content Tests (stories #24, #29, #32) › TC_CAREERS_001 Careers previews open roles and See All Positions opens Open Positions |
+| TC_CONSOLE_001 | — | [#39](https://github.com/karimarie67/QA-jahnelgroup/issues/39) | `@regression` `@errors` | `error_handling_tests.spec.js` | Error Handling Tests › TC_CONSOLE_001 No page runs the ads pixel in debug mode |
+| TC_CONTACT_001 | — | [#31](https://github.com/karimarie67/QA-jahnelgroup/issues/31) | `@regression` `@content` | `content_tests.spec.js` | Content Tests (stories #24, #29, #32) › TC_CONTACT_001 Contact page's phone and email are links |
+| TC_CONTENT_001 | — | [#26](https://github.com/karimarie67/QA-jahnelgroup/issues/26) | `@regression` `@content` | `content_tests.spec.js` | Content Tests (stories #24, #29, #32) › TC_CONTENT_001 Case Studies page links to its three case studies |
+| TC_CONTENT_002 | — | [#27](https://github.com/karimarie67/QA-jahnelgroup/issues/27) | `@regression` `@content` | `content_tests.spec.js` | Content Tests (stories #24, #29, #32) › TC_CONTENT_002 Videos and Our HQ embed their videos, map, and tour, each with a title |
+| TC_ERROR_001 | — | [#21](https://github.com/karimarie67/QA-jahnelgroup/issues/21) | `@regression` `@errors` | `error_handling_tests.spec.js` | Error Handling Tests › TC_ERROR_001 Unknown page shows the 404 page |
+| TC_ERROR_004 | — | [#22](https://github.com/karimarie67/QA-jahnelgroup/issues/22) | `@regression` `@errors` | `error_handling_tests.spec.js` | Error Handling Tests › TC_ERROR_004 Malformed addresses never cause a server error |
+| TC_ERROR_005 | — | [#28](https://github.com/karimarie67/QA-jahnelgroup/issues/28) | `@regression` `@errors` | `error_handling_tests.spec.js` | Error Handling Tests › TC_ERROR_005 Outbound links lead somewhere |
+| TC_LINKS_001 | — | [#23](https://github.com/karimarie67/QA-jahnelgroup/issues/23) | `@links` | `check-links.spec.js` | Production Link Check › TC_LINKS_001 No link between the site's pages is broken |
 | TC_SMOKE_001 | — | [#16](https://github.com/karimarie67/QA-jahnelgroup/issues/16) | `@smoke` | `smoke_tests.spec.js` | Smoke Tests › TC_SMOKE_001 Home page loads with its title, logo, header menu, and main heading |
 | TC_SMOKE_002 | — | [#17](https://github.com/karimarie67/QA-jahnelgroup/issues/17) | `@smoke` | `smoke_tests.spec.js` | Smoke Tests › TC_SMOKE_002 Header menu reaches Case Studies, Team, Culture, Careers, and Contact |
 | TC_SMOKE_003 | — | [#18](https://github.com/karimarie67/QA-jahnelgroup/issues/18) | `@smoke` | `smoke_tests.spec.js` | Smoke Tests › TC_SMOKE_003 Services menu opens and reaches each service page |

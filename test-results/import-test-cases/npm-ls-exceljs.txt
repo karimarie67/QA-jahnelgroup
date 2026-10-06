@@ -1,3 +1,0 @@
-qa-documentation@1.0.0 ~/QA-framework-template
-└── exceljs@4.4.0
-

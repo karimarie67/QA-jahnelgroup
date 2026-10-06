@@ -1,0 +1,725 @@
+{
+ "config": {
+  "projects": [
+   {
+    "name": "local"
+   },
+   {
+    "name": "staging"
+   },
+   {
+    "name": "production"
+   },
+   {
+    "name": "staging-mobile"
+   },
+   {
+    "name": "production-mobile"
+   },
+   {
+    "name": "staging-setup"
+   },
+   {
+    "name": "staging-auth"
+   },
+   {
+    "name": "staging-auth-mobile"
+   },
+   {
+    "name": "production-setup"
+   },
+   {
+    "name": "production-auth"
+   },
+   {
+    "name": "production-auth-mobile"
+   },
+   {
+    "name": "link-checker"
+   }
+  ]
+ },
+ "suites": [
+  {
+   "title": "accessibility_tests.spec.js",
+   "file": "accessibility_tests.spec.js",
+   "specs": [],
+   "suites": [
+    {
+     "title": "Accessibility Tests",
+     "file": "accessibility_tests.spec.js",
+     "specs": [
+      {
+       "title": "TC_A11Y_001 No page has a serious or critical accessibility violation",
+       "file": "accessibility_tests.spec.js",
+       "tags": [
+        "regression",
+        "a11y"
+       ],
+       "tests": [
+        {
+         "projectName": "local"
+        }
+       ]
+      },
+      {
+       "title": "TC_A11Y_001 No page has a serious or critical accessibility violation",
+       "file": "accessibility_tests.spec.js",
+       "tags": [
+        "regression",
+        "a11y"
+       ],
+       "tests": [
+        {
+         "projectName": "staging"
+        }
+       ]
+      },
+      {
+       "title": "TC_A11Y_001 No page has a serious or critical accessibility violation",
+       "file": "accessibility_tests.spec.js",
+       "tags": [
+        "regression",
+        "a11y"
+       ],
+       "tests": [
+        {
+         "projectName": "production"
+        }
+       ]
+      },
+      {
+       "title": "TC_A11Y_001 No page has a serious or critical accessibility violation",
+       "file": "accessibility_tests.spec.js",
+       "tags": [
+        "regression",
+        "a11y"
+       ],
+       "tests": [
+        {
+         "projectName": "staging-mobile"
+        }
+       ]
+      },
+      {
+       "title": "TC_A11Y_001 No page has a serious or critical accessibility violation",
+       "file": "accessibility_tests.spec.js",
+       "tags": [
+        "regression",
+        "a11y"
+       ],
+       "tests": [
+        {
+         "projectName": "production-mobile"
+        }
+       ]
+      }
+     ],
+     "suites": []
+    }
+   ]
+  },
+  {
+   "title": "error_handling_tests.spec.js",
+   "file": "error_handling_tests.spec.js",
+   "specs": [],
+   "suites": [
+    {
+     "title": "Error Handling Tests",
+     "file": "error_handling_tests.spec.js",
+     "specs": [
+      {
+       "title": "TC_ERROR_001 An unknown address shows a not-found page",
+       "file": "error_handling_tests.spec.js",
+       "tags": [
+        "regression",
+        "errors"
+       ],
+       "tests": [
+        {
+         "projectName": "local"
+        }
+       ]
+      },
+      {
+       "title": "TC_ERROR_002 A malformed address never causes a server error",
+       "file": "error_handling_tests.spec.js",
+       "tags": [
+        "regression",
+        "errors"
+       ],
+       "tests": [
+        {
+         "projectName": "local"
+        }
+       ]
+      },
+      {
+       "title": "TC_ERROR_001 An unknown address shows a not-found page",
+       "file": "error_handling_tests.spec.js",
+       "tags": [
+        "regression",
+        "errors"
+       ],
+       "tests": [
+        {
+         "projectName": "staging"
+        }
+       ]
+      },
+      {
+       "title": "TC_ERROR_002 A malformed address never causes a server error",
+       "file": "error_handling_tests.spec.js",
+       "tags": [
+        "regression",
+        "errors"
+       ],
+       "tests": [
+        {
+         "projectName": "staging"
+        }
+       ]
+      },
+      {
+       "title": "TC_ERROR_001 An unknown address shows a not-found page",
+       "file": "error_handling_tests.spec.js",
+       "tags": [
+        "regression",
+        "errors"
+       ],
+       "tests": [
+        {
+         "projectName": "production"
+        }
+       ]
+      },
+      {
+       "title": "TC_ERROR_002 A malformed address never causes a server error",
+       "file": "error_handling_tests.spec.js",
+       "tags": [
+        "regression",
+        "errors"
+       ],
+       "tests": [
+        {
+         "projectName": "production"
+        }
+       ]
+      },
+      {
+       "title": "TC_ERROR_001 An unknown address shows a not-found page",
+       "file": "error_handling_tests.spec.js",
+       "tags": [
+        "regression",
+        "errors"
+       ],
+       "tests": [
+        {
+         "projectName": "staging-mobile"
+        }
+       ]
+      },
+      {
+       "title": "TC_ERROR_002 A malformed address never causes a server error",
+       "file": "error_handling_tests.spec.js",
+       "tags": [
+        "regression",
+        "errors"
+       ],
+       "tests": [
+        {
+         "projectName": "staging-mobile"
+        }
+       ]
+      },
+      {
+       "title": "TC_ERROR_001 An unknown address shows a not-found page",
+       "file": "error_handling_tests.spec.js",
+       "tags": [
+        "regression",
+        "errors"
+       ],
+       "tests": [
+        {
+         "projectName": "production-mobile"
+        }
+       ]
+      },
+      {
+       "title": "TC_ERROR_002 A malformed address never causes a server error",
+       "file": "error_handling_tests.spec.js",
+       "tags": [
+        "regression",
+        "errors"
+       ],
+       "tests": [
+        {
+         "projectName": "production-mobile"
+        }
+       ]
+      }
+     ],
+     "suites": []
+    }
+   ]
+  },
+  {
+   "title": "forms_tests.spec.js",
+   "file": "forms_tests.spec.js",
+   "specs": [],
+   "suites": [
+    {
+     "title": "Forms Tests",
+     "file": "forms_tests.spec.js",
+     "specs": [
+      {
+       "title": "TC_FORM_001 Every form field has its label, type, and required state",
+       "file": "forms_tests.spec.js",
+       "tags": [
+        "regression",
+        "forms"
+       ],
+       "tests": [
+        {
+         "projectName": "local"
+        }
+       ]
+      },
+      {
+       "title": "TC_FORM_001 Every form field has its label, type, and required state",
+       "file": "forms_tests.spec.js",
+       "tags": [
+        "regression",
+        "forms"
+       ],
+       "tests": [
+        {
+         "projectName": "staging"
+        }
+       ]
+      },
+      {
+       "title": "TC_FORM_001 Every form field has its label, type, and required state",
+       "file": "forms_tests.spec.js",
+       "tags": [
+        "regression",
+        "forms"
+       ],
+       "tests": [
+        {
+         "projectName": "production"
+        }
+       ]
+      },
+      {
+       "title": "TC_FORM_001 Every form field has its label, type, and required state",
+       "file": "forms_tests.spec.js",
+       "tags": [
+        "regression",
+        "forms"
+       ],
+       "tests": [
+        {
+         "projectName": "staging-mobile"
+        }
+       ]
+      },
+      {
+       "title": "TC_FORM_001 Every form field has its label, type, and required state",
+       "file": "forms_tests.spec.js",
+       "tags": [
+        "regression",
+        "forms"
+       ],
+       "tests": [
+        {
+         "projectName": "production-mobile"
+        }
+       ]
+      }
+     ],
+     "suites": []
+    }
+   ]
+  },
+  {
+   "title": "smoke_tests.spec.js",
+   "file": "smoke_tests.spec.js",
+   "specs": [],
+   "suites": [
+    {
+     "title": "Smoke Tests",
+     "file": "smoke_tests.spec.js",
+     "specs": [
+      {
+       "title": "TC_SMOKE_001 Every page loads with its title and one main heading",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "local"
+        }
+       ]
+      },
+      {
+       "title": "TC_SMOKE_002 The header menu links reach their pages",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "local"
+        }
+       ]
+      },
+      {
+       "title": "TC_SMOKE_003 The footer is there, with its links",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "local"
+        }
+       ]
+      },
+      {
+       "title": "TC_SMOKE_001 Every page loads with its title and one main heading",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "staging"
+        }
+       ]
+      },
+      {
+       "title": "TC_SMOKE_002 The header menu links reach their pages",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "staging"
+        }
+       ]
+      },
+      {
+       "title": "TC_SMOKE_003 The footer is there, with its links",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "staging"
+        }
+       ]
+      },
+      {
+       "title": "TC_SMOKE_001 Every page loads with its title and one main heading",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "production"
+        }
+       ]
+      },
+      {
+       "title": "TC_SMOKE_002 The header menu links reach their pages",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "production"
+        }
+       ]
+      },
+      {
+       "title": "TC_SMOKE_003 The footer is there, with its links",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "production"
+        }
+       ]
+      },
+      {
+       "title": "TC_SMOKE_001 Every page loads with its title and one main heading",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "staging-mobile"
+        }
+       ]
+      },
+      {
+       "title": "TC_SMOKE_002 The header menu links reach their pages",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "staging-mobile"
+        }
+       ]
+      },
+      {
+       "title": "TC_SMOKE_003 The footer is there, with its links",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "staging-mobile"
+        }
+       ]
+      },
+      {
+       "title": "TC_SMOKE_001 Every page loads with its title and one main heading",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "production-mobile"
+        }
+       ]
+      },
+      {
+       "title": "TC_SMOKE_002 The header menu links reach their pages",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "production-mobile"
+        }
+       ]
+      },
+      {
+       "title": "TC_SMOKE_003 The footer is there, with its links",
+       "file": "smoke_tests.spec.js",
+       "tags": [
+        "smoke"
+       ],
+       "tests": [
+        {
+         "projectName": "production-mobile"
+        }
+       ]
+      }
+     ],
+     "suites": []
+    }
+   ]
+  },
+  {
+   "title": "auth.setup.js",
+   "file": "auth.setup.js",
+   "specs": [
+    {
+     "title": "TC_AUTH_001 Logs in and saves the session",
+     "file": "auth.setup.js",
+     "tags": [
+      "regression",
+      "auth"
+     ],
+     "tests": [
+      {
+       "projectName": "staging-setup"
+      }
+     ]
+    },
+    {
+     "title": "TC_AUTH_001 Logs in and saves the session",
+     "file": "auth.setup.js",
+     "tags": [
+      "regression",
+      "auth"
+     ],
+     "tests": [
+      {
+       "projectName": "production-setup"
+      }
+     ]
+    }
+   ],
+   "suites": []
+  },
+  {
+   "title": "account.auth.spec.js",
+   "file": "account.auth.spec.js",
+   "specs": [],
+   "suites": [
+    {
+     "title": "Logged-in pages",
+     "file": "account.auth.spec.js",
+     "specs": [
+      {
+       "title": "TC_AUTH_002 A page that needs a login opens with the saved session",
+       "file": "account.auth.spec.js",
+       "tags": [
+        "regression",
+        "auth"
+       ],
+       "tests": [
+        {
+         "projectName": "staging-auth"
+        }
+       ]
+      },
+      {
+       "title": "TC_AUTH_002 A page that needs a login opens with the saved session",
+       "file": "account.auth.spec.js",
+       "tags": [
+        "regression",
+        "auth"
+       ],
+       "tests": [
+        {
+         "projectName": "staging-auth-mobile"
+        }
+       ]
+      },
+      {
+       "title": "TC_AUTH_002 A page that needs a login opens with the saved session",
+       "file": "account.auth.spec.js",
+       "tags": [
+        "regression",
+        "auth"
+       ],
+       "tests": [
+        {
+         "projectName": "production-auth"
+        }
+       ]
+      },
+      {
+       "title": "TC_AUTH_002 A page that needs a login opens with the saved session",
+       "file": "account.auth.spec.js",
+       "tags": [
+        "regression",
+        "auth"
+       ],
+       "tests": [
+        {
+         "projectName": "production-auth-mobile"
+        }
+       ]
+      }
+     ],
+     "suites": [
+      {
+       "title": "without a session",
+       "file": "account.auth.spec.js",
+       "specs": [
+        {
+         "title": "TC_AUTH_003 Without a session, that page sends you to the login page",
+         "file": "account.auth.spec.js",
+         "tags": [
+          "regression",
+          "auth"
+         ],
+         "tests": [
+          {
+           "projectName": "staging-auth"
+          }
+         ]
+        },
+        {
+         "title": "TC_AUTH_003 Without a session, that page sends you to the login page",
+         "file": "account.auth.spec.js",
+         "tags": [
+          "regression",
+          "auth"
+         ],
+         "tests": [
+          {
+           "projectName": "staging-auth-mobile"
+          }
+         ]
+        },
+        {
+         "title": "TC_AUTH_003 Without a session, that page sends you to the login page",
+         "file": "account.auth.spec.js",
+         "tags": [
+          "regression",
+          "auth"
+         ],
+         "tests": [
+          {
+           "projectName": "production-auth"
+          }
+         ]
+        },
+        {
+         "title": "TC_AUTH_003 Without a session, that page sends you to the login page",
+         "file": "account.auth.spec.js",
+         "tags": [
+          "regression",
+          "auth"
+         ],
+         "tests": [
+          {
+           "projectName": "production-auth-mobile"
+          }
+         ]
+        }
+       ],
+       "suites": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "check-links.spec.js",
+   "file": "check-links.spec.js",
+   "specs": [],
+   "suites": [
+    {
+     "title": "Production Link Check",
+     "file": "check-links.spec.js",
+     "specs": [
+      {
+       "title": "TC_LINKS_001 No link between the site's pages is broken",
+       "file": "check-links.spec.js",
+       "tags": [
+        "links"
+       ],
+       "tests": [
+        {
+         "projectName": "link-checker"
+        }
+       ]
+      }
+     ],
+     "suites": []
+    }
+   ]
+  }
+ ]
+}

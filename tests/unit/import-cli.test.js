@@ -318,3 +318,189 @@ test('reconcile exits 0 for a consistent set and 1 for a duplicate test case iss
   assert.equal(duplicate.status, 1);
   assert.match(duplicate.stderr, /duplicate/);
 });
+
+// ---------------------------------------------------------------------------
+// Map guard, --remap, --map-out, section warnings, `set`, stages, --final
+// ---------------------------------------------------------------------------
+
+/** Preview a fixture, write its confirmed map and cases.json, and return the paths. */
+function importFixture(fixtureName) {
+  const dir = freshDir();
+  fs.copyFileSync(path.join(FIXTURES_DIR, fixtureName), path.join(dir, fixtureName));
+  const preview = run(['normalise', fixtureName, '--preview'], dir);
+  assert.equal(preview.status, 0, preview.stderr);
+  const confirmedMap = extractColumnMapJson(preview.stdout);
+  fs.writeFileSync(path.join(dir, 'column-map.json'), JSON.stringify(confirmedMap, null, 2));
+  const write = run(['normalise', fixtureName, '--write', '--map', 'column-map.json'], dir);
+  assert.equal(write.status, 0, write.stderr);
+  return { dir, fixtureName, confirmedMap, casesPath: path.join(dir, 'docs', 'client-test-cases', 'cases.json') };
+}
+
+const readCases = casesPath => JSON.parse(fs.readFileSync(casesPath, 'utf8'));
+
+test('normalise --preview lists each section with the ID area it gives', () => {
+  const dir = freshDir();
+  fs.copyFileSync(path.join(FIXTURES_DIR, 'testrail.csv'), path.join(dir, 'testrail.csv'));
+  const result = run(['normalise', 'testrail.csv', '--preview'], dir);
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /Sections \(with the ID area each would give\):/);
+  assert.match(result.stdout, /Authentication: \d+ cases? -> TC_AUTHENTI_###/);
+  assert.doesNotMatch(result.stdout, /WARNING: no section values/);
+  // The confirmed map must still be the last thing printed.
+  extractColumnMapJson(result.stdout);
+});
+
+test('normalise --preview warns when there are no sections, because every new ID would be TC_GEN_###', () => {
+  const dir = freshDir();
+  fs.copyFileSync(path.join(FIXTURES_DIR, 'boost-format.csv'), path.join(dir, 'boost-format.csv'));
+  const result = run(['normalise', 'boost-format.csv', '--preview'], dir);
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /\(no section\): 3 cases -> TC_GEN_###/);
+  assert.match(result.stdout, /WARNING: no section values\..*TC_GEN_###/);
+  extractColumnMapJson(result.stdout);
+});
+
+test('normalise --preview --map-out writes the map file, and only when asked', () => {
+  const dir = freshDir();
+  fs.copyFileSync(path.join(FIXTURES_DIR, 'boost-format.csv'), path.join(dir, 'boost-format.csv'));
+  const result = run(['normalise', 'boost-format.csv', '--preview', '--map-out', 'docs/client-test-cases/column-map.json'], dir);
+  assert.equal(result.status, 0, result.stderr);
+  const written = JSON.parse(fs.readFileSync(path.join(dir, 'docs', 'client-test-cases', 'column-map.json'), 'utf8'));
+  assert.deepEqual(written.column_map, extractColumnMapJson(result.stdout).column_map);
+  assert.equal(written.format, 'proposed');
+});
+
+test('normalise --write refuses a different column map for the same file, and --remap keeps the import state', () => {
+  const { dir, fixtureName, confirmedMap, casesPath } = importFixture('boost-format.csv');
+  const firstId = readCases(casesPath).cases[0].client_id;
+  assert.equal(run(['set', firstId, 'bucket', 'manual'], dir).status, 0);
+  assert.equal(run(['set', firstId, 'reason', 'needs a human eye'], dir).status, 0);
+
+  // Correct the map: a column the human wants mapped that was left out.
+  const corrected = { ...confirmedMap, column_map: { ...confirmedMap.column_map, notes: null } };
+  fs.writeFileSync(path.join(dir, 'corrected-map.json'), JSON.stringify(corrected, null, 2));
+  const before = fs.readFileSync(casesPath);
+
+  const refused = run(['normalise', fixtureName, '--write', '--map', 'corrected-map.json'], dir);
+  assert.equal(refused.status, 3);
+  assert.match(refused.stderr, /different column map/);
+  assert.match(refused.stderr, /--remap/);
+  assert.ok(fs.readFileSync(casesPath).equals(before), 'a refused write must leave cases.json untouched');
+
+  const remapped = run(['normalise', fixtureName, '--write', '--map', 'corrected-map.json', '--remap'], dir);
+  assert.equal(remapped.status, 0, remapped.stderr);
+  assert.match(remapped.stdout, /Remapped .*3 cases kept their import state, 0 new/);
+  const doc = readCases(casesPath);
+  assert.equal(doc.column_map.notes, null);
+  assert.equal(doc.cases[0].notes, null, 'the new map should be applied');
+  assert.equal(doc.cases[0].import.bucket, 'manual', 'import state must survive a remap');
+  assert.equal(doc.cases[0].import.reason, 'needs a human eye');
+  assert.ok(doc.remapped_at);
+});
+
+test('normalise --remap refuses when the new map no longer finds an existing case', () => {
+  const { dir, fixtureName, confirmedMap, casesPath } = importFixture('boost-format.csv');
+  // Mapping client_id to the title column changes every client_id.
+  const wrong = { ...confirmedMap, column_map: { ...confirmedMap.column_map, client_id: 'Test Case Name' } };
+  fs.writeFileSync(path.join(dir, 'wrong-map.json'), JSON.stringify(wrong, null, 2));
+  const before = fs.readFileSync(casesPath);
+
+  const result = run(['normalise', fixtureName, '--write', '--map', 'wrong-map.json', '--remap'], dir);
+  assert.equal(result.status, 3);
+  assert.match(result.stderr, /would drop 3 case\(s\)/);
+  assert.ok(fs.readFileSync(casesPath).equals(before), 'nothing may change when a remap would drop cases');
+});
+
+test('set writes one import field, validates it, and refuses what it cannot place', () => {
+  const { dir, casesPath } = importFixture('boost-format.csv');
+  const [first] = readCases(casesPath).cases;
+  const id = first.client_id;
+
+  // Plain and nested fields, and integers.
+  assert.equal(run(['set', id, 'bucket', 'stale'], dir).status, 0);
+  assert.equal(run(['set', id, 'probe', 'Checkout page returns 404'], dir).status, 0);
+  assert.equal(run(['set', id, 'stale.missing', 'Checkout page'], dir).status, 0);
+  assert.equal(run(['set', id, 'stale.outcome', 'finding'], dir).status, 0);
+  assert.equal(run(['set', id, 'stale.finding_issue', '31'], dir).status, 0);
+  let imp = readCases(casesPath).cases[0].import;
+  assert.equal(imp.bucket, 'stale');
+  assert.equal(imp.probe, 'Checkout page returns 404');
+  assert.deepEqual(imp.stale, { missing: 'Checkout page', outcome: 'finding', finding_issue: 31 });
+
+  // `null` clears a field, and a number-looking reason stays text.
+  assert.equal(run(['set', id, 'stale.finding_issue', 'null'], dir).status, 0);
+  assert.equal(readCases(casesPath).cases[0].import.stale.finding_issue, null);
+  assert.equal(run(['set', id, 'reason', '404'], dir).status, 0);
+  assert.equal(readCases(casesPath).cases[0].import.reason, '404');
+
+  // Refusals leave the file alone.
+  const before = fs.readFileSync(casesPath);
+  const refusals = [
+    [['set', id, 'bucket', 'Manual'], /bucket must be one of/],
+    [['set', id, 'stale.outcome', 'ignore'], /stale\.outcome must be one of/],
+    [['set', id, 'issue', 'abc'], /issue number/],
+    [['set', id, 'issue', '-4'], /issue number/],
+    [['set', id, 'title', 'Renamed'], /Unknown field/],
+    [['set', 'NOPE', 'bucket', 'manual'], /No case with client_id/],
+    [['set', id], /Usage: import\.js set/],
+  ];
+  for (const [args, pattern] of refusals) {
+    const result = run(args, dir);
+    assert.equal(result.status, 2, `${args.join(' ')} should exit 2`);
+    assert.match(result.stderr, pattern);
+  }
+  assert.ok(fs.readFileSync(casesPath).equals(before), 'refused sets must not change cases.json');
+});
+
+test('validate --stage triage checks probes and stale outcomes before any ID exists', () => {
+  const { dir, casesPath } = importFixture('boost-format.csv');
+  const ids = readCases(casesPath).cases.map(c => c.client_id);
+
+  // Bucket everything automatable, but probe only two of the three cases.
+  for (const id of ids) assert.equal(run(['set', id, 'bucket', 'automatable'], dir).status, 0);
+  for (const id of ids.slice(0, 2)) assert.equal(run(['set', id, 'probe', 'page loads'], dir).status, 0);
+  const missing = run(['validate', '--stage', 'triage'], dir);
+  assert.equal(missing.status, 1);
+  assert.match(missing.stderr, new RegExp(`${ids[2]}.*import\\.probe is required`));
+
+  assert.equal(run(['set', ids[2], 'probe', 'page loads'], dir).status, 0);
+  const ok = run(['validate', '--stage', 'triage'], dir);
+  assert.equal(ok.status, 0, ok.stderr);
+
+  // These client IDs are already TC_-shaped, so `full` needs assign-ids first.
+  assert.equal(run(['validate'], dir).status, 1);
+  assert.equal(run(['assign-ids'], dir).status, 0);
+  assert.equal(run(['validate', '--stage', 'all'], dir).status, 0);
+
+  const bad = run(['validate', '--stage', 'nope'], dir);
+  assert.equal(bad.status, 2);
+  assert.match(bad.stderr, /Unknown stage/);
+});
+
+test('reconcile --final fails a case whose issue was never relabelled test-automated', () => {
+  const { dir, casesPath } = importFixture('boost-format.csv');
+  const [first] = readCases(casesPath).cases;
+  const tcid = first.client_id;
+  const fields = { bucket: 'automatable', test_case_id: tcid, issue: '7', story: '3', test: `tests/home.spec.js › ${tcid}` };
+  for (const [field, value] of Object.entries(fields)) assert.equal(run(['set', tcid, field, value], dir).status, 0);
+
+  // Only the first case is under test; drop the rest from the file.
+  const doc = readCases(casesPath);
+  doc.cases = [doc.cases[0]];
+  fs.writeFileSync(casesPath, JSON.stringify(doc, null, 2));
+
+  const write = (name, value) => fs.writeFileSync(path.join(dir, name), JSON.stringify(value));
+  write('tests.json', { suites: [{ specs: [{ title: `${tcid} Homepage search`, file: 'tests/home.spec.js', tests: [{ annotations: [{ type: 'test_case', description: tcid }] }] }] }] });
+  write('issues-needs.json', [{ number: 7, title: `[TEST CASE] ${tcid} - Homepage search`, labels: [{ name: 'test-needs-automation' }], state: 'open' }]);
+  write('issues-done.json', [{ number: 7, title: `[TEST CASE] ${tcid} - Homepage search`, labels: [{ name: 'test-automated' }], state: 'open' }]);
+
+  const relaxed = run(['reconcile', '--issues', 'issues-needs.json', '--tests', 'tests.json'], dir);
+  assert.equal(relaxed.status, 0, relaxed.stderr);
+
+  const strict = run(['reconcile', '--issues', 'issues-needs.json', '--tests', 'tests.json', '--final'], dir);
+  assert.equal(strict.status, 1);
+  assert.match(strict.stderr, /must be labelled test-automated/);
+
+  const done = run(['reconcile', '--issues', 'issues-done.json', '--tests', 'tests.json', '--final'], dir);
+  assert.equal(done.status, 0, done.stderr);
+});

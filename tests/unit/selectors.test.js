@@ -3,8 +3,6 @@ import assert from 'node:assert/strict';
 import {
   mobileToggleFallbacks,
   mobileMenuFallbacks,
-  searchInputFallbacks,
-  searchTriggerFallbacks,
   logoFallbacks,
   navFallbacks,
   navLinksFallbacks,
@@ -12,8 +10,6 @@ import {
   ctaFallbacks,
   externalLinksFallbacks,
   footerFallbacks,
-  searchResultsFallbacks,
-  downloadLinksFallbacks,
   formsInputFallbacks,
   formsButtonFallbacks,
   formsSelectFallbacks,
@@ -24,12 +20,10 @@ import {
   selectors,
 } from '../../selectors.js';
 
-// All 20 plain-array fallback exports from selectors.js.
+// All 16 plain-array fallback exports from selectors.js.
 const allFallbackExports = {
   mobileToggleFallbacks,
   mobileMenuFallbacks,
-  searchInputFallbacks,
-  searchTriggerFallbacks,
   logoFallbacks,
   navFallbacks,
   navLinksFallbacks,
@@ -37,8 +31,6 @@ const allFallbackExports = {
   ctaFallbacks,
   externalLinksFallbacks,
   footerFallbacks,
-  searchResultsFallbacks,
-  downloadLinksFallbacks,
   formsInputFallbacks,
   formsButtonFallbacks,
   formsSelectFallbacks,
@@ -95,26 +87,15 @@ test('logoFallbacks', async t => {
   });
 });
 
-test('downloadLinksFallbacks', async t => {
-  await t.test('contains exactly the expected generic fallback chain, in order', () => {
-    assert.deepEqual(downloadLinksFallbacks, [
-      'a[href$=".tar.gz"], a[href$=".zip"], a[href$=".exe"]',
-      'a:has-text("Download"), a:has-text("tar.gz"), a:has-text("zip")',
-      '[class*="download"], #download',
-      'button:has-text("Download")',
-    ]);
-  });
-});
-
 test('selectors function API', async t => {
   // Every selectors.X entry the additive refactor is supposed to leave
   // untouched, including the nested selectors.forms.* group - a dropped or
   // renamed entry here would otherwise pass test:unit and test:template-check
   // silently, since neither exercises call sites directly.
   const topLevelNames = [
-    'mobileToggle', 'mobileMenu', 'searchInput', 'searchTrigger', 'logo',
+    'mobileToggle', 'mobileMenu', 'logo',
     'nav', 'navLinks', 'content', 'cta', 'externalLinks', 'footer',
-    'searchResults', 'downloadLinks', 'modals', 'alerts', 'loading',
+    'modals', 'alerts', 'loading',
   ];
   for (const name of topLevelNames) {
     await t.test(`selectors.${name} is a function`, () => {
@@ -131,6 +112,19 @@ test('selectors function API', async t => {
       assert.equal(typeof selectors.forms[name], 'function');
     });
   }
+});
+
+test('selectors.site (the skeleton specs\' hooks)', async t => {
+  await t.test('has exactly the expected entries, each a function', () => {
+    assert.deepEqual(Object.keys(selectors.site).sort(), ['footer', 'footerLink', 'mainHeading', 'nav', 'navLink']);
+    for (const fn of Object.values(selectors.site)) assert.equal(typeof fn, 'function');
+  });
+
+  await t.test('the search and download selectors are gone', () => {
+    for (const name of ['searchInput', 'searchTrigger', 'searchResults', 'downloadLinks']) {
+      assert.equal(selectors[name], undefined, name);
+    }
+  });
 });
 
 test('selectors.jg', async t => {

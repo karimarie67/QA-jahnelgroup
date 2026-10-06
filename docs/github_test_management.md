@@ -363,8 +363,8 @@ echo "4. Link test cases to Playwright test files"
 
 ```javascript
 // migrate-existing-tests.js
-const fs = require('fs');
-const { Octokit } = require('@octokit/rest');
+import fs from 'fs';
+import { Octokit } from '@octokit/rest';
 
 const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN
@@ -432,7 +432,7 @@ migrateTestCases().catch(console.error);
 
 ```javascript
 // scripts/collect-test-metrics.js
-const { Octokit } = require('@octokit/rest');
+import { Octokit } from '@octokit/rest';
 
 class TestMetrics {
   constructor() {
@@ -513,15 +513,15 @@ class TestMetrics {
   }
 }
 
-module.exports = TestMetrics;
+export default TestMetrics;
 ```
 
 ### Dashboard Data Generation
 
 ```javascript
 // scripts/generate-dashboard-data.js
-const TestMetrics = require('./collect-test-metrics');
-const fs = require('fs');
+import TestMetrics from './collect-test-metrics.js';
+import fs from 'fs';
 
 async function generateDashboardData() {
   const metrics = new TestMetrics();
@@ -539,9 +539,10 @@ async function generateDashboardData() {
   return data;
 }
 
-if (require.main === module) {
+// Run when invoked as a command, not when imported.
+if (process.argv[1] && fs.realpathSync(process.argv[1]) === fs.realpathSync(new URL(import.meta.url).pathname)) {
   generateDashboardData().catch(console.error);
 }
 
-module.exports = generateDashboardData;
+export default generateDashboardData;
 ```

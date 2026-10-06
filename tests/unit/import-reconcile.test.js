@@ -192,3 +192,60 @@ test('reconcile: counts', async t => {
     assert.deepEqual(result.counts.issues_by_label, { 'test-manual': 1, 'test-automated': 1, 'test-needs-automation': 0 });
   });
 });
+
+test('reconcile: final mode - a skipped relabel or unrecorded story cannot pass', async t => {
+  const automatable = (overrides = {}) =>
+    makeCase({
+      client_id: 'TC_LOGIN_001',
+      import: baseImport({ bucket: 'automatable', test_case_id: 'TC_LOGIN_001', issue: 7, story: 3, test: 'tests/login.spec.js › TC_LOGIN_001 Sign in', ...overrides }),
+    });
+  const issue = labels => [{ number: 7, title: '[TEST CASE] TC_LOGIN_001 - Sign in', labels: labels.map(name => ({ name })), state: 'open' }];
+  const tests = [{ testCase: 'TC_LOGIN_001', clientCases: [] }];
+
+  await t.test('without final, a case still labelled test-needs-automation passes', () => {
+    const result = reconcile(casesFile([automatable()]), issue(['test-needs-automation']), tests);
+    assert.equal(result.ok, true, result.errors.join('; '));
+  });
+
+  await t.test('with final, the same case fails until its issue is test-automated', () => {
+    const result = reconcile(casesFile([automatable()]), issue(['test-needs-automation']), tests, { final: true });
+    assert.equal(result.ok, false);
+    assert.ok(result.errors.some(e => e.includes('must be labelled test-automated')));
+  });
+
+  await t.test('with final, a missing import.test or import.story fails', () => {
+    const result = reconcile(casesFile([automatable({ test: null, story: null })]), issue(['test-automated']), tests, { final: true });
+    assert.ok(result.errors.some(e => e.includes('missing import.test')));
+    assert.ok(result.errors.some(e => e.includes('missing import.story')));
+  });
+
+  await t.test('with final, a fully recorded and relabelled case passes', () => {
+    const result = reconcile(casesFile([automatable()]), issue(['test-automated']), tests, { final: true });
+    assert.equal(result.ok, true, result.errors.join('; '));
+  });
+
+  await t.test('with final, a manual case needs its story but no test', () => {
+    const manual = makeCase({ client_id: 'TC_LOGIN_002', import: baseImport({ bucket: 'manual', reason: 'needs a human', test_case_id: 'TC_LOGIN_002', issue: 8, story: null }) });
+    const issues = [{ number: 8, title: '[TEST CASE] TC_LOGIN_002 - Forgot password', labels: [{ name: 'test-manual' }], state: 'open' }];
+    const result = reconcile(casesFile([manual]), issues, [], { final: true });
+    assert.deepEqual(result.errors, ['TC_LOGIN_002 (row 2): missing import.story']);
+  });
+
+  await t.test('with final, stale and covered cases are exempt from the story and issue checks', () => {
+    const stale = makeCase({ client_id: 'C-9', import: baseImport({ bucket: 'stale', stale: { missing: 'x', outcome: 'question', question: 'q' } }) });
+    const covered = makeCase({ client_id: 'C-10', import: baseImport({ bucket: 'automatable', covered_by: 'TC_LOGIN_001', test_case_id: 'TC_LOGIN_001' }) });
+    const result = reconcile(casesFile([stale, covered]), [], [{ testCase: 'TC_LOGIN_001', clientCases: ['C-10'] }], { final: true });
+    assert.equal(result.ok, true, result.errors.join('; '));
+  });
+});
+
+test('reconcile: an issue carrying two automation labels is flagged', () => {
+  const tc = makeCase({ client_id: 'TC_LOGIN_001', import: baseImport({ bucket: 'manual', reason: 'needs a human', test_case_id: 'TC_LOGIN_001', issue: 7 }) });
+  const both = [{ number: 7, title: '[TEST CASE] TC_LOGIN_001 - Sign in', labels: [{ name: 'test-manual' }, { name: 'test-automated' }], state: 'open' }];
+  const result = reconcile(casesFile([tc]), both, []);
+  assert.equal(result.ok, false);
+  assert.ok(result.errors.some(e => e.includes('conflicting labels test-manual, test-automated')));
+
+  const one = [{ number: 7, title: '[TEST CASE] TC_LOGIN_001 - Sign in', labels: [{ name: 'test-manual' }, { name: 'test-case' }], state: 'open' }];
+  assert.equal(reconcile(casesFile([tc]), one, []).ok, true, 'unrelated labels such as test-case are fine');
+});

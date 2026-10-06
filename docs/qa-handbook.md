@@ -22,8 +22,9 @@ This handbook deliberately leaves two kinds of content out:
 | Commands, and what counts as proof of work | [`docs/agents/testing.md`](./agents/testing.md) |
 | How to run the tests day to day | [`README.md`](../README.md) |
 
-The original Boost.org handbook this was extracted from lives in
-[`examples/boost/QA_handbook.md`](../examples/boost/QA_handbook.md).
+The original Boost.org handbook this was extracted from is kept in the
+repository's history:
+[`examples/boost/QA_handbook.md`](https://github.com/karimarie67/QA-framework-template/blob/76f455d/examples/boost/QA_handbook.md).
 
 ---
 
@@ -51,10 +52,13 @@ user story ──► test case(s) ──► automated test ──► CI run ─�
 4. **CI and dashboard**: the workflow runs the tests and publishes results
    to `dashboards/qa-metrics.md`.
 
+A client that tracks work in Jira keeps the same chain, with the stories,
+test cases, and bugs in Jira: see [`jira.md`](./jira.md).
+
 ### Test case IDs
 
 ```
-TC_<AREA>_<NNN>     e.g. TC_SMOKE_001, TC_SEARCH_004, TC_CART_002
+TC_<AREA>_<NNN>     e.g. TC_SMOKE_001, TC_A11Y_001, TC_CART_002
 ```
 
 `<AREA>` is a short, stable name for the feature or suite; `<NNN>` is the next
@@ -80,7 +84,7 @@ before anything reaches production.
 
 | Stage | What runs | Why |
 |---|---|---|
-| Pull request | Smoke tests, unit tests, `template-check` | A fast gate before code merges |
+| Pull request | Smoke tests, unit tests, `template-check`, lint | A fast gate before code merges |
 | After merge | The full suite | Validates the integrated change |
 | Before a release | The full suite against the release candidate environment | Release gate (the brief sets the threshold) |
 | After a release | Smoke tests against production | Confirms the release, within the limits the brief allows for production |
@@ -90,15 +94,43 @@ manual dispatch only, until an Engagement replaces the placeholder Site
 config, and the Engagement then enables them on push and PR. The brief records
 the Engagement's actual choice, including any scheduled monitoring.
 
-**Smoke tests** are the few tests that prove the critical paths work. They
-are identified either by file (`tests/smoke_tests.spec.js` in the template)
-or by the `@smoke` tag (`npx playwright test --grep @smoke`). Keep the set
+**Smoke tests** are the few tests that prove the critical paths work: the
+ones tagged `@smoke` (`npx playwright test --grep @smoke`). Keep the set
 small enough to finish in minutes.
+
+**API tests** check what the site's own API answers, without a browser:
+`tests/api_tests.spec.js` reads each endpoint in `siteConfig.api` (GET only)
+and checks its status, content type, and the JSON fields it promises. Tagged
+`@regression` and `@api`.
+
+**Performance budgets**: `tests/performance_tests.spec.js` measures each
+page's Web Vitals (LCP, CLS, TTFB, load time) in Chromium during a normal load
+and fails a page over the budgets the brief sets (`siteConfig.perf`). The
+numbers are attached to each run's report. Tagged `@regression` and `@perf`.
+
+**Visual checks**: `tests/visual_tests.spec.js` compares each page's
+screenshot with a committed baseline (`siteConfig.visual`). Screenshots differ
+by operating system, so it runs only in Playwright's Docker image: `npm run
+test:visual` to compare, `npm run test:visual:update` to make or refresh the
+baselines, which are reviewed and committed like code. Tagged `@regression`
+and `@visual`; it skips in any other run.
+
+**Other browsers**: the projects run Chromium on desktop and a Pixel 5
+emulation. When the brief asks, `QA_BROWSERS` adds Firefox, WebKit (Safari's
+engine), and an iPhone emulation for the public specs (see
+`site-config.md`, "Phones").
 
 **Manual testing** stays manual when a script can't judge it well:
 exploratory sessions, visual review, accessibility with assistive technology,
 and one-off checks. Each lasting manual check is still a test case, labeled
 `test-manual`.
+
+**A suite that catches real defects.** Some practice sites offer accounts or
+variants that are broken on purpose (Sauce Demo's `problem_user`, say). Running
+the suite as one of those, or giving a test case of its own to the broken
+variant, shows the tests fail when the site is wrong, which no green run can.
+Its failures are expected, so keep it off the dashboard and out of the push
+and PR gate.
 
 ### Recording a manual run
 
@@ -151,7 +183,8 @@ A suggestion ("this could be faster", "this could look better", "add X") is an
 
 On the cadence the brief sets (weekly by default), review open bugs, failed
 runs, and dashboard trends. Confirm severity, close bugs verified fixed in
-staging, and raise anything urgent with the development team.
+the environment where the fix lands (production, when there's no staging), and
+raise anything urgent with the development team.
 
 ### When an automated test fails
 
@@ -179,44 +212,51 @@ Decide which of these it is before doing anything else:
 
 | What | Where |
 |---|---|
-| URLs, paths, and test data | `config-helper.js` (`buildURL`, `urlPatterns`, `testData`) |
+| URLs, the site's pages, menu, and forms, and test data | `config-helper.js` (`buildURL`, `siteConfig`, `testData`) |
 | Element selectors | `selectors.js` (`selectors.<name>(page)`) |
 | Reusable flows | `test-helpers.js` (`testPatterns`, `testElementVisibility`, …) |
 | Base URLs per environment | `playwright.config.js` projects (`staging`, `production`, …) |
 | The test | The spec for its area under `tests/` |
+| A test that needs a login | A spec named `*.auth.spec.js`: only the `-auth` projects run it, from the session `tests/auth.setup.js` saves (`siteConfig.auth`). No screenshots or evidence captures in it: a logged-in page can show the account's data |
 
 ### Anatomy
 
 ```javascript
 import { test, expect } from '@playwright/test';
 import { selectors } from '../selectors.js';
-import { buildURL, urlPatterns, testData } from '../config-helper.js';
-import { testPatterns } from '../test-helpers.js';
+import { buildURL } from '../config-helper.js';
 
-test.describe('Search Tests', () => {
-  test('TC_SEARCH_006 Search returns results for a known term', {
-    tag: '@smoke',                      // only if it's a smoke test
+test.describe('Pricing Tests', { tag: ['@regression', '@pricing'] }, () => {
+  test('TC_PRICING_001 The pricing page lists the three plans', {
     annotation: [
-      { type: 'test_case', description: 'TC_SEARCH_006' },
+      { type: 'test_case', description: 'TC_PRICING_001' },
       { type: 'issue', description: 'https://github.com/<org>/<repo>/issues/42' },
     ],
   }, async ({ page }, testInfo) => {
     // Arrange: build the URL from the project's baseURL, never hard-code it
-    const url = buildURL(testInfo, urlPatterns.search, {
-      params: { q: testData.searchTerms.working },
-    });
-    await testPatterns.loadAndValidatePage(page, testInfo, url, 'TC_SEARCH_006');
+    await page.goto(buildURL(testInfo, '/pricing'));
 
     // Assert: web-first assertions wait for the condition by themselves
-    await expect(selectors.searchResults(page).first()).toBeVisible();
+    await expect(selectors.site.mainHeading(page)).toHaveText('Pricing');
+    await expect(page.getByRole('heading', { level: 2 })).toHaveCount(3);
   });
 });
 ```
 
 Conventions:
 
-- **Put the ID first in the title.** It makes `-g TC_SEARCH_006` work and
+- **Put the ID first in the title.** It makes `-g TC_PRICING_001` work and
   puts the ID on the dashboard, which shows test titles.
+- **Give every test one suite tag**, usually on its `describe`: `@smoke`
+  (the few critical-path checks), `@regression` (everything else that runs in
+  CI), or `@links` (the link checker only). CI selects by suite tag, so a new
+  spec runs with no workflow edit. Add area tags as useful (`@a11y`,
+  `@forms`, `@pricing`), never one that starts with a suite tag's name
+  (`@smoke-visual`), and never put a suite tag in a title or file name:
+  `--grep` would match it. A logged-in spec (`*.auth.spec.js`) is
+  `@regression`. `template-check` enforces all of this.
+- **Run by tag**: `npx playwright test --grep @a11y --project=staging`, or
+  `--grep-invert @smoke` for everything but.
 - **Declare annotations in the test's details object**, as above. Annotations
   pushed at runtime (`testInfo.annotations.push`) are invisible to
   `playwright test --list`, so the coverage map can't see them.
@@ -236,14 +276,20 @@ Conventions:
 3. **Write the test** in the right spec, following the anatomy above.
 4. **Run it**:
    ```bash
-   npx playwright test -g "TC_SEARCH_006" --project=staging
-   npx playwright test -g "TC_SEARCH_006" --project=staging --headed   # watch it
-   npx playwright test -g "TC_SEARCH_006" --project=staging --debug    # step through it
+   npx playwright test -g "TC_PRICING_001" --project=staging
+   npx playwright test -g "TC_PRICING_001" --project=staging --headed   # watch it
+   npx playwright test -g "TC_PRICING_001" --project=staging --debug    # step through it
    ```
 5. **Check that it can fail.** Break the expectation briefly and confirm the
    test goes red, then restore it.
 6. **Regenerate the coverage map**: `npm run coverage`.
-7. **Open a PR** that references the test case issue. Once it merges, label
+7. **Lint it**: `npm run lint` (`npx eslint --fix` fixes what it can). It
+   catches a missing `await` on an assertion, a stray `test.only`, and unused
+   or undefined names; it doesn't catch a missing `await` on an action such
+   as `page.goto`.
+8. **Open a PR** that references the test case issue, and fill in the PR
+   template (`.github/pull_request_template.md`): what and why, the test
+   cases, the evidence path, and its checklist. Once it merges, label
    the case `test-automated` and fill in *Automation File Path*.
 
 ### Best practices
@@ -291,10 +337,14 @@ A flaky test passes and fails without any change. Common causes:
 | Animation or transition | Assert the end state; Playwright's actionability checks wait for stable elements |
 | Hidden duplicate of an element | Filter to what a user sees: `locator.filter({ visible: true })` |
 | Bandwidth-heavy steps in parallel (large downloads) | Run those tests serially, or give them their own timeout |
+| A control a site builder wires up after `load` (Wix, Squarespace) | A click before then does nothing. Retry the action until its result shows: `expect(async () => { … }).toPass()` |
+| A closed slide-in menu that's off-screen | Playwright counts it as visible. Check `toBeInViewport` for "open" |
+| A live site rate-limiting the run (HTTP 429) | Lower `workers`, space requests with `politeGet`, and run request-only checks once, on desktop |
 
-The test runner retries a failed test once (`retries: 1` in
-`playwright.config.js`). A test that passes only on retry is reported as flaky
-on the run's HTML report; fix it rather than relying on the retry.
+In CI, the test runner retries a failed test once (`retries` in
+`playwright.config.js`); locally it doesn't, so a flaky test shows up while
+you're writing it. A test that passes only on retry is reported as flaky on the
+run's HTML report and the dashboard; fix it rather than relying on the retry.
 
 ### Troubleshooting
 
@@ -322,7 +372,8 @@ needed, scrubbing sensitive data) are in
 
 **Daily** (about 10 minutes)
 
-- Check the latest workflow runs for failures.
+- Check the latest workflow runs for failures, including the nightly
+  scheduled run once the Engagement has turned it on.
 - Check the dashboard for new failures or a falling pass rate.
 - Check open Critical and High bugs.
 
@@ -334,8 +385,8 @@ needed, scrubbing sensitive data) are in
 
 **Monthly**
 
-- Update Playwright (`npm install -D @playwright/test@latest`, then
-  `npx playwright install`) and run the full suite.
+- Review Dependabot's update PRs, Playwright's above all (run the full suite,
+  and the logged-in no-leak check its comments describe, before merging).
 - Review the slowest tests.
 - Reread the engagement brief with the client contact and update anything
   that changed.

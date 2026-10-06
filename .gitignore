@@ -55,3 +55,12 @@ Thumbs.db
 scripts/broken-links-*.csv
 scripts/malformed-paths-*.csv
 node_modules/
+
+# Playwright's own output; never proof of work (that is test-results/)
+playwright-output/
+playwright-report/
+/test-results.json
+
+# Saved login sessions (tests/auth.setup.js): they log whoever holds them in.
+# Never committed, never evidence, never a CI artifact.
+playwright/.auth/

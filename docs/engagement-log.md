@@ -622,3 +622,41 @@ gates, and the targets.
 - Human: agree the brief and the stories (#15, #24, #29, #32, #35, #38) with
   the client contact.
 - Human: triage #10–#13.
+
+## Template update, part 1: the framework (2026-10-05)
+
+**What:** the framework moved up to the current `QA-framework-template`
+(plan: #42, red-team review passed on its second cycle). The tests and
+what they check didn't change: all 19 test cases keep their IDs, titles,
+assertions, and issues.
+
+- **Site config:** `config-helper.js` now holds the template's `siteConfig`:
+  the 27 pages (each with its key), the header menu, the footer, the 404 and
+  malformed addresses. This site's own data (services, socials, contact,
+  embeds, role filters, …) is in `siteConfig.jg`. Same values, byte-exact.
+- **Tags:** every test is tagged: `@smoke`, or `@regression` with an area
+  (`@errors`, `@content`, `@a11y`), or `@links`. CI selects by tag, so the
+  Error Handling job folded into Functional; `template-check` now fails a
+  test without a fitting tag.
+- **Playwright config:** still one worker, every project on the live site.
+  New from the template: retries only in CI, screenshots only on failure,
+  run output in `playwright-output/` (not `test-results/`), `test.only`
+  blocked in CI.
+- **CI:** the e2e jobs still run on every push and PR, and the dashboard on a
+  push to `main`. New: a Lint job, the tag check, Dependabot (weekly), a PR
+  template. `merge-branches.yml` (a Boost leftover) is gone.
+- **Docs and skills** are the template's current ones; `examples/boost/` is
+  trimmed to its two spreadsheets.
+
+**Result** (`test-results/template-update/summary.txt`)
+
+| Check | Result |
+|---|---|
+| Lint, unit tests (397), template check (with tags), coverage map (Tags column only) | Pass |
+| Tests per project, before and after | The same, except TC_LINKS_001 now runs only on its own `link-checker` project |
+| CI's selection | `--grep @smoke` = the old smoke job (16); `--grep @regression` = the old error-handling and functional jobs together (20) |
+| The four specs on the live site, before (`main`) and after, same day, one worker | 36 of 36 tests agree on status and first error line: 27 passed, 7 failed (the known defects #10–#13), 2 skipped |
+| `npm audit` | No high or critical |
+
+**Next:** part 2 adds the axe accessibility scan, the read-only forms check,
+and performance budgets (with a brief update: performance moves into scope).

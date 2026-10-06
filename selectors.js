@@ -60,20 +60,6 @@ export const mobileMenuFallbacks = [
   '.navbar-collapse.show, .nav-menu.active',
 ];
 
-// Search functionality selectors
-export const searchInputFallbacks = [
-  { role: 'combobox', roleOptions: { name: /search/i } },
-  'input[type="search"], input[name="q"], input[placeholder*="search" i]',
-  '#search-input, .search-input, [class*="search-input"]',
-  '[role="searchbox"], [aria-label*="search" i]',
-];
-
-export const searchTriggerFallbacks = [
-  'button[aria-label*="search" i], button[title*="search" i]',
-  '.search-trigger, #search-trigger, [class*="search-btn"]',
-  'button:has-text("Search"), [type="submit"][value*="search" i]',
-];
-
 // Logo selector with multiple fallback strategies
 export const logoFallbacks = [
   { selector: '.logo img, #logo img, [class*="logo"] img', hasNotIframe: true },
@@ -129,23 +115,6 @@ export const footerFallbacks = [
   '[role="contentinfo"]',
 ];
 
-// Search results selectors
-export const searchResultsFallbacks = [
-  '[class*="search-result"], [class*="result"]',
-  '[data-testid*="search"], [data-testid*="result"]',
-  '.algolia-autocomplete .aa-dropdown-menu .aa-suggestion',
-  '[role="listbox"] [role="option"]',
-  '.search-hits, .search-results, #search-results',
-];
-
-// Download link patterns
-export const downloadLinksFallbacks = [
-  'a[href$=".tar.gz"], a[href$=".zip"], a[href$=".exe"]',
-  'a:has-text("Download"), a:has-text("tar.gz"), a:has-text("zip")',
-  '[class*="download"], #download',
-  'button:has-text("Download")',
-];
-
 // Form elements
 export const formsInputFallbacks = ['input:not([type="hidden"])'];
 export const formsButtonFallbacks = ['button, input[type="submit"], input[type="button"]'];
@@ -178,11 +147,6 @@ export const selectors = {
 
   mobileMenu: page => buildChain(page, mobileMenuFallbacks),
 
-  // Search functionality selectors
-  searchInput: page => buildChain(page, searchInputFallbacks),
-
-  searchTrigger: page => buildChain(page, searchTriggerFallbacks),
-
   // Logo selector with multiple fallback strategies
   logo: page => buildChain(page, logoFallbacks),
 
@@ -203,12 +167,6 @@ export const selectors = {
   // Footer selector
   footer: page => buildChain(page, footerFallbacks),
 
-  // Search results selectors
-  searchResults: page => buildChain(page, searchResultsFallbacks),
-
-  // Download link patterns
-  downloadLinks: page => buildChain(page, downloadLinksFallbacks),
-
   // Form elements
   forms: {
     input: page => buildChain(page, formsInputFallbacks),
@@ -224,6 +182,17 @@ export const selectors = {
 
   // Loading indicators
   loading: page => buildChain(page, loadingFallbacks),
+
+  // The skeleton specs' hooks, by role and accessible name, which survive a
+  // site's redesigns better than classes and IDs. The phone menu keeps using
+  // mobileToggle / mobileMenu above (test-helpers.js handleMobileMenu).
+  site: {
+    nav: page => page.getByRole('navigation').first(),
+    navLink: (page, name) => page.getByRole('navigation').getByRole('link', { name, exact: true }).first(),
+    mainHeading: page => page.getByRole('heading', { level: 1 }),
+    footer: page => page.getByRole('contentinfo'),
+    footerLink: (page, name) => page.getByRole('contentinfo').getByRole('link', { name, exact: true }),
+  },
 
   // Jahnel Group website elements, by role and accessible name. The site has
   // no <header> or <main> element, so these hang off the navigation and

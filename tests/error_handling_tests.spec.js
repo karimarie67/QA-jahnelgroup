@@ -1,16 +1,19 @@
 import { test, expect } from '@playwright/test';
 import fs from 'fs';
 import { selectors } from '../selectors.js';
-import { buildURL, testData, urlPatterns } from '../config-helper.js';
+import { buildURL, testData, urlPatterns, siteConfig } from '../config-helper.js';
 import { testPatterns } from '../test-helpers.js';
 
-fs.mkdirSync('test-results', { recursive: true });
+// The Engagement's own test data (config-helper.js, siteConfig.jg).
+const site = siteConfig.jg;
+
+fs.mkdirSync('playwright-output', { recursive: true });
 
 // Read-only, like every test in this Engagement: no form is ever typed into or sent.
 const { jg } = selectors;
 const ISSUES = 'https://github.com/karimarie67/QA-jahnelgroup/issues';
 
-test.describe('Error Handling Tests', () => {
+test.describe('Error Handling Tests', { tag: ['@regression', '@errors'] }, () => {
 
   test('TC_ERROR_001 Unknown page shows the 404 page', {
     annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }, { type: 'issue', description: `${ISSUES}/21` }],
@@ -18,7 +21,7 @@ test.describe('Error Handling Tests', () => {
     const response = await page.goto(buildURL(testInfo, '/this-page-does-not-exist-qa', { cachebust: true }));
     expect(response.status()).toBe(404);
     await expect(jg.notFoundHeading(page)).toBeVisible();
-    await expect(page).toHaveTitle(testData.notFoundTitle);
+    await expect(page).toHaveTitle(site.notFoundTitle);
     // The 404 page keeps the header menu, so a visitor can find their way back.
     await expect(jg.logo(page)).toBeVisible();
   });
@@ -31,7 +34,7 @@ test.describe('Error Handling Tests', () => {
     for (const malformedPath of ['/team/////', '/careers/../contact', '/contact?..', '/CONTACT']) {
       const response = await page.goto(buildURL(testInfo, malformedPath), { timeout: testData.timeouts.long });
       const status = response.status();
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} ${malformedPath}: status ${status}, final URL ${page.url()}\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} ${malformedPath}: status ${status}, final URL ${page.url()}\n`);
 
       // Either a working page or the site's own 404 page, never a server error.
       expect.soft(status, `${malformedPath} returned ${status}`).toBeLessThan(500);
@@ -58,7 +61,7 @@ test.describe('Error Handling Tests', () => {
       );
       found.forEach(h => hrefs.add(h));
     }
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} ${hrefs.size} external links: ${[...hrefs].join(', ')}\n`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} ${hrefs.size} external links: ${[...hrefs].join(', ')}\n`);
     expect(hrefs.size).toBeGreaterThan(0);
 
     // A single stalled request isn't a broken link, so a link that doesn't
@@ -67,7 +70,7 @@ test.describe('Error Handling Tests', () => {
     for (const href of hrefs) {
       const response = (await get(href)) || (await get(href));
       const status = response ? response.status() : 'no response';
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} ${href}: ${status}\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} ${href}: ${status}\n`);
       // Social sites often answer bots with 999 or 403; only a 404/410 or no answer is a broken link.
       expect.soft(response, `${href} did not respond`).not.toBeNull();
       if (response) expect.soft([404, 410], `${href} returned ${status}`).not.toContain(status);
@@ -86,6 +89,7 @@ test.describe('Error Handling Tests', () => {
         await testPatterns.loadAndValidatePage(page, testInfo, buildURL(testInfo, urlPatterns[key], { cachebust: true }), 'TC_CONSOLE_001');
         await expect(jg.footer(page)).toBeVisible();
         // The pixel logs as it starts and again as it sends; give it a moment.
+        // eslint-disable-next-line playwright/no-wait-for-timeout -- the ads pixel starts after load; this waits for it to log
         await page.waitForTimeout(2000);
         page.off('console', collect);
 

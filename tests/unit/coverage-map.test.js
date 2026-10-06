@@ -90,6 +90,12 @@ test('renderMarkdown', async t => {
     assert.match(md, /\| TC_CART_002 \| — \| — \| — \|/);
   });
 
+  await t.test('links a Jira ticket by its key, and shows any other URL as is', () => {
+    const one = (issue) => renderMarkdown([{ file: 'a.spec.js', title: 'TC_X_001 x', testCase: 'TC_X_001', issue, clientCases: [], tags: [], projects: [] }]);
+    assert.match(one('https://client.atlassian.net/browse/SHOP-142'), /\| \[SHOP-142\]\(https:\/\/client\.atlassian\.net\/browse\/SHOP-142\) \|/);
+    assert.match(one('https://tracker.example/ticket/9'), /\| https:\/\/tracker\.example\/ticket\/9 \|/);
+  });
+
   await t.test('lists tests without an ID separately and escapes pipes', () => {
     assert.match(md, /## Tests without a test case ID/);
     assert.match(md, /Untracked \\\| check/);
