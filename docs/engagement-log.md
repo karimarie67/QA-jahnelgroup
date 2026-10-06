@@ -691,3 +691,15 @@ area isn't keyboard-reachable on the phone (Low).
 **A template fix found on the way:** the forms spec waited for the network to
 go idle, which /contact never does (reCAPTCHA and analytics traffic), so the
 test timed out without checking anything. The wait is now capped at 10 s.
+
+## The stories agreed (2026-10-06)
+
+The QA lead, standing in for the Jahnel Group client contact (there is no
+client contact for this Engagement yet), agreed all seven stories: #15, #24,
+#29, #32, #35, #38, and #44. Each story's "pending agreement" line now
+records it.
+
+**Still open:** the brief stays **Draft** until its `TBD`s (people, release
+gates, and the targets other than the performance budgets) are filled in and
+agreed. The findings #10–#13 and #48–#54 are left untriaged for now, by the
+QA lead's choice.
